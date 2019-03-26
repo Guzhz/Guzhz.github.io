@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-03-26T15:05:26.714Z</updated>
+  <updated>2019-03-26T17:27:38.403Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2019/03/26/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2/"/>
     <id>http://yoursite.com/2019/03/26/我的第一个博客/</id>
     <published>2019-03-26T15:00:06.441Z</published>
-    <updated>2019-03-26T15:05:26.714Z</updated>
+    <updated>2019-03-26T17:27:38.403Z</updated>
     
     <content type="html"><![CDATA[<p>没想到Github还有这么好的功能，<br>本来纯粹是想了解下GitHub看看别人的代码的，<br>结果兴致来了就搭建了自己的博客。<br>搞了一天，换了好多个主题，也总算是搞定了。</p><h2 id="心情"><a href="#心情" class="headerlink" title="心情"></a>心情</h2><pre><code>从郁闷到舒畅。</code></pre><h2 id="天气"><a href="#天气" class="headerlink" title="天气"></a>天气</h2><pre><code>阴天。</code></pre><h2 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h2><pre><code>2019年3月26日 晚</code></pre>]]></content>
     
@@ -35,6 +35,10 @@
     
     </summary>
     
+      <category term="生活类" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB%E7%B1%BB/"/>
+    
+    
+      <category term="心情" scheme="http://yoursite.com/tags/%E5%BF%83%E6%83%85/"/>
     
   </entry>
   
