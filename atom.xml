@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-03-28T11:46:46.916Z</updated>
+  <updated>2020-02-24T15:10:02.286Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一年了</title>
+    <link href="http://yoursite.com/2020/02/24/%E4%B8%80%E5%B9%B4%E4%BA%86/"/>
+    <id>http://yoursite.com/2020/02/24/一年了/</id>
+    <published>2020-02-24T15:07:07.900Z</published>
+    <updated>2020-02-24T15:10:02.286Z</updated>
+    
+    <content type="html"><![CDATA[<p>时间飞逝，一眨眼，一年过去了。</p><p>好久没来，<br>好久没写，<br>其实心里一直想着，<br>总要记录点什么，<br>可是总是没能抽出时间过来。</p><p>有空再写吧，晚安。</p><h4 id="Mood"><a href="#Mood" class="headerlink" title="Mood"></a>Mood</h4><pre><code>从郁闷到舒畅。</code></pre><h4 id="Weather"><a href="#Weather" class="headerlink" title="Weather"></a>Weather</h4><pre><code>晴天。</code></pre><h4 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h4><pre><code>2020年2月24日 晚上</code></pre><p><strong><center>完结</center></strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;时间飞逝，一眨眼，一年过去了。&lt;/p&gt;
+&lt;p&gt;好久没来，&lt;br&gt;好久没写，&lt;br&gt;其实心里一直想着，&lt;br&gt;总要记录点什么，&lt;br&gt;可是总是没能抽出时间过来。&lt;/p&gt;
+&lt;p&gt;有空再写吧，晚安。&lt;/p&gt;
+&lt;h4 id=&quot;Mood&quot;&gt;&lt;a href=&quot;#Mood&quot; class=
+      
+    
+    </summary>
+    
+      <category term="生活类" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB%E7%B1%BB/"/>
+    
+    
+      <category term="心情" scheme="http://yoursite.com/tags/%E5%BF%83%E6%83%85/"/>
+    
+  </entry>
   
   <entry>
     <title>优化</title>
