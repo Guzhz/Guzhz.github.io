@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-04-10T17:27:25.601Z</updated>
+  <updated>2020-04-10T18:05:08.752Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2020/04/11/Hexo/"/>
     <id>http://yoursite.com/2020/04/11/Hexo/</id>
     <published>2020-04-10T16:23:09.371Z</published>
-    <updated>2020-04-10T17:27:25.601Z</updated>
+    <updated>2020-04-10T18:05:08.752Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a><center>hexo</center></h1><h3 id="一、详细搭建参考"><a href="#一、详细搭建参考" class="headerlink" title="一、详细搭建参考"></a>一、详细搭建参考</h3><blockquote><p><a href="http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa" target="_blank" rel="noopener">搭建参考一</a><br><a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html" target="_blank" rel="noopener">搭建参考二</a><br><a href="https://www.jianshu.com/p/36d67d7d6985" target="_blank" rel="noopener">markdown语法参考</a><br><a href="https://www.jianshu.com/p/bcdbe7347c8d" target="_blank" rel="noopener">主题推荐</a></p></blockquote><h3 id="二、域名的绑定与解绑"><a href="#二、域名的绑定与解绑" class="headerlink" title="二、域名的绑定与解绑"></a>二、域名的绑定与解绑</h3><ul><li>绑定：<a href="https://my.freenom.com/clientarea.php" target="_blank" rel="noopener">免费一年的域名网</a><ol><li>在myblog\source（source目录下的文件为源文件)目录下新建CNAME(无后缀)</li><li>把域名写进去即可，www加不加都行。</li></ol></li><li>解绑：<ol><li>只生效一次的解绑方法：直接删除github项目上的CNAME文件，但是更新后重新部署后又会生成</li><li>永久解绑方法：删除/清空source目录下的CNAME文件后重新部署，setting里删除手动指定的域名。<h3 id="三、我的博客详细分类"><a href="#三、我的博客详细分类" class="headerlink" title="三、我的博客详细分类"></a>三、我的博客详细分类</h3></li></ol></li><li>操作步骤：<ol><li>在项目的根目录下（myblog)</li><li>右键打开：Git Bash</li><li>新文章  ：myblog\source_posts 下编写md文件<blockquote> <font color="red">hexo g  (生成)<br> hexo s   (本地浏览)<br> hexo d   (部署到github)</font></blockquote></li></ol></li><li>博客一：VScode、有道云笔记<blockquote><pre><code>myblog      → 主目录myblog_bak  → 主目录备份ourblog     → 博客二的基本素材Picture-bed → 图床仓库test        → 测试仓库</code></pre></blockquote></li><li><p>博客二：VScode</p><blockquote><p>  虚拟机桌面的“blog”文件</p><pre><code>已同步到坚果云</code></pre></blockquote><p>  <br><br><strong><p align="right">Edited by</p></strong></p><p align="right">2020年4月11日 凌晨</p><br><p align="right">Guzhz</p></li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a><center>hexo</center></h1><h3 id="一、详细搭建参考"><a href="#一、详细搭建参考" class="headerlink" title="一、详细搭建参考"></a>一、详细搭建参考</h3><blockquote><p><a href="http://blog.haoji.me/build-blog-website-by-hexo-github.html?from=xa" target="_blank" rel="noopener">搭建参考一</a><br><a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html" target="_blank" rel="noopener">搭建参考二</a><br><a href="https://www.jianshu.com/p/36d67d7d6985" target="_blank" rel="noopener">markdown语法参考</a><br><a href="https://www.jianshu.com/p/bcdbe7347c8d" target="_blank" rel="noopener">主题推荐</a></p></blockquote><h3 id="二、域名的绑定与解绑"><a href="#二、域名的绑定与解绑" class="headerlink" title="二、域名的绑定与解绑"></a>二、域名的绑定与解绑</h3><p>绑定：<a href="https://my.freenom.com/clientarea.php" target="_blank" rel="noopener">免费一年的域名网</a></p><blockquote><p>1、在myblog\source（source目录下的文件为源文件)目录下新建CNAME(无后缀)<br>2、把域名写进去即可，www加不加都行。</p></blockquote><p>解绑：</p><blockquote><p>1、只生效一次的解绑方法：直接删除github项目上的CNAME文件，但是更新后重新部署后又会生成<br>2、永久解绑方法：删除主题source目录下的CNAME，删除/清空source目录下的CNAME文件后重新部署，setting里删除手动指定的域名。</p></blockquote><h3 id="三、我的博客详细分类"><a href="#三、我的博客详细分类" class="headerlink" title="三、我的博客详细分类"></a>三、我的博客详细分类</h3><p>操作步骤：</p><pre><code>1. 在项目的根目录下（myblog)2. 右键打开：Git Bash3. 新文章  ：myblog\source\_posts 下编写md文件</code></pre><blockquote><font color="red">hexo g  (生成)<br>    hexo s   (本地浏览)<br>    hexo d   (部署到github)</font></blockquote><p>博客一：VScode、有道云笔记</p><pre><code>myblog      → 主目录myblog_bak  → 主目录备份ourblog     → 博客二的基本素材Picture-bed → 图床仓库test        → 测试仓库</code></pre><p>博客二：VScode</p><pre><code>虚拟机桌面的“blog”文件已同步到坚果云</code></pre><p align="right"><br>2020年4月11日 凌晨<br>Guzhz</p>]]></content>
     
     <summary type="html">
     
