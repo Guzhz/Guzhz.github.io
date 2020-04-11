@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-04-11T08:38:44.490Z</updated>
+  <updated>2020-04-11T11:18:18.972Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2020/04/11/%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%A0%81%E9%83%A8%E7%BD%B2%E5%88%B0github%E6%95%99%E7%A8%8B/"/>
     <id>http://yoursite.com/2020/04/11/本地代码部署到github教程/</id>
     <published>2020-04-11T07:57:18.917Z</published>
-    <updated>2020-04-11T08:38:44.490Z</updated>
+    <updated>2020-04-11T11:18:18.972Z</updated>
     
-    <content type="html"><![CDATA[<p>前言：注册GitHub有一段时间了，之前有按照教程操作过，不过后来一段时间不用又不熟练了。以至于后期突然使用时出现一些错误，导致本地文件一直提交不了。今天又熟悉了一次，这里做个笔记，以至于后面在忘记可以回顾一下。</p><h3 id="一、详细搭建参考"><a href="#一、详细搭建参考" class="headerlink" title="一、详细搭建参考"></a>一、详细搭建参考</h3><blockquote><p><a href="https://www.jianshu.com/p/8282eced3bf2" target="_blank" rel="noopener">搭建参考一</a></p></blockquote><h3 id="二、详细步骤"><a href="#二、详细步骤" class="headerlink" title="二、详细步骤"></a>二、详细步骤</h3><p>1.登录github，创建一个仓库，勾选上RENAME</p><blockquote><p>name - description - public - Init - create</p></blockquote><p>2.在需要部署的文件夹中打开Git bash，在命令行中输入git init把这个文件夹变成Git可管理的仓库</p><blockquote><p>git init</p></blockquote><p>3.通过git add .(注意这个”.”，是有空格的)，把文件添加到缓存区</p><blockquote><p>git add .</p></blockquote><p>4.可查看代码的状态</p><blockquote><p>git status<br>  红色为未添加到缓冲区<br>  绿色为已添加到缓冲区</p></blockquote><p>5.git commit -m “这里面写你的注释” 把文件提交的本地仓库</p><blockquote><p>git commit -m “first”</p></blockquote><p>6.连接远程github</p><blockquote><p>git remote add origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Guzhz/test.git</p></blockquote><p>7.仓库存在RENAME.md不为空，需要合并</p><blockquote><p>git pull –rebase origin master</p></blockquote><p>8.最后成功部署</p><blockquote><p>git push origin master</p></blockquote><p>9.重复部署</p><blockquote><p>git push origin master</p></blockquote><p align="right"><br>2020年4月11日 下午<br>Guzhz</p>]]></content>
+    <content type="html"><![CDATA[<p>前言：注册GitHub有一段时间了，之前有按照教程操作过，不过后来一段时间不用又不熟练了。以至于后期突然使用时出现一些错误，导致本地文件一直提交不了。今天又熟悉了一次，这里做个笔记，以至于后面在忘记可以回顾一下。</p><h3 id="一、详细搭建参考"><a href="#一、详细搭建参考" class="headerlink" title="一、详细搭建参考"></a>一、详细搭建参考</h3><blockquote><p><a href="https://www.jianshu.com/p/8282eced3bf2" target="_blank" rel="noopener">搭建参考一</a></p></blockquote><h3 id="二、无仓库部署详细步骤"><a href="#二、无仓库部署详细步骤" class="headerlink" title="二、无仓库部署详细步骤"></a>二、无仓库部署详细步骤</h3><p>1.登录github，创建一个仓库，勾选上RENAME</p><blockquote><p>name - description - public - Init - create</p></blockquote><p>2.在需要部署的文件夹中打开Git bash，在命令行中输入git init把这个文件夹变成Git可管理的仓库</p><blockquote><p>git init</p></blockquote><p>3.通过git add .(注意这个”.”，是有空格的)，把文件添加到缓存区</p><blockquote><p>git add .</p></blockquote><p>4.可查看代码的状态</p><blockquote><p>git status<br>  红色为未添加到缓冲区<br>  绿色为已添加到缓冲区</p></blockquote><p>5.git commit -m “这里面写你的注释” 把文件提交的本地仓库</p><blockquote><p>git commit -m “first”</p></blockquote><p>6.连接远程github</p><blockquote><p>git remote add origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Guzhz/test.git</p></blockquote><p>7.仓库存在RENAME.md不为空，需要合并</p><blockquote><p>git pull –rebase origin master （这里–为“双杠”）</p></blockquote><p>8.最后成功部署</p><blockquote><p>git push origin master</p></blockquote><h3 id="三、有仓库部署详细步骤"><a href="#三、有仓库部署详细步骤" class="headerlink" title="三、有仓库部署详细步骤"></a>三、有仓库部署详细步骤</h3><p>1.通过git add .(注意这个”.”，是有空格的)，把文件添加到缓存区</p><blockquote><p>git add .</p></blockquote><p>2.可查看代码的状态</p><blockquote><p>git status<br>  红色为未添加到缓冲区<br>  绿色为已添加到缓冲区</p></blockquote><p>3.git commit -m “这里面写你的注释” 把文件提交的本地仓库</p><blockquote><p>git commit -m “first”</p></blockquote><p>4.最后成功部署</p><blockquote><p>git push origin master</p></blockquote><p align="right"><br>2020年4月11日 下午<br>Guzhz</p>]]></content>
     
     <summary type="html">
     
