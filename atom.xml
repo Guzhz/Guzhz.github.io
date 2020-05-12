@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-04-11T11:18:18.972Z</updated>
+  <updated>2020-05-12T16:14:47.938Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,20 +17,20 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>本地代码部署到github教程</title>
-    <link href="http://yoursite.com/2020/04/11/%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%A0%81%E9%83%A8%E7%BD%B2%E5%88%B0github%E6%95%99%E7%A8%8B/"/>
-    <id>http://yoursite.com/2020/04/11/本地代码部署到github教程/</id>
+    <title>本地代码部署到远程仓库Github/Gitee教程</title>
+    <link href="http://yoursite.com/2020/04/11/Github&amp;Gitee%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"/>
+    <id>http://yoursite.com/2020/04/11/Github&amp;Gitee使用教程/</id>
     <published>2020-04-11T07:57:18.917Z</published>
-    <updated>2020-04-11T11:18:18.972Z</updated>
+    <updated>2020-05-12T16:14:47.938Z</updated>
     
-    <content type="html"><![CDATA[<p>前言：注册GitHub有一段时间了，之前有按照教程操作过，不过后来一段时间不用又不熟练了。以至于后期突然使用时出现一些错误，导致本地文件一直提交不了。今天又熟悉了一次，这里做个笔记，以至于后面在忘记可以回顾一下。</p><h3 id="一、详细搭建参考"><a href="#一、详细搭建参考" class="headerlink" title="一、详细搭建参考"></a>一、详细搭建参考</h3><blockquote><p><a href="https://www.jianshu.com/p/8282eced3bf2" target="_blank" rel="noopener">搭建参考一</a></p></blockquote><h3 id="二、无仓库部署详细步骤"><a href="#二、无仓库部署详细步骤" class="headerlink" title="二、无仓库部署详细步骤"></a>二、无仓库部署详细步骤</h3><p>1.登录github，创建一个仓库，勾选上RENAME</p><blockquote><p>name - description - public - Init - create</p></blockquote><p>2.在需要部署的文件夹中打开Git bash，在命令行中输入git init把这个文件夹变成Git可管理的仓库</p><blockquote><p>git init</p></blockquote><p>3.通过git add .(注意这个”.”，是有空格的)，把文件添加到缓存区</p><blockquote><p>git add .</p></blockquote><p>4.可查看代码的状态</p><blockquote><p>git status<br>  红色为未添加到缓冲区<br>  绿色为已添加到缓冲区</p></blockquote><p>5.git commit -m “这里面写你的注释” 把文件提交的本地仓库</p><blockquote><p>git commit -m “first”</p></blockquote><p>6.连接远程github</p><blockquote><p>git remote add origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:Guzhz/test.git</p></blockquote><p>7.仓库存在RENAME.md不为空，需要合并</p><blockquote><p>git pull –rebase origin master （这里–为“双杠”）</p></blockquote><p>8.最后成功部署</p><blockquote><p>git push origin master</p></blockquote><h3 id="三、有仓库部署详细步骤"><a href="#三、有仓库部署详细步骤" class="headerlink" title="三、有仓库部署详细步骤"></a>三、有仓库部署详细步骤</h3><p>1.通过git add .(注意这个”.”，是有空格的)，把文件添加到缓存区</p><blockquote><p>git add .</p></blockquote><p>2.可查看代码的状态</p><blockquote><p>git status<br>  红色为未添加到缓冲区<br>  绿色为已添加到缓冲区</p></blockquote><p>3.git commit -m “这里面写你的注释” 把文件提交的本地仓库</p><blockquote><p>git commit -m “first”</p></blockquote><p>4.最后成功部署</p><blockquote><p>git push origin master</p></blockquote><p align="right"><br>2020年4月11日 下午<br>Guzhz</p>]]></content>
+    <content type="html"><![CDATA[<p>前言：注册GitHub有一段时间了，之前有按照教程操作过，不过后来一段时间不用又不熟练了。以至于后期突然使用时出现一些错误，导致本地文件一直提交不了。今天又熟悉了一次，这里做个笔记，以至于后面在忘记可以回顾一下。</p><h3 id="一、操作前准备"><a href="#一、操作前准备" class="headerlink" title="一、操作前准备"></a>一、操作前准备</h3><ul><li><a href="https://www.jianshu.com/p/8282eced3bf2" target="_blank" rel="noopener">Github环境搭建</a></li><li><a href="https://segmentfault.com/a/1190000020127413" target="_blank" rel="noopener">配置共存Github/Gitee环境</a><br>共存Github/Gitee环境，需要切换全局的 user.name 和 user.email<blockquote><p>git config –global –list（先查看变量）<br>git config –global user.name “账户名” （再修改变量）<br>git config –global user.email “邮箱”</p></blockquote></li></ul><h3 id="二、Github-Gitee部署详细步骤"><a href="#二、Github-Gitee部署详细步骤" class="headerlink" title="二、Github/Gitee部署详细步骤"></a>二、Github/Gitee部署详细步骤</h3><h5 id="【无仓库：新建远程仓库、初始化本地仓库、两者建立连接、添加并部署】"><a href="#【无仓库：新建远程仓库、初始化本地仓库、两者建立连接、添加并部署】" class="headerlink" title="【无仓库：新建远程仓库、初始化本地仓库、两者建立连接、添加并部署】"></a>【无仓库：新建远程仓库、初始化本地仓库、两者建立连接、添加并部署】</h5><blockquote><p>创建仓库，勾选上RENAME<br> name -&gt; description -&gt; public -&gt; Init -&gt; create<br> “+” -&gt; 介绍 -&gt; 使用Readme文件初始化这个仓库 -&gt; 创建</p></blockquote><blockquote><p>git init （初始化本地仓库）<br>  git add .（有空格）<br>  git status（可查看代码的状态）<br>  git commit -m “说明”（把文件提交的本地仓库）</p></blockquote><blockquote><p>git remote add origin [url]（连接远程仓库，这个为新建的仓库地址）</p></blockquote><blockquote><p>it pull –rebase origin master （本地仓库为空，远程仓库不为空，需要pull合并同步，这里–为“双杠”）</p></blockquote><blockquote><ul><li>git push origin master（部署）</li></ul></blockquote><h5 id="【有本地仓库-克隆操作（已建立连接）：在仓库文件夹下进行以下操作】"><a href="#【有本地仓库-克隆操作（已建立连接）：在仓库文件夹下进行以下操作】" class="headerlink" title="【有本地仓库/克隆操作（已建立连接）：在仓库文件夹下进行以下操作】"></a>【有本地仓库/克隆操作（已建立连接）：在仓库文件夹下进行以下操作】</h5><blockquote><p>改动文件后 ↓<br>  git add .<br>  git status<br>  git commit -m “说明”<br>  git push origin master</p></blockquote><h3 id="三、常用命令"><a href="#三、常用命令" class="headerlink" title="三、常用命令"></a>三、常用命令</h3><ol><li>git status</li><li>git add .</li><li>git commit -m “说明”</li><li>git push origin master</li><li>git clone [url]</li><li>git pull （拉去远程库更新本地库）</li></ol><p align="right"><br>2020年4月11日 下午<br>Guzhz</p>]]></content>
     
     <summary type="html">
     
       
       
         &lt;p&gt;前言：注册GitHub有一段时间了，之前有按照教程操作过，不过后来一段时间不用又不熟练了。以至于后期突然使用时出现一些错误，导致本地文件一直提交不了。今天又熟悉了一次，这里做个笔记，以至于后面在忘记可以回顾一下。&lt;/p&gt;
-&lt;h3 id=&quot;一、详细搭建参考&quot;&gt;&lt;a href=
+&lt;h3 id=&quot;一、操作前准备&quot;&gt;&lt;a href=&quot;
       
     
     </summary>
