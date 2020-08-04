@@ -214,9 +214,9 @@ url: '<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="h
 不用Mustache语法包裹</code></pre>
 <h4 id="1-5、v-pre指令的使用"><a href="#1-5、v-pre指令的使用" class="headerlink" title="1.5、v-pre指令的使用"></a>1.5、v-pre指令的使用</h4><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">v-pre</span>&gt;</span>&#123;&#123;message&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span> <span class="hljs-comment">&lt;!--不解析 Previous--&gt;</span>
 原样输出内容：&#123;&#123;message&#125;&#125; -&gt; &#123;&#123;message&#125;&#125;</code></pre>
-<h4 id="1-6、v-cloak指令的使用"><a href="#1-6、v-cloak指令的使用" class="headerlink" title="1.6、v-cloak指令的使用"></a>1.6、v-cloak指令的使用</h4><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="undefined">
-    [v-cloak] &#123;
-        display: none;
+<h4 id="1-6、v-cloak指令的使用"><a href="#1-6、v-cloak指令的使用" class="headerlink" title="1.6、v-cloak指令的使用"></a>1.6、v-cloak指令的使用</h4><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+    <span class="hljs-selector-attr">[v-cloak]</span> &#123;
+        <span class="hljs-attribute">display</span>: none;
     &#125;
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
 
@@ -256,17 +256,17 @@ methods: &#123;
   <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"title"</span> <span class="hljs-attr">:class</span>=<span class="hljs-string">"getClasses()"</span>&gt;</span>&#123;&#123;message&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>		//通过方法获得数组变量
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined">
-  const app = new Vue(&#123;
-    el: "#app",
-    data: &#123;
-      message: '你好啊',
-      active: 'aaa',
-      line: 'bbb'
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Vue(&#123;
+    <span class="hljs-attr">el</span>: <span class="hljs-string">"#app"</span>,
+    <span class="hljs-attr">data</span>: &#123;
+      <span class="hljs-attr">message</span>: <span class="hljs-string">'你好啊'</span>,
+      <span class="hljs-attr">active</span>: <span class="hljs-string">'aaa'</span>,
+      <span class="hljs-attr">line</span>: <span class="hljs-string">'bbb'</span>
     &#125;,
-    methods: &#123;
-      getClasses: function () &#123;
-        return [this.active,this.line]
+    <span class="hljs-attr">methods</span>: &#123;
+      <span class="hljs-attr">getClasses</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+        <span class="hljs-keyword">return</span> [<span class="hljs-keyword">this</span>.active,<span class="hljs-keyword">this</span>.line]
       &#125;
     &#125;
   &#125;)
@@ -277,17 +277,17 @@ methods: &#123;
   <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">:style</span>=<span class="hljs-string">"&#123;'font-size': '50px'&#125;"</span>&gt;</span>&#123;&#123;message&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined">
-  const app = new Vue(&#123;
-    el: "#app",
-    data: &#123;
-      message: '你好啊',
-      finalSize: 100,
-      finalColor: 'red'
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Vue(&#123;
+    <span class="hljs-attr">el</span>: <span class="hljs-string">"#app"</span>,
+    <span class="hljs-attr">data</span>: &#123;
+      <span class="hljs-attr">message</span>: <span class="hljs-string">'你好啊'</span>,
+      <span class="hljs-attr">finalSize</span>: <span class="hljs-number">100</span>,
+      <span class="hljs-attr">finalColor</span>: <span class="hljs-string">'red'</span>
     &#125;,
-    methods: &#123;
-      getStyle: function () &#123;
-        return &#123;fontSize: this.finalSize + 'px',background: this.finalColor&#125;
+    <span class="hljs-attr">methods</span>: &#123;
+      <span class="hljs-attr">getStyle</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+        <span class="hljs-keyword">return</span> &#123;<span class="hljs-attr">fontSize</span>: <span class="hljs-keyword">this</span>.finalSize + <span class="hljs-string">'px'</span>,<span class="hljs-attr">background</span>: <span class="hljs-keyword">this</span>.finalColor&#125;
       &#125;
     &#125;
   &#125;)
@@ -296,12 +296,12 @@ methods: &#123;
   <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">:style</span>=<span class="hljs-string">"[baseStyle]"</span>&gt;</span>&#123;&#123;message&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined">
-  const app = new Vue(&#123;
-    el: "#app",
-    data: &#123;
-      message: '你好啊',
-      baseStyle: &#123;background: 'red'&#125;
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Vue(&#123;
+    <span class="hljs-attr">el</span>: <span class="hljs-string">"#app"</span>,
+    <span class="hljs-attr">data</span>: &#123;
+      <span class="hljs-attr">message</span>: <span class="hljs-string">'你好啊'</span>,
+      <span class="hljs-attr">baseStyle</span>: &#123;<span class="hljs-attr">background</span>: <span class="hljs-string">'red'</span>&#125;
     &#125;
   &#125;)
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
@@ -317,29 +317,29 @@ computed: &#123;
   <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>总价格：&#123;&#123;totalPrice&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="xml">
-  const app = new Vue(&#123;
-    el: "#app",
-    data: &#123;
-      books: [
-        &#123;id: 110,name: 'Unix编程艺术',price: 119&#125;,
-        &#123;id: 111,name: '代码大全',price: 105&#125;,
-        &#123;id: 112,name: '计算机原理',price: 98&#125;,
-        &#123;id: 113,name: '现代操作系统',price: 97&#125;,
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Vue(&#123;
+    <span class="hljs-attr">el</span>: <span class="hljs-string">"#app"</span>,
+    <span class="hljs-attr">data</span>: &#123;
+      <span class="hljs-attr">books</span>: [
+        &#123;<span class="hljs-attr">id</span>: <span class="hljs-number">110</span>,<span class="hljs-attr">name</span>: <span class="hljs-string">'Unix编程艺术'</span>,<span class="hljs-attr">price</span>: <span class="hljs-number">119</span>&#125;,
+        &#123;<span class="hljs-attr">id</span>: <span class="hljs-number">111</span>,<span class="hljs-attr">name</span>: <span class="hljs-string">'代码大全'</span>,<span class="hljs-attr">price</span>: <span class="hljs-number">105</span>&#125;,
+        &#123;<span class="hljs-attr">id</span>: <span class="hljs-number">112</span>,<span class="hljs-attr">name</span>: <span class="hljs-string">'计算机原理'</span>,<span class="hljs-attr">price</span>: <span class="hljs-number">98</span>&#125;,
+        &#123;<span class="hljs-attr">id</span>: <span class="hljs-number">113</span>,<span class="hljs-attr">name</span>: <span class="hljs-string">'现代操作系统'</span>,<span class="hljs-attr">price</span>: <span class="hljs-number">97</span>&#125;,
       ]
     &#125;,
-    //有缓存，效率高
+    <span class="hljs-comment">//有缓存，效率高</span>
     computed: &#123;
-      totalPrice: function () &#123;
-        let result = 0;
-        for (let i = 0; i<span class="hljs-tag">&lt;<span class="hljs-name">this.books.length;</span> <span class="hljs-attr">i</span>++)&#123;
-          <span class="hljs-attr">result</span> += <span class="hljs-string">this.books[i].price;</span>
+      <span class="hljs-attr">totalPrice</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+        <span class="hljs-keyword">let</span> result = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i&lt;<span class="hljs-keyword">this</span>.books.length; i++)&#123;
+          result += <span class="hljs-keyword">this</span>.books[i].price;
         &#125;
-        <span class="hljs-attr">return</span> <span class="hljs-attr">result</span>;
+        <span class="hljs-keyword">return</span> result;
       &#125;
     &#125;
   &#125;)
-</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
 <h4 id="3-3、计算属性的setter和getter"><a href="#3-3、计算属性的setter和getter" class="headerlink" title="3.3、计算属性的setter和getter"></a>3.3、计算属性的setter和getter</h4><pre><code class="hljs js">computed: &#123;
 	<span class="hljs-comment">//简写,默认是get</span>
 	fullName: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;

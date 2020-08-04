@@ -625,48 +625,48 @@ $&#123;#authentication.getPrincipal().uId&#125;&#125;</code></pre>
     <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"hidden"</span>  <span class="hljs-attr">sec:authorize</span>=<span class="hljs-string">"isAuthenticated()"</span> <span class="hljs-attr">th:value</span>=<span class="hljs-string">"$&#123;#authentication.getPrincipal().uId&#125; "</span>&gt;</span>   <span class="hljs-comment">&lt;!--登录后获得用户id--&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"hidden"</span>  <span class="hljs-attr">sec:authorize</span>=<span class="hljs-string">"isAuthenticated()"</span> <span class="hljs-attr">th:value</span>=<span class="hljs-string">"$&#123;#authentication.getPrincipal().uRole&#125;   "</span>&gt;</span>   <span class="hljs-comment">&lt;!--登录后判断账号权限--&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined">
-    function getDetail(a) &#123;
-        let list = $(a).children('input');      //获得当前元素下的所有子input
-        if (list.length == 5)&#123;                  //5个说明处于未登录状态
-            alert("请先登录，再订餐哦~");
-            $(a).attr("href","#");
-            return ;
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getDetail</span>(<span class="hljs-params">a</span>) </span>&#123;
+        <span class="hljs-keyword">let</span> list = $(a).children(<span class="hljs-string">'input'</span>);      <span class="hljs-comment">//获得当前元素下的所有子input</span>
+        <span class="hljs-keyword">if</span> (list.length == <span class="hljs-number">5</span>)&#123;                  <span class="hljs-comment">//5个说明处于未登录状态</span>
+            alert(<span class="hljs-string">"请先登录，再订餐哦~"</span>);
+            $(a).attr(<span class="hljs-string">"href"</span>,<span class="hljs-string">"#"</span>);
+            <span class="hljs-keyword">return</span> ;
         &#125;
-        if($(list[6]).val() == "ROLE_admin")&#123;
-            alert("你就是老板啦，你不能下单哦~");
-            $(a).attr("href","#");
-            return ;
-        &#125;if($(list[1]).val() == "0")&#123;
-            alert("加入购物车失败！该菜品已售罄，等待补货！");
-            $(a).attr("href","#");
-            return ;
-        &#125; else&#123;
-            let mdName = $(list[0]).val();
-            let mdPrice = $(list[2]).val();
-            $('#tips-name').html("【名称】"+mdName);
-            $('#tips-price').html("【价格】"+mdPrice+'元');
-            /*发起请求*/
-            let postData = &#123;&#125;;
-            postData['scName'] = mdName;
-            postData['scAmount'] = 1;
-            postData['scPrice'] = mdPrice;
-            postData['scImg'] = $(list[3]).val();
-            postData['mdId'] = $(list[4]).val();
-            postData['uId'] = $(list[5]).val();
+        <span class="hljs-keyword">if</span>($(list[<span class="hljs-number">6</span>]).val() == <span class="hljs-string">"ROLE_admin"</span>)&#123;
+            alert(<span class="hljs-string">"你就是老板啦，你不能下单哦~"</span>);
+            $(a).attr(<span class="hljs-string">"href"</span>,<span class="hljs-string">"#"</span>);
+            <span class="hljs-keyword">return</span> ;
+        &#125;<span class="hljs-keyword">if</span>($(list[<span class="hljs-number">1</span>]).val() == <span class="hljs-string">"0"</span>)&#123;
+            alert(<span class="hljs-string">"加入购物车失败！该菜品已售罄，等待补货！"</span>);
+            $(a).attr(<span class="hljs-string">"href"</span>,<span class="hljs-string">"#"</span>);
+            <span class="hljs-keyword">return</span> ;
+        &#125; <span class="hljs-keyword">else</span>&#123;
+            <span class="hljs-keyword">let</span> mdName = $(list[<span class="hljs-number">0</span>]).val();
+            <span class="hljs-keyword">let</span> mdPrice = $(list[<span class="hljs-number">2</span>]).val();
+            $(<span class="hljs-string">'#tips-name'</span>).html(<span class="hljs-string">"【名称】"</span>+mdName);
+            $(<span class="hljs-string">'#tips-price'</span>).html(<span class="hljs-string">"【价格】"</span>+mdPrice+<span class="hljs-string">'元'</span>);
+            <span class="hljs-comment">/*发起请求*/</span>
+            <span class="hljs-keyword">let</span> postData = &#123;&#125;;
+            postData[<span class="hljs-string">'scName'</span>] = mdName;
+            postData[<span class="hljs-string">'scAmount'</span>] = <span class="hljs-number">1</span>;
+            postData[<span class="hljs-string">'scPrice'</span>] = mdPrice;
+            postData[<span class="hljs-string">'scImg'</span>] = $(list[<span class="hljs-number">3</span>]).val();
+            postData[<span class="hljs-string">'mdId'</span>] = $(list[<span class="hljs-number">4</span>]).val();
+            postData[<span class="hljs-string">'uId'</span>] = $(list[<span class="hljs-number">5</span>]).val();
             $.ajax(&#123;
-                url: "/addShoppingCart",
-                type: 'POST',
-                data: postData,
-                success: function (arg) &#123;
-                    if(arg == "0")&#123;
-                        $('#myModalLabel').text("当前菜品加购已达到上限！")
-                    &#125;else if(arg == "1")&#123;
-                        $('#myModalLabel').text("加入成功！")
-                    &#125;else&#123;
-                        $('#myModalLabel').text("数量加+1成功！")
+                <span class="hljs-attr">url</span>: <span class="hljs-string">"/addShoppingCart"</span>,
+                <span class="hljs-attr">type</span>: <span class="hljs-string">'POST'</span>,
+                <span class="hljs-attr">data</span>: postData,
+                <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">arg</span>) </span>&#123;
+                    <span class="hljs-keyword">if</span>(arg == <span class="hljs-string">"0"</span>)&#123;
+                        $(<span class="hljs-string">'#myModalLabel'</span>).text(<span class="hljs-string">"当前菜品加购已达到上限！"</span>)
+                    &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(arg == <span class="hljs-string">"1"</span>)&#123;
+                        $(<span class="hljs-string">'#myModalLabel'</span>).text(<span class="hljs-string">"加入成功！"</span>)
+                    &#125;<span class="hljs-keyword">else</span>&#123;
+                        $(<span class="hljs-string">'#myModalLabel'</span>).text(<span class="hljs-string">"数量加+1成功！"</span>)
                     &#125;
-                    // window.location.reload();
+                    <span class="hljs-comment">// window.location.reload();</span>
                 &#125;
             &#125;)
         &#125;
@@ -709,22 +709,22 @@ $&#123;#authentication.getPrincipal().uId&#125;&#125;</code></pre>
 <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"tips()"</span> <span class="hljs-attr">th:name</span>=<span class="hljs-string">"$&#123;#authentication.getPrincipal().uId&#125;"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"margin-right: 75px; float: right"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-primary"</span> <span class="hljs-attr">data-toggle</span>=<span class="hljs-string">"modal"</span> <span class="hljs-attr">data-target</span>=<span class="hljs-string">"#headImgModal"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"glyphicon glyphicon-picture"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>修改头像
 <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></code></pre>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined">
-    $("#updateHeadImg").change(function () &#123;        //点击“浏览”后会触发隐藏文件表单。监听一旦发生改变则
-        var file = this.files[0];                   // 获取input上传的图片数据;
-        console.log(file);
-        var url = window.URL.createObjectURL(file);  // 得到file对象路径，可当成普通的文件路径一样使用，赋值给src;
-        $("#headImg").attr("src", url);                //修改模态框的头像
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+    $(<span class="hljs-string">"#updateHeadImg"</span>).change(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;        <span class="hljs-comment">//点击“浏览”后会触发隐藏文件表单。监听一旦发生改变则</span>
+        <span class="hljs-keyword">var</span> file = <span class="hljs-keyword">this</span>.files[<span class="hljs-number">0</span>];                   <span class="hljs-comment">// 获取input上传的图片数据;</span>
+        <span class="hljs-built_in">console</span>.log(file);
+        <span class="hljs-keyword">var</span> url = <span class="hljs-built_in">window</span>.URL.createObjectURL(file);  <span class="hljs-comment">// 得到file对象路径，可当成普通的文件路径一样使用，赋值给src;</span>
+        $(<span class="hljs-string">"#headImg"</span>).attr(<span class="hljs-string">"src"</span>, url);                <span class="hljs-comment">//修改模态框的头像</span>
     &#125;);
 
-    //  JQ点击提交表单
-    $("#submitBtn").on("click", function () &#123;
-        var file = $("#updateHeadImg").val();                   // 获取input上传的图片数据;
-        if(file!='')&#123;
-            alert("修改头像成功，正在前往登录页~");
-            $('#updateHeadImgForm').submit();
-        &#125;else&#123;
-            alert('请先浏览图片！')
+    <span class="hljs-comment">//  JQ点击提交表单</span>
+    $(<span class="hljs-string">"#submitBtn"</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+        <span class="hljs-keyword">var</span> file = $(<span class="hljs-string">"#updateHeadImg"</span>).val();                   <span class="hljs-comment">// 获取input上传的图片数据;</span>
+        <span class="hljs-keyword">if</span>(file!=<span class="hljs-string">''</span>)&#123;
+            alert(<span class="hljs-string">"修改头像成功，正在前往登录页~"</span>);
+            $(<span class="hljs-string">'#updateHeadImgForm'</span>).submit();
+        &#125;<span class="hljs-keyword">else</span>&#123;
+            alert(<span class="hljs-string">'请先浏览图片！'</span>)
         &#125;
     &#125;);
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
@@ -769,39 +769,39 @@ $&#123;#authentication.getPrincipal().uId&#125;&#125;</code></pre>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined">
-    function toOrder() &#123;
-        let postData = &#123;&#125;;
-        let uId = $('#fill-uId').val();
-        let odName = $('#fill-name').val();
-        let odPhone = $('#fill-phone').val();
-        let odAddress = $('#fill-address').val();
-        let odRemarks = $('#fill-remarks').val();
-        if (odName === "") &#123;
-            alert("姓名不能为空！");
-            return;
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">toOrder</span>(<span class="hljs-params"></span>) </span>&#123;
+        <span class="hljs-keyword">let</span> postData = &#123;&#125;;
+        <span class="hljs-keyword">let</span> uId = $(<span class="hljs-string">'#fill-uId'</span>).val();
+        <span class="hljs-keyword">let</span> odName = $(<span class="hljs-string">'#fill-name'</span>).val();
+        <span class="hljs-keyword">let</span> odPhone = $(<span class="hljs-string">'#fill-phone'</span>).val();
+        <span class="hljs-keyword">let</span> odAddress = $(<span class="hljs-string">'#fill-address'</span>).val();
+        <span class="hljs-keyword">let</span> odRemarks = $(<span class="hljs-string">'#fill-remarks'</span>).val();
+        <span class="hljs-keyword">if</span> (odName === <span class="hljs-string">""</span>) &#123;
+            alert(<span class="hljs-string">"姓名不能为空！"</span>);
+            <span class="hljs-keyword">return</span>;
         &#125;
-        if (odPhone === "") &#123;
-            alert("手机号不能为空");
-            return;
+        <span class="hljs-keyword">if</span> (odPhone === <span class="hljs-string">""</span>) &#123;
+            alert(<span class="hljs-string">"手机号不能为空"</span>);
+            <span class="hljs-keyword">return</span>;
         &#125;
-        if (odAddress === "") &#123;
-            alert("地址不能为空");
-            return;
+        <span class="hljs-keyword">if</span> (odAddress === <span class="hljs-string">""</span>) &#123;
+            alert(<span class="hljs-string">"地址不能为空"</span>);
+            <span class="hljs-keyword">return</span>;
         &#125;
-        postData['odName'] = odName;
-        postData['odPhone'] = odPhone;
-        postData['odAddress'] = odAddress;
-        postData['odRemarks'] = odRemarks;
-        postData['uId'] = uId;
-        console.log(postData);
+        postData[<span class="hljs-string">'odName'</span>] = odName;
+        postData[<span class="hljs-string">'odPhone'</span>] = odPhone;
+        postData[<span class="hljs-string">'odAddress'</span>] = odAddress;
+        postData[<span class="hljs-string">'odRemarks'</span>] = odRemarks;
+        postData[<span class="hljs-string">'uId'</span>] = uId;
+        <span class="hljs-built_in">console</span>.log(postData);
         $.ajax(&#123;
-            url: "/toOrder",
-            type: 'POST',
-            data: postData,
-            success: function (arg) &#123;
+            <span class="hljs-attr">url</span>: <span class="hljs-string">"/toOrder"</span>,
+            <span class="hljs-attr">type</span>: <span class="hljs-string">'POST'</span>,
+            <span class="hljs-attr">data</span>: postData,
+            <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">arg</span>) </span>&#123;
                 alert(arg);
-                window.location.reload();
+                <span class="hljs-built_in">window</span>.location.reload();
             &#125;
         &#125;);
     &#125;
@@ -810,22 +810,22 @@ $&#123;#authentication.getPrincipal().uId&#125;&#125;</code></pre>
     <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"glyphicon glyphicon-pencil"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>编辑
 <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined">
-/*被绑定的按钮，先执行onclick，获得表格当前行的值并设置为模态框的值*/
-function getData() &#123;
-    $("#userInfoTable tbody").on("click", "tr", function () &#123;
-        let data = new Array();
-        let td = $(this).find("td");
-        for (let i = 0; i &lt; td.length; i++) &#123;
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-comment">/*被绑定的按钮，先执行onclick，获得表格当前行的值并设置为模态框的值*/</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getData</span>(<span class="hljs-params"></span>) </span>&#123;
+    $(<span class="hljs-string">"#userInfoTable tbody"</span>).on(<span class="hljs-string">"click"</span>, <span class="hljs-string">"tr"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+        <span class="hljs-keyword">let</span> data = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>();
+        <span class="hljs-keyword">let</span> td = $(<span class="hljs-keyword">this</span>).find(<span class="hljs-string">"td"</span>);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; td.length; i++) &#123;
             data.push(td.eq(i).text());
         &#125;
-        $('#ed-uId').attr('value',data[0]);
-        console.log(data[0]);
-        $('#ed-uUsername').attr('value',data[2]);
-        $('#ed-uPassword').attr('value',data[3]);
-        $('#ed-uName').attr('value',data[4]);
-        $('#ed-uPhone').attr('value',data[5]);
-        $('#ed-uAddress').attr('value',data[6]);
+        $(<span class="hljs-string">'#ed-uId'</span>).attr(<span class="hljs-string">'value'</span>,data[<span class="hljs-number">0</span>]);
+        <span class="hljs-built_in">console</span>.log(data[<span class="hljs-number">0</span>]);
+        $(<span class="hljs-string">'#ed-uUsername'</span>).attr(<span class="hljs-string">'value'</span>,data[<span class="hljs-number">2</span>]);
+        $(<span class="hljs-string">'#ed-uPassword'</span>).attr(<span class="hljs-string">'value'</span>,data[<span class="hljs-number">3</span>]);
+        $(<span class="hljs-string">'#ed-uName'</span>).attr(<span class="hljs-string">'value'</span>,data[<span class="hljs-number">4</span>]);
+        $(<span class="hljs-string">'#ed-uPhone'</span>).attr(<span class="hljs-string">'value'</span>,data[<span class="hljs-number">5</span>]);
+        $(<span class="hljs-string">'#ed-uAddress'</span>).attr(<span class="hljs-string">'value'</span>,data[<span class="hljs-number">6</span>]);
     &#125;);
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">th:href</span>=<span class="hljs-string">"@&#123;'/deleteUser/'+$&#123;user.getUId()&#125;&#125;"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">"return confirm('确定删除?');"</span>&gt;</span>
