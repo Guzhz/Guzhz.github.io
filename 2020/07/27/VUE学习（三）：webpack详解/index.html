@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content>
+  <meta name="author" content="Guzhz">
+  <meta name="keywords" content>
+  <title>VUE学习（三）：webpack详解 - Guzhz&#39;s House</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Guzhz's House</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-07-27 23:49">
+      2020年7月27日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="一、传统的模块化"><a href="#一、传统的模块化" class="headerlink" title="一、传统的模块化"></a>一、传统的模块化</h1><h4 id="1-导入导出"><a href="#1-导入导出" class="headerlink" title="1. 导入导出"></a>1. 导入导出</h4><pre><code class="hljs javascript"><span class="hljs-comment">//commonJS</span>
+导出：<span class="hljs-built_in">module</span>.exports = &#123;add&#125;
+导入：<span class="hljs-keyword">const</span> &#123;add&#125; = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./mathUtils.js'</span>);
+
+<span class="hljs-comment">//es6</span>
+导出：<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> name = <span class="hljs-string">'哈哈哈'</span>;
+导入：<span class="hljs-keyword">import</span> &#123;name&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'./info'</span>;</code></pre>
+<h4 id="2-打包"><a href="#2-打包" class="headerlink" title="2. 打包"></a>2. 打包</h4><blockquote>
+<p>webpack ./src/main.js ./dist/bundle.js</p>
+</blockquote>
+<h1 id="二、webpack初体验"><a href="#二、webpack初体验" class="headerlink" title="二、webpack初体验"></a>二、webpack初体验</h1><h4 id="1-自定义打包命令：webpack（配置固定路径）"><a href="#1-自定义打包命令：webpack（配置固定路径）" class="headerlink" title="1. 自定义打包命令：webpack（配置固定路径）"></a>1. 自定义打包命令：webpack（配置固定路径）</h4><pre><code class="hljs javascript"><span class="hljs-comment">//npm init 生成 package.json</span>
+
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);	<span class="hljs-comment">// 需要用到node依赖path</span>
+<span class="hljs-built_in">module</span>.exports = &#123;
+  <span class="hljs-attr">entry</span>: <span class="hljs-string">'./src/main.js'</span>,
+  <span class="hljs-attr">output</span>: &#123;
+    <span class="hljs-attr">path</span>: path.resolve(__dirname,<span class="hljs-string">'dist'</span>),   <span class="hljs-comment">//绝对路径</span>
+    filename: <span class="hljs-string">'bundle.js'</span>
+  &#125;
+&#125;</code></pre>
+<h4 id="2、映射路径为局部命令：npm-run-build"><a href="#2、映射路径为局部命令：npm-run-build" class="headerlink" title="2、映射路径为局部命令：npm run build"></a>2、映射路径为局部命令：npm run build</h4><pre><code class="hljs javascript"><span class="hljs-number">1.</span> 由于实际开发中大多数是用到局部webpack版本，则需要使用局部webpack
+<span class="hljs-number">2.</span> 使用局部命令
+    (<span class="hljs-number">1</span>)修改package.json里的scripts，添加自定义命令
+      <span class="hljs-string">"scripts"</span>: &#123;
+        <span class="hljs-string">"build"</span>: <span class="hljs-string">"webpack"</span>
+      &#125;,</code></pre>
+<h4 id="3、配置开发环境-npm-install-webpack-3-6-0-–save-dev"><a href="#3、配置开发环境-npm-install-webpack-3-6-0-–save-dev" class="headerlink" title="3、配置开发环境 npm install webpack@3.6.0 –save-dev"></a>3、配置开发环境 npm install <a href="mailto:webpack@3.6.0" target="_blank" rel="noopener">webpack@3.6.0</a> –save-dev</h4><blockquote>
+<p>安装开发环境的webpack，局部命令则优先去node_modules里面找webpack包</p>
+</blockquote>
+<h1 id="三、webpack的各种加载器"><a href="#三、webpack的各种加载器" class="headerlink" title="三、webpack的各种加载器"></a>三、webpack的各种加载器</h1><blockquote>
+<p>webpack官网：<a href="https://www.webpackjs.com/loaders" target="_blank" rel="noopener">https://www.webpackjs.com/loaders</a></p>
+</blockquote>
+<h4 id="1-依赖css"><a href="#1-依赖css" class="headerlink" title="1. 依赖css"></a>1. 依赖css</h4><ol>
+<li>main.js依赖：require(‘./css/normal.css’);</li>
+<li>npm install <a href="mailto:css-loader@2.0.2" target="_blank" rel="noopener">css-loader@2.0.2</a> –save-dev</li>
+<li>npm install style-loader –save-dev    //同时需要样式加载器</li>
+<li>修改webpack.config.js</li>
+</ol>
+<pre><code class="hljs javascript"><span class="hljs-built_in">module</span>: &#123;
+    <span class="hljs-attr">rules</span>: [
+      &#123;
+        <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.css$/</span>,
+        <span class="hljs-comment">// 使用多个loader，是从右向左读，先css在style</span>
+        use: [<span class="hljs-string">'style-loader'</span>,<span class="hljs-string">'css-loader'</span>]
+      &#125;
+    ]
+  &#125;</code></pre>
+<h4 id="2-依赖less"><a href="#2-依赖less" class="headerlink" title="2. 依赖less"></a>2. 依赖less</h4><ol>
+<li>npm install –save-dev <a href="mailto:less-loader@4.1.0" target="_blank" rel="noopener">less-loader@4.1.0</a> less</li>
+</ol>
+<pre><code class="hljs javascript"><span class="hljs-number">2.</span> &#123;
+            <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.less$/</span>,
+            <span class="hljs-attr">use</span>: [&#123;
+                <span class="hljs-attr">loader</span>: <span class="hljs-string">"style-loader"</span> <span class="hljs-comment">// creates style nodes from JS strings</span>
+            &#125;, &#123;
+                <span class="hljs-attr">loader</span>: <span class="hljs-string">"css-loader"</span> <span class="hljs-comment">// translates CSS into CommonJS</span>
+            &#125;, &#123;
+                <span class="hljs-attr">loader</span>: <span class="hljs-string">"less-loader"</span> <span class="hljs-comment">// compiles Less to CSS</span>
+            &#125;]
+    &#125;</code></pre>
+<h4 id="3-1-依赖图片"><a href="#3-1-依赖图片" class="headerlink" title="3.1 依赖图片"></a>3.1 依赖图片</h4><ol>
+<li>npm install –save-dev <a href="mailto:url-loader@1.1.2" target="_blank" rel="noopener">url-loader@1.1.2</a></li>
+</ol>
+<pre><code class="hljs javascript"><span class="hljs-number">2.</span> rules: [
+       &#123;
+         <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.(png|jpg|gif)$/</span>,
+         <span class="hljs-attr">use</span>: [
+           &#123;
+             <span class="hljs-attr">loader</span>: <span class="hljs-string">'url-loader'</span>,
+             <span class="hljs-attr">options</span>: &#123;
+               <span class="hljs-comment">//图片大小，小于limit时，会转化成base64形式并直接使用</span>
+               limit: <span class="hljs-number">8192</span>
+             &#125;
+           &#125;
+         ]
+       &#125;
+     ]</code></pre>
+<h4 id="3-2-依赖图片-gt-依赖文件"><a href="#3-2-依赖图片-gt-依赖文件" class="headerlink" title="3.2 依赖图片 -&gt; 依赖文件"></a>3.2 依赖图片 -&gt; 依赖文件</h4><ol>
+<li>如果大于limit，需要用到file-loader但不需要配置</li>
+<li><p>npm install <a href="mailto:file-loader@3.0.1" target="_blank" rel="noopener">file-loader@3.0.1</a> –save-dev</p>
+<p>问题一：自动生成的图片在dist文件夹里，而写的路径在img里<br>解决：需要配置图片路径，自动拼接dist/才能显示</p>
+</li>
+</ol>
+<pre><code class="hljs javascript"> webpack.config.js：
+  output: &#123;
+    <span class="hljs-attr">path</span>: path.resolve(__dirname,<span class="hljs-string">'dist'</span>),   <span class="hljs-comment">//绝对路径</span>
+    filename: <span class="hljs-string">'bundle.js'</span>,
+    <span class="hljs-attr">publicPath</span>: <span class="hljs-string">'dist/'</span>
+  &#125;,
+<span class="hljs-comment">//后续需要把index.html放到dist中，就不要配置了</span></code></pre>
+<p>问题二：解决文件命名问题</p>
+<pre><code class="hljs javascript">options: &#123;
+   <span class="hljs-attr">limit</span>: <span class="hljs-number">8192</span>,
+   <span class="hljs-attr">name</span>: <span class="hljs-string">'img/[name].[hash:8].[ext]'</span>
+&#125;</code></pre>
+<h4 id="4-ES6转ES5"><a href="#4-ES6转ES5" class="headerlink" title="4. ES6转ES5"></a>4. ES6转ES5</h4><p>npm install –save-dev babel-loader@7 babel-core babel-preset-es2015</p>
+<pre><code class="hljs javascript">    &#123;
+      <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.js$/</span>,
+      <span class="hljs-attr">exclude</span>: <span class="hljs-regexp">/(node_modules|bower_components)/</span>,
+      <span class="hljs-attr">use</span>: &#123;
+        <span class="hljs-attr">loader</span>: <span class="hljs-string">'babel-loader'</span>,
+        <span class="hljs-attr">options</span>: &#123;
+          <span class="hljs-attr">presets</span>: [<span class="hljs-string">'@babel/preset-env'</span>]
+        &#125;
+      &#125;
+    &#125;
+改：
+    options: &#123;
+        <span class="hljs-attr">presets</span>: [<span class="hljs-string">'es2015'</span>]
+    &#125;</code></pre>
+<h1 id="四、依赖-vue"><a href="#四、依赖-vue" class="headerlink" title="四、依赖.vue"></a>四、依赖.vue</h1><ol>
+<li>npm install vue –save（不加-dev，是因为开发和发布都需要用）</li>
+<li>配置</li>
+</ol>
+<pre><code class="hljs javascript">resolve: &#123;
+    <span class="hljs-comment">//起别名，指定路径</span>
+    alias: &#123;
+      <span class="hljs-string">'vue$'</span>: <span class="hljs-string">'vue/dist/vue.esm.js'</span>  <span class="hljs-comment">//(runtime-compiler 而不使用 runtime-only（不能编译template）)</span>
+    &#125;
+&#125;
+
+resolve: &#123;
+    <span class="hljs-comment">//去后缀</span>
+    extensions: [<span class="hljs-string">'.js'</span>,<span class="hljs-string">'.css'</span>,<span class="hljs-string">'.vue'</span>],</code></pre>
+<h1 id="五、index-js代码抽离"><a href="#五、index-js代码抽离" class="headerlink" title="五、index.js代码抽离"></a>五、index.js代码抽离</h1><h4 id="1-对象化"><a href="#1-对象化" class="headerlink" title="1. 对象化"></a>1. 对象化</h4><pre><code class="hljs javascript">&lt;div id=<span class="hljs-string">"app"</span>&gt;
+<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+
+<span class="hljs-number">2.</span> 写成对象
+<span class="hljs-keyword">const</span> App = &#123;	
+  <span class="hljs-attr">template</span>: <span class="hljs-string">`
+  &lt;div&gt;
+    &lt;h2&gt;&#123;&#123;message&#125;&#125;&lt;/h2&gt;
+    &lt;button @click="btnClick"&gt;按钮&lt;/button&gt;
+    &lt;h2&gt;&#123;&#123;name&#125;&#125;&lt;/h2&gt;
+  &lt;/div&gt;
+  `</span>,
+  data() &#123;
+    <span class="hljs-keyword">return</span> &#123;
+      <span class="hljs-attr">message</span>: <span class="hljs-string">'Hello,Webpack'</span>,
+      <span class="hljs-attr">name</span>: <span class="hljs-string">'哈哈哈'</span>
+    &#125;
+  &#125;,
+  <span class="hljs-attr">methods</span>: &#123;
+    btnClick() &#123;&#125;
+  &#125;
+&#125;;
+
+<span class="hljs-number">3.</span> <span class="hljs-keyword">new</span> Vue(&#123;
+  <span class="hljs-attr">el</span>: <span class="hljs-string">'#app'</span>,
+  <span class="hljs-comment">//编译后，会直接把div替换掉</span>
+  template: <span class="hljs-string">'&lt;App/&gt;'</span>,  <span class="hljs-comment">//使用</span>
+  components: &#123;     <span class="hljs-comment">//注册</span>
+    App
+  &#125;
+&#125;);</code></pre>
+<h4 id="2-文件化"><a href="#2-文件化" class="headerlink" title="2. 文件化"></a>2. 文件化</h4><blockquote>
+<p>新建vue/app.js,把App代码拿过去，用导入导出的方式使用</p>
+</blockquote>
+<h4 id="3-演变成：使用app-vue"><a href="#3-演变成：使用app-vue" class="headerlink" title="3. 演变成：使用app.vue"></a>3. 演变成：使用app.vue</h4><ol>
+<li><p>安装npm install –save-dev vue-loader vue-template-compiler</p>
+</li>
+<li><p>配置webpack.config.js</p>
+</li>
+</ol>
+<pre><code class="hljs javascript">&#123;
+    <span class="hljs-attr">test</span>: <span class="hljs-regexp">/\.vue$/</span>,
+    <span class="hljs-attr">use</span>: [<span class="hljs-string">'vue-loader'</span>]
+&#125;
+
+<span class="hljs-comment">// webpack.config.js</span>
+<span class="hljs-keyword">const</span> VueLoaderPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">'vue-loader/lib/plugin'</span>)
+<span class="hljs-built_in">module</span>.exports = &#123;
+  <span class="hljs-comment">// ...</span>
+  plugins: [
+    <span class="hljs-keyword">new</span> VueLoaderPlugin()
+  ]
+&#125;</code></pre>
+<h1 id="六、插件的使用"><a href="#六、插件的使用" class="headerlink" title="六、插件的使用"></a>六、插件的使用</h1><h4 id="1-版权插件"><a href="#1-版权插件" class="headerlink" title="1. 版权插件"></a>1. 版权插件</h4><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack'</span>);
+plugins: [
+    <span class="hljs-keyword">new</span> VueLoaderPlugin(),<span class="hljs-keyword">new</span> webpack.BannerPlugin(<span class="hljs-string">'最终版权归Guzhz所有'</span>)
+]</code></pre>
+<h4 id="2-打包生成index-html到dist中的插件"><a href="#2-打包生成index-html到dist中的插件" class="headerlink" title="2. 打包生成index.html到dist中的插件"></a>2. 打包生成index.html到dist中的插件</h4><p>安装：npm install html-webpack-plugin –save-dev</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">'html-webpack-plugin'</span>);
+<span class="hljs-keyword">new</span> HtmlWebpackPlugin(&#123;
+    <span class="hljs-attr">template</span>: <span class="hljs-string">'index.html'</span> <span class="hljs-comment">//不在需要手动引入script（删除）</span>
+&#125;)</code></pre>
+<p><code>注意：删除配置的 publicPath: &#39;dist/&#39;</code></p>
+<h4 id="3-丑化插件uglifyjs"><a href="#3-丑化插件uglifyjs" class="headerlink" title="3. 丑化插件uglifyjs"></a>3. 丑化插件uglifyjs</h4><p>安装：npm install <a href="mailto:uglifyjs-webpack-plugin@1.1.1" target="_blank" rel="noopener">uglifyjs-webpack-plugin@1.1.1</a> –save-dev</p>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">const</span> UglifyjsWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">'uglifyjs-webpack-plugin'</span>);
+    <span class="hljs-keyword">new</span> UglifyjsWebpackPlugin()</code></pre>
+<h4 id="4-搭建本地服务器（热部署）"><a href="#4-搭建本地服务器（热部署）" class="headerlink" title="4. 搭建本地服务器（热部署）"></a>4. 搭建本地服务器（热部署）</h4><p>安装：<a href="mailto:webpack-dev-server@2.9.1" target="_blank" rel="noopener">webpack-dev-server@2.9.1</a></p>
+<pre><code>devServer: {
+   contextBase: &apos;./dist&apos;,
+   inline: true    //实时监听
+}
+</code></pre><p><code>把上面注释掉，配置webpack.json命令&quot;dev&quot;: &quot;webpack-dev-server --open&quot;</code></p>
+<p>启动：npm run dev</p>
+<p>部署：npm run build</p>
+<h4 id="5-合并插件：环境的分离"><a href="#5-合并插件：环境的分离" class="headerlink" title="5. 合并插件：环境的分离"></a>5. 合并插件：环境的分离</h4><p>安装：npm install <a href="mailto:webpack-merge@4.1.5" target="_blank" rel="noopener">webpack-merge@4.1.5</a> –save-dev</p>
+<pre><code class="hljs javascript">prod:
+    <span class="hljs-keyword">const</span> UglifyjsWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">'uglifyjs-webpack-plugin'</span>);
+    <span class="hljs-keyword">const</span> WebpackMerge = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack-merge'</span>);
+    <span class="hljs-keyword">const</span> baseConfig = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./base.config'</span>);
+    <span class="hljs-built_in">module</span>.exports = WebpackMerge(baseConfig, &#123;
+      <span class="hljs-attr">plugins</span>: [
+        <span class="hljs-keyword">new</span> UglifyjsWebpackPlugin()
+      ]
+    &#125;);
+
+dev:
+    <span class="hljs-keyword">const</span> WebpackMerge = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack-merge'</span>);
+    <span class="hljs-keyword">const</span> baseConfig = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./base.config'</span>);
+    <span class="hljs-built_in">module</span>.exports = WebpackMerge (baseConfig, &#123;
+      <span class="hljs-attr">devServer</span>: &#123;
+        <span class="hljs-attr">contextBase</span>: <span class="hljs-string">'./dist'</span>,
+        <span class="hljs-attr">inline</span>: <span class="hljs-literal">true</span>    <span class="hljs-comment">//实时监听</span>
+      &#125;
+    &#125;);</code></pre>
+<p>配置：</p>
+<pre><code class="hljs javascript">package.json
+  <span class="hljs-string">"scripts"</span>: &#123;
+    <span class="hljs-string">"test"</span>: <span class="hljs-string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>,
+    <span class="hljs-string">"build"</span>: <span class="hljs-string">"webpack --config ./build/prod.config.js"</span>,
+    <span class="hljs-string">"dev"</span>: <span class="hljs-string">"webpack-dev-server --open --config ./build/dev.config.js"</span>
+  &#125;,
+
+  <span class="hljs-attr">path</span>: path.resolve(__dirname,<span class="hljs-string">'../dist'</span>),   <span class="hljs-comment">//绝对路径</span></code></pre>
+<p align="right"><br>2020年08月4日 中午<br>Guzhz</p>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/学习类/">学习类</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/教程/">教程</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/28/VUE学习（四）：脚手架和箭头函数的使用/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">VUE学习（四）：脚手架和箭头函数的使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/26/VUE学习（二）：组件化开发/">
+                        <span class="hidden-mobile">VUE学习（二）：组件化开发</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备1234556号-1</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="/js/debouncer.js"></script>
+<script src="/js/main.js"></script>
+
+<!-- Plugins -->
+
+
+  
+    <script src="/js/lazyload.js"></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script>
+  <script src="/js/clipboard-use.js"></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "VUE学习（三）：webpack详解&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js"></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>

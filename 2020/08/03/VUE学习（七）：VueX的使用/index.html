@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content>
+  <meta name="author" content="Guzhz">
+  <meta name="keywords" content>
+  <title>VUE学习（七）：VueX的使用 - Guzhz&#39;s House</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Guzhz's House</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-03 01:49">
+      2020年8月3日 凌晨
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="VueX：管理组件间的共享资源"><a href="#VueX：管理组件间的共享资源" class="headerlink" title="VueX：管理组件间的共享资源"></a>VueX：管理组件间的共享资源</h1><h4 id="1、安装和使用：npm-install-vuex-3-0-1-–save"><a href="#1、安装和使用：npm-install-vuex-3-0-1-–save" class="headerlink" title="1、安装和使用：npm install vuex@3.0.1 –save"></a>1、安装和使用：npm install <a href="mailto:vuex@3.0.1" target="_blank" rel="noopener">vuex@3.0.1</a> –save</h4><blockquote>
+<p>1、新建store包，放在index.js里</p>
+</blockquote>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>
+<span class="hljs-keyword">import</span> Vuex <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span>
+
+<span class="hljs-comment">//安装插件</span>
+Vue.use(Vuex)
+
+<span class="hljs-comment">//创建对象</span>
+<span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Vuex.Store(&#123;
+  <span class="hljs-attr">state</span>: &#123;
+    <span class="hljs-attr">counter</span>: <span class="hljs-number">1000</span>
+  &#125;,
+  <span class="hljs-attr">mutations</span>: &#123;  <span class="hljs-comment">//记录处理记录</span>
+
+  &#125;,
+  <span class="hljs-attr">actions</span>: &#123;   <span class="hljs-comment">//异步处理，对接后端</span>
+
+  &#125;,
+  <span class="hljs-attr">getters</span>:&#123;
+    
+  &#125;,
+  <span class="hljs-attr">modules</span>: &#123;
+
+  &#125;
+&#125;)
+
+<span class="hljs-comment">//导出</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store</code></pre>
+<blockquote>
+<p>2、main.js，通过vue使用vuex插件</p>
+</blockquote>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">import</span> store <span class="hljs-keyword">from</span> <span class="hljs-string">'./store'</span>		<span class="hljs-comment">//导入对应的包即可</span>
+Vue.prototype.$store = store</code></pre>
+<blockquote>
+<p>3、使用共享数据（不建议直接修改）</p>
+</blockquote>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>&#123;&#123;$store.state.counter&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></code></pre>
+<blockquote>
+<p>4、安装devtools浏览器插件（谷歌商店）进行调试</p>
+</blockquote>
+<pre><code class="hljs html">//定义处理方法（这个方法经过vuex插件
+ mutations: &#123;  //记录处理记录
+    increment(state) &#123;
+      state.counter++
+    &#125;,
+    decrement(state) &#123;
+      state.counter--
+    &#125;
+ &#125;,
+
+//通过提交的方式，字符串参数为方法名
+  methods: &#123;
+    add() &#123;
+      this.$store.commit('increment')
+    &#125;,
+    minus() &#123;
+      this.$store.commit('decrement')
+    &#125;
+  &#125;</code></pre>
+<h4 id="2、state：管理状态"><a href="#2、state：管理状态" class="headerlink" title="2、state：管理状态"></a>2、state：管理状态</h4><blockquote>
+<p>单一状态树，即vuex本身不建议创建多个，只需要一个即可，方便管理</p>
+</blockquote>
+<h4 id="3、getters：计算属性-函数参数：state、-getters"><a href="#3、getters：计算属性-函数参数：state、-getters" class="headerlink" title="3、getters：计算属性 | 函数参数：state、(getters)"></a>3、getters：计算属性 | 函数参数：state、(getters)</h4><blockquote>
+<p>可以理解为计算属性，对数据的复杂处理，然后按照属性的方式进行调用</p>
+</blockquote>
+<pre><code class="hljs JavaScript">getters:&#123;
+  powerCounter(state) &#123;
+    <span class="hljs-keyword">return</span> state.counter * state.counter
+  &#125;
+&#125;,</code></pre>
+<p>妙用：需要对已有的方法进行进一步处理，可以再写个方法传getters进去，然后调用指定的方法进行处理</p>
+<pre><code class="hljs javascript">more20stu(state) &#123;
+  <span class="hljs-keyword">return</span> state.students.filter(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s.age&gt;<span class="hljs-number">20</span>)
+&#125;,
+more20stuLength(state, getters) &#123;		<span class="hljs-comment">//只接受state和getters，两个参数</span>
+  <span class="hljs-keyword">return</span> getters.more20stu.length;
+&#125;</code></pre>
+<p>需求：调动getters的方法时，需要指定参数</p>
+<p>思想：因为getters不接受自定义参数，则可以通过嵌套函数，由函数处理传进来的参数，然后return回去</p>
+<pre><code class="hljs JavaScript">&lt;h2&gt;超过指定年龄的学生：&#123;&#123;$store.getters.moreAgeStu(17)&#125;&#125;&lt;/h2&gt;
+//17就传到function里面了
+moreAgeStu(state) &#123;
+  return function (age) &#123;
+    return state.students.filter(s =&gt; s.age &gt; age);
+  &#125;
+&#125;</code></pre>
+<h4 id="4、mutations：-函数参数：state、-调用：commit"><a href="#4、mutations：-函数参数：state、-调用：commit" class="headerlink" title="4、mutations：| 函数参数：state、%| 调用：commit"></a>4、mutations：| 函数参数：state、%| 调用：commit</h4><blockquote>
+<p>1、修改state参数时使用</p>
+<p>2、传递参数</p>
+</blockquote>
+<pre><code class="hljs JavaScript"><span class="hljs-comment">//App.vue</span>
+addStudent() &#123;
+  <span class="hljs-keyword">const</span> stu = &#123;<span class="hljs-attr">id</span>: <span class="hljs-number">5</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'eee'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">111</span>&#125;
+  <span class="hljs-keyword">this</span>.$store.commit(<span class="hljs-string">'addStudent'</span>,stu)
+&#125;
+
+addStudent(state, stu) &#123;
+  state.students.push(stu)
+&#125;</code></pre>
+<blockquote>
+<p>3、提交风格（传对象）</p>
+</blockquote>
+<pre><code class="hljs javascript">addCount(count) &#123;
+  <span class="hljs-comment">//直接传数字</span>
+  <span class="hljs-comment">// this.$store.commit('incrementCount',count)</span>
+
+  <span class="hljs-comment">//传对象</span>
+  <span class="hljs-keyword">this</span>.$store.commit(&#123;
+    <span class="hljs-attr">type</span>: <span class="hljs-string">'incrementCount'</span>,
+    count
+  &#125;)
+&#125;,
+
+<span class="hljs-comment">//接收的时候也是对象，需要在对象里取出对应的值，注意：传的type会自动查找指定函数</span>
+incrementCount(state,payload) &#123;
+  <span class="hljs-built_in">console</span>.log(payload);
+  state.counter += payload.count;
+&#125;,</code></pre>
+<blockquote>
+<p>4、响应式系统：需要提前初始化好才会是响应式；如果动态添加属性，则不会响应式（观察者模式）</p>
+</blockquote>
+<pre><code class="hljs javascript">解决：
+&gt; 添加：
+响应式：Vue.set(state.info, <span class="hljs-string">'key'</span>, <span class="hljs-string">'value'</span>) <span class="hljs-comment">//对象</span>
+
+&gt; 删除：
+非响应式：<span class="hljs-keyword">delete</span> state.info.age
+响应式：Vue.delete(state.info, <span class="hljs-string">'age'</span>)</code></pre>
+<blockquote>
+<p>5、类型常量（解决方法名可能写错的问题）</p>
+</blockquote>
+<pre><code class="hljs javascript"><span class="hljs-comment">//新建mutation-types.js，统一常量名然后导出</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> INCREMENT = <span class="hljs-string">'increment'</span>
+
+<span class="hljs-keyword">import</span> &#123;INCREMENT&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"./store/mutations-types"</span>;
+<span class="hljs-comment">//Vue.vue使用</span>
+  add() &#123;
+    <span class="hljs-keyword">this</span>.$store.commit(INCREMENT)
+  &#125;,
+<span class="hljs-comment">//index.js使用</span>
+  [INCREMENT](state) &#123;  <span class="hljs-comment">//用括号包起来</span>
+    state.counter++
+  &#125;,</code></pre>
+<h4 id="5、actions：异步操作-函数参数：context，payload-调用：dispatch"><a href="#5、actions：异步操作-函数参数：context，payload-调用：dispatch" class="headerlink" title="5、actions：异步操作 | 函数参数：context，payload | 调用：dispatch"></a>5、actions：异步操作 | 函数参数：context，payload | 调用：dispatch</h4><p>原理：把异步请求放在actions里，在actions的方法里通过commit请求mutations，vue通过dispatch调用actions的方法</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//按钮点击修改</span>
+updateInfo() &#123;
+     <span class="hljs-keyword">this</span>.$store.dispatch(<span class="hljs-string">'aUpdateInfo'</span>,<span class="hljs-string">'我是payload'</span>)
+&#125;
+
+<span class="hljs-comment">//来到actions</span>
+actions: &#123;   <span class="hljs-comment">//异步处理，对接后端</span>
+    <span class="hljs-comment">//上下文，理解为store对象</span>
+    aUpdateInfo(context,payload) &#123;
+      setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;
+	  <span class="hljs-built_in">console</span>.log(payload);
+      context.commit(<span class="hljs-string">'updateInfo'</span>)
+    &#125;, <span class="hljs-number">1000</span>)
+  &#125;
+&#125;,
+
+<span class="hljs-comment">//来到mutations</span>
+updateInfo(state) &#123;
+  state.info.name = <span class="hljs-string">'hhh'</span>
+&#125;</code></pre>
+<p>高操作：点击按钮后，来到actions发送请求，然后放回Promise对象，对象存放回调信息，然后在一开始的按钮函数里then()拿出信息</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//按钮</span>
+updateInfo() &#123;
+  <span class="hljs-comment">//需求：请求完了，要返回一个回调信息 new Promise</span>
+  <span class="hljs-keyword">this</span>.$store
+      .dispatch(<span class="hljs-string">'aUpdateInfo'</span>,<span class="hljs-string">'我是携带的信息'</span>)
+      .then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'----------------------'</span>)
+        <span class="hljs-built_in">console</span>.log(res);
+  &#125;)
+&#125;
+
+<span class="hljs-comment">//回调</span>
+aUpdateInfo(context,payload) &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;
+      setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;
+        <span class="hljs-built_in">console</span>.log(payload);
+        context.commit(<span class="hljs-string">'updateInfo'</span>)
+
+        resolve(<span class="hljs-string">'回调信息'</span>)
+      &#125;, <span class="hljs-number">1000</span>)
+    &#125;)
+&#125;
+
+我的payload
+我是携带的信息
+----------------------
+回调信息</code></pre>
+<h4 id="6、modules：嵌套子模块"><a href="#6、modules：嵌套子模块" class="headerlink" title="6、modules：嵌套子模块"></a>6、modules：嵌套子模块</h4><pre><code class="hljs javascript">modules: &#123;
+  <span class="hljs-attr">a</span>: moduleA
+&#125;
+
+<span class="hljs-keyword">const</span> moduleA = &#123;
+  <span class="hljs-attr">state</span>: &#123;
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'zhangsan'</span>,
+  &#125;,
+  <span class="hljs-attr">mutations</span>: &#123;
+    updateName(state, payload) &#123;	<span class="hljs-comment">//使用方法一样： this.$store.commit('updateName','lisi')</span>
+      state.name = payload
+    &#125;
+  &#125;,
+  <span class="hljs-attr">getters</span>: &#123;	<span class="hljs-comment">//使用方法一样：&#123;&#123;$store.getters.fullName&#125;&#125;</span>
+    fullName(state) &#123;
+      <span class="hljs-keyword">return</span> state.name + <span class="hljs-string">'1111'</span>
+    &#125;,
+    fullName2(state, getters) &#123;
+      <span class="hljs-keyword">return</span> getters.fullName + <span class="hljs-string">'2222'</span>
+    &#125;,
+    fullName3(state, gettters, rootState) &#123;	<span class="hljs-comment">//多了一个参数，可以拿到根的state</span>
+      <span class="hljs-keyword">return</span> gettters.fullName2 + rootState.counter
+    &#125;
+  &#125;,
+  <span class="hljs-attr">actions</span>: &#123;
+    aUpdateName(context) &#123;  <span class="hljs-comment">//context不再是store对象，而是指本模块，commit也只能是自己的</span>
+      setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;
+        context.commit(<span class="hljs-string">'updateName'</span>,<span class="hljs-string">'wangwu'</span>)
+      &#125;,<span class="hljs-number">1000</span>)
+    &#125;
+  &#125;
+&#125;</code></pre>
+<h4 id="7、文件目录组织"><a href="#7、文件目录组织" class="headerlink" title="7、文件目录组织"></a>7、文件目录组织</h4><h5 id="1、对象的解构"><a href="#1、对象的解构" class="headerlink" title="1、对象的解构"></a>1、对象的解构</h5><pre><code class="hljs html">const obj = &#123;
+  name: 'hh',
+  age: 18,
+  height: 1.88,
+  address: '洛杉矶'
+&#125;
+
+const &#123;name,height,age&#125; = obj; //不用按顺序，按需取出
+cosole.log(name)  //直接使用</code></pre>
+<h5 id="2、拆分"><a href="#2、拆分" class="headerlink" title="2、拆分"></a>2、拆分</h5><pre><code class="hljs html">store
+  |--modules
+		|--moduleA.js
+  |mutations.js
+  |mutations-types.js
+  |getters.js
+  |actions.js
+  |index.js</code></pre>
+<p align="right"><br>2020年08月4日 下午<br>Guzhz</p>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/学习类/">学习类</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/教程/">教程</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/04/VUE学习（八）：axios使用/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">VUE学习（八）：axios使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/01/VUE学习（六）：Promise的使用/">
+                        <span class="hidden-mobile">VUE学习（六）：Promise的使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备1234556号-1</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="/js/debouncer.js"></script>
+<script src="/js/main.js"></script>
+
+<!-- Plugins -->
+
+
+  
+    <script src="/js/lazyload.js"></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script>
+  <script src="/js/clipboard-use.js"></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "VUE学习（七）：VueX的使用&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js"></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>

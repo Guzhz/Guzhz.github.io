@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content>
+  <meta name="author" content="Guzhz">
+  <meta name="keywords" content>
+  <title>VUE学习（五）：vue-router的使用 - Guzhz&#39;s House</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Guzhz's House</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-07-29 23:49">
+      2020年7月29日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="一、vue-router的使用"><a href="#一、vue-router的使用" class="headerlink" title="一、vue-router的使用"></a>一、vue-router的使用</h1><h4 id="1、使用方法"><a href="#1、使用方法" class="headerlink" title="1、使用方法"></a>1、使用方法</h4><blockquote>
+<p>1、components文件夹新建vue文件；</p>
+<p>2、index.js添加映射路径（导入组件）；</p>
+<p>3、App.vue使用组件</p>
+</blockquote>
+<h4 id="2、改hash路径为history路径"><a href="#2、改hash路径为history路径" class="headerlink" title="2、改hash路径为history路径"></a>2、改hash路径为history路径</h4><blockquote>
+<p>index.js -&gt; Router对象：mode: ‘history’,</p>
+</blockquote>
+<h4 id="3、router-link的使用"><a href="#3、router-link的使用" class="headerlink" title="3、router-link的使用"></a>3、router-link的使用</h4><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"app"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>我是app组件<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+    <span class="hljs-comment">&lt;!--默认a标签，tag指定标签，replace：replaceState（禁止来回返回）--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">"/home"</span> <span class="hljs-attr">tag</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">replace</span>&gt;</span>首页<span class="hljs-tag">&lt;/<span class="hljs-name">router-link</span>&gt;</span> 
+    <span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">"/about"</span> <span class="hljs-attr">tag</span>=<span class="hljs-string">"button"</span> <span class="hljs-attr">replace</span>&gt;</span>关于<span class="hljs-tag">&lt;/<span class="hljs-name">router-link</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">router-view</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-view</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></code></pre>
+<h4 id="4、router-link-active"><a href="#4、router-link-active" class="headerlink" title="4、router-link-active"></a>4、router-link-active</h4><pre><code class="hljs html">//当<span class="hljs-tag">&lt;<span class="hljs-name">router-link</span>&gt;</span>对应的路由匹配成功时，会自动给元素设置一个router-link-active的class，可以对这个类进行样式设置
+.router-link-active &#123;
+	color: red;
+&#125;
+
+//修改默认的名称：index.js，使用linkActiveClass: 'active'，则会修改陈active
+.active &#123;
+	color: red;
+&#125;</code></pre>
+<h4 id="5、绑定方法，使用this-router-push-‘-home’-跳转页面"><a href="#5、绑定方法，使用this-router-push-‘-home’-跳转页面" class="headerlink" title="5、绑定方法，使用this.$router.push(‘/home’)跳转页面"></a>5、绑定方法，使用this.$router.push(‘/home’)跳转页面</h4><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"app"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>我是app组件<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">"clickHome"</span>&gt;</span>首页<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">"clickAbout"</span>&gt;</span>关于<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">router-view</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-view</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+export default &#123;
+  name: 'App',
+  methods: &#123;
+    clickHome() &#123;
+      this.$router.replace('/home').catch(err =&gt; &#123;&#125;);  //区别push
+      console.log('clickHome');
+    &#125;,
+    clickAbout() &#123;
+      this.$router.replace('/about').catch(err =&gt; &#123;&#125;);
+      console.log('clickAbout');
+    &#125;
+  &#125;
+&#125;</code></pre>
+<h4 id="6、-router、-route、routes的区别"><a href="#6、-router、-route、routes的区别" class="headerlink" title="6、$router、$route、routes的区别"></a>6、$router、$route、routes的区别</h4><blockquote>
+<p>1、$router：代指Router对象，使用：this.$router；</p>
+<p>2、$route：指当前正在活跃(使用)的路由：通过this.$route.params.参数，可以拿到参数</p>
+<p>3、routes：index.js路由管理里面，Router对象里的属性，也是映射管理；</p>
+</blockquote>
+<h4 id="7、动态路由（路由传参）"><a href="#7、动态路由（路由传参）" class="headerlink" title="7、动态路由（路由传参）"></a>7、动态路由（路由传参）</h4><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">v-bind:to</span>=<span class="hljs-string">"'/user/'+uId"</span>&gt;</span>用户<span class="hljs-tag">&lt;/<span class="hljs-name">router-link</span>&gt;</span>
+
+data() &#123;
+  return &#123;
+    uId: 'ss'
+  &#125;
+&#125;,
+
+------User.vue------
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>我是用户界面<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>我是用户的相关信息，略略略<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>&#123;&#123;userId&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>				<span class="hljs-comment">&lt;!--展示--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>&#123;&#123;$route.params.uId&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>  <span class="hljs-comment">&lt;!--直接拿--&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
+    <span class="hljs-attr">name</span>: <span class="hljs-string">"user"</span>,
+    <span class="hljs-attr">computed</span>: &#123;
+      userId() &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.$route.params.uId		<span class="hljs-comment">//获得参数</span>
+      &#125;
+    &#125;
+  &#125;
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+<h4 id="8、路由的懒加载"><a href="#8、路由的懒加载" class="headerlink" title="8、路由的懒加载"></a>8、路由的懒加载</h4><blockquote>
+<p>把不同的路由拆分为多个js文件，不一起打包，用到的时候再加载。</p>
+</blockquote>
+<pre><code class="hljs html">/*懒加载*/
+const Home = () =&gt; import('../components/Home')
+const About = () =&gt; import('../components/About')
+const User = () =&gt; import('../components/User')
+
+在index.js里，把之前直接引入的方式，改为声明为一个变量（常量），用到时候再引用，即加载</code></pre>
+<h4 id="9、嵌套子路由"><a href="#9、嵌套子路由" class="headerlink" title="9、嵌套子路由"></a>9、嵌套子路由</h4><blockquote>
+<p>1、新建vue：HomeNews.vue/HomeMessage.vue</p>
+<p>2、配置子路由映射children[{},{}] ，不需要”/“</p>
+<p>3、父vue模板，也加上<router-link><router-view></router-view></router-link></p>
+<p>4、注意：router-link to=”完整路径”</p>
+</blockquote>
+<pre><code class="hljs html">&#123;
+  path: '/home',
+  component: Home,
+  children: [
+    &#123;
+      path: 'news',  //不需要加 '/'
+      component: HomeNews
+    &#125;,
+    &#123;
+      path: 'message',  //不需要加 '/'
+      component: HomeMessage
+    &#125;
+  ]
+&#125;,
+
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>我是首页<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>我是首页内容，嘻嘻嘻<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">"/home/news"</span>&gt;</span>新闻<span class="hljs-tag">&lt;/<span class="hljs-name">router-link</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">to</span>=<span class="hljs-string">"/home/message"</span>&gt;</span>消息<span class="hljs-tag">&lt;/<span class="hljs-name">router-link</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">router-view</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-view</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></code></pre>
+<h4 id="10、路由参数传递"><a href="#10、路由参数传递" class="headerlink" title="10、路由参数传递"></a>10、路由参数传递</h4><h5 id="1-方式一：restful风格"><a href="#1-方式一：restful风格" class="headerlink" title="1. 方式一：restful风格"></a>1. 方式一：restful风格</h5><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">v-bind:to</span>=<span class="hljs-string">"'/user/'+uId"</span>&gt;</span>用户<span class="hljs-tag">&lt;/<span class="hljs-name">router-link</span>&gt;</span>
+
+&#123;
+	path: '/user/:uId',
+	component: User
+&#125;,
+
+&#123;&#123;$route.params.uId&#125;&#125;</code></pre>
+<h5 id="2-方式二：query传递"><a href="#2-方式二：query传递" class="headerlink" title="2. 方式二：query传递"></a>2. 方式二：query传递</h5><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">router-link</span> <span class="hljs-attr">v-bind:to</span>=<span class="hljs-string">"&#123;path: '/profile', query: &#123;name: 'guzhz', age: 18&#125;&#125;"</span>&gt;</span>档案<span class="hljs-tag">&lt;/<span class="hljs-name">router-link</span>&gt;</span>
+
+&#123;&#123;$route.query.name&#125;&#125;
+&#123;&#123;$route.query.age&#125;&#125;</code></pre>
+<h4 id="11、全局导航守卫"><a href="#11、全局导航守卫" class="headerlink" title="11、全局导航守卫"></a>11、全局导航守卫</h4><h5 id="1-生命周期的方式实现"><a href="#1-生命周期的方式实现" class="headerlink" title="1. 生命周期的方式实现"></a>1. 生命周期的方式实现</h5><pre><code class="hljs javascript">created() &#123;
+	<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'组件被创建的时候回调'</span>);
+	<span class="hljs-built_in">document</span>.title = <span class="hljs-string">'首页'</span>;
+&#125;,
+mounted() &#123;
+	<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'dom被挂载的时候回调'</span>);
+&#125;,
+updated() &#123;
+	<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'界面刷新则回调'</span>);
+&#125;</code></pre>
+<h5 id="2-前置钩子：全局导航守卫（cil4里则用to-name即可）"><a href="#2-前置钩子：全局导航守卫（cil4里则用to-name即可）" class="headerlink" title="2. 前置钩子：全局导航守卫（cil4里则用to.name即可）"></a>2. 前置钩子：全局导航守卫（cil4里则用to.name即可）</h5><pre><code class="hljs javascript"><span class="hljs-comment">//router调用beforeEach，参数是一个函数</span>
+<span class="hljs-comment">//matched[0],解决嵌套的时候undefined的问题</span>
+router.beforeEach(<span class="hljs-function">(<span class="hljs-params">to, <span class="hljs-keyword">from</span> ,next</span>) =&gt;</span> &#123;
+  <span class="hljs-built_in">document</span>.title = to.matched[<span class="hljs-number">0</span>].meta.title;
+  next(); <span class="hljs-comment">//必须调用，才能下一步</span>
+&#125;)
+
+<span class="hljs-comment">//在各自的route里面添加meta(元数据，描述数据的数据)</span>
+&#123;
+  <span class="hljs-attr">path</span>: <span class="hljs-string">'/user/:uId'</span>,
+  <span class="hljs-attr">component</span>: User,
+  <span class="hljs-attr">meta</span>: &#123;
+    <span class="hljs-attr">title</span>: <span class="hljs-string">'用户'</span>
+  &#125;
+&#125;,</code></pre>
+<h5 id="3-补充：后置钩子（没有next）"><a href="#3-补充：后置钩子（没有next）" class="headerlink" title="3. 补充：后置钩子（没有next）"></a>3. 补充：后置钩子（没有next）</h5><pre><code class="hljs javascript">router.afterEach(<span class="hljs-function">(<span class="hljs-params">to,<span class="hljs-keyword">from</span></span>) =&gt;</span> &#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'after'</span>);
+&#125;)</code></pre>
+<h5 id="4-补充：独享钩子"><a href="#4-补充：独享钩子" class="headerlink" title="4. 补充：独享钩子"></a>4. 补充：独享钩子</h5><pre><code class="hljs javascript"><span class="hljs-comment">//对指定的route配置</span>
+beforeEnter: <span class="hljs-function">(<span class="hljs-params">to, <span class="hljs-keyword">from</span>, next</span>) =&gt;</span> &#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'beforeEnter'</span>);
+  next();
+&#125;,</code></pre>
+<h5 id="5-补充：组件补充"><a href="#5-补充：组件补充" class="headerlink" title="5. 补充：组件补充"></a>5. 补充：组件补充</h5><h4 id="12、keep-alive的使用：提供组件缓存"><a href="#12、keep-alive的使用：提供组件缓存" class="headerlink" title="12、keep-alive的使用：提供组件缓存"></a>12、keep-alive的使用：提供组件缓存</h4><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">keep-alive</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">router-view</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-view</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">keep-alive</span>&gt;</span>
+
+//有缓存activated()和deactivated()才能使用</code></pre>
+<h5 id="1-嵌套子组件引发问题"><a href="#1-嵌套子组件引发问题" class="headerlink" title="1. 嵌套子组件引发问题"></a>1. 嵌套子组件引发问题</h5><blockquote>
+<p>问题：嵌套的子组件由于缺省设定的问题，导致切换回来的时候，子组件永远是缺省的那个</p>
+<p>思路：去掉缺省值，动态添加默认显示的子组件，同时记录路径，使切换回来的时候仍然是切换走的时候那个子组件</p>
+</blockquote>
+<pre><code class="hljs javascript"><span class="hljs-comment">//index.js的Home的route去掉写死的缺省值</span>
+children: [
+        <span class="hljs-comment">// &#123;</span>
+        <span class="hljs-comment">//   path: '',</span>
+        <span class="hljs-comment">//   redirect: 'news'</span>
+        <span class="hljs-comment">// &#125;,</span>
+        &#123;
+          <span class="hljs-attr">path</span>: <span class="hljs-string">'news'</span>,  <span class="hljs-comment">//不需要加 '/'</span>
+          component: HomeNews
+        &#125;,
+        &#123;
+          <span class="hljs-attr">path</span>: <span class="hljs-string">'message'</span>,  <span class="hljs-comment">//不需要加 '/'</span>
+          component: HomeMessage
+        &#125;
+      ],
+
+<span class="hljs-comment">//Home.vue，data()添加一个路径变量记录路径：path</span>
+data() &#123;
+      <span class="hljs-keyword">return</span> &#123;
+        <span class="hljs-attr">message</span>: <span class="hljs-string">'你好啊'</span>,
+        <span class="hljs-attr">path</span>: <span class="hljs-string">'/home/news'</span>
+      &#125;
+    &#125;,
+
+<span class="hljs-comment">//Home.vue配合activated()活跃时动态创建，beforeRouteLeave()离开时记录path</span>
+activated() &#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'activated'</span>);
+  <span class="hljs-keyword">this</span>.$router.push(<span class="hljs-keyword">this</span>.path).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;&#125;);
+&#125;,
+deactivated()&#123;
+    <span class="hljs-comment">//这个方法来不及获取path路径，所以不能使用</span>
+&#125;
+beforeRouteLeave(to, <span class="hljs-keyword">from</span>, next) &#123;
+  <span class="hljs-keyword">this</span>.path = <span class="hljs-keyword">this</span>.$route.path;
+  next();
+&#125;</code></pre>
+<h5 id="2-排除个别不需要缓存"><a href="#2-排除个别不需要缓存" class="headerlink" title="2. 排除个别不需要缓存"></a>2. 排除个别不需要缓存</h5><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">keep-alive</span> <span class="hljs-attr">exclude</span>=<span class="hljs-string">"Profile,User"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">router-view</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-view</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">keep-alive</span>&gt;</span></code></pre>
+<h1 id="二、vue-router底部栏项目知识点"><a href="#二、vue-router底部栏项目知识点" class="headerlink" title="二、vue-router底部栏项目知识点"></a>二、vue-router底部栏项目知识点</h1><h4 id="1-目录文件管理与逻辑分离"><a href="#1-目录文件管理与逻辑分离" class="headerlink" title="1. 目录文件管理与逻辑分离"></a>1. 目录文件管理与逻辑分离</h4><blockquote>
+<p>1、共同的vue放在components里</p>
+<p>2、主要视图放在views里，然后详细页面再分包</p>
+<p>3、App.vue如果太多代码，还可以继续抽离</p>
+<p>4、大组件继续拆分小组件，用插槽</p>
+<p>5、div(设置属性)包裹插槽，可以避免属性被覆盖</p>
+</blockquote>
+<h4 id="2-获得活跃路径和动态修改样式"><a href="#2-获得活跃路径和动态修改样式" class="headerlink" title="2. 获得活跃路径和动态修改样式"></a>2. 获得活跃路径和动态修改样式</h4><pre><code class="hljs html">//父传子<span class="hljs-tag">&lt;<span class="hljs-name">tab-bar-item</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"/profile"</span> <span class="hljs-attr">activeColor</span>=<span class="hljs-string">"blue"</span>&gt;</span>
+
+props: &#123;
+    path: String,
+    activeColor: &#123;
+    	type: String,
+    	default: 'deeppink'
+    &#125;
+&#125;,
+computed: &#123;
+  isActive() &#123;
+    //获得活跃路径
+    return this.$route.path.indexOf(this.path) !== -1;
+  &#125;,
+  activeStyle() &#123;
+    return this.isActive ? &#123;color: this.activeColor&#125; : &#123;&#125;
+  &#125;
+&#125;,</code></pre>
+<h4 id="3-点击跳转"><a href="#3-点击跳转" class="headerlink" title="3. 点击跳转"></a>3. 点击跳转</h4><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"tab-bar-item"</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">"itemClick"</span>&gt;</span>
+    
+//父传子，path
+methods: &#123;
+    itemClick() &#123;
+    	this.$router.push(this.path).catch(err =&gt; &#123;&#125;);
+    &#125;
+&#125;</code></pre>
+<h4 id="4-文件路径起别名"><a href="#4-文件路径起别名" class="headerlink" title="4. 文件路径起别名"></a>4. 文件路径起别名</h4><blockquote>
+<p>1、webpack.base.conf.js修改</p>
+<pre><code class="hljs JavaScript">&gt; resolve: &#123;
+&gt; extensions: [<span class="hljs-string">'.js'</span>, <span class="hljs-string">'.vue'</span>, <span class="hljs-string">'.json'</span>],
+&gt; alias: &#123;
+&gt;  <span class="hljs-string">'@'</span>: resolve(<span class="hljs-string">'src'</span>),
+&gt;  <span class="hljs-string">'assets'</span>: resolve(<span class="hljs-string">'src/assets'</span>),
+&gt;  <span class="hljs-string">'components'</span>: resolve(<span class="hljs-string">'src/components'</span>),
+&gt;  <span class="hljs-string">'views'</span>: resolve(<span class="hljs-string">'src/views'</span>),
+&gt; &#125;
+&gt; &#125;,
+&gt;</code></pre>
+</blockquote>
+<blockquote>
+<p>2、使用</p>
+<pre><code class="hljs html">&gt; //如果是import from 的路径则直接使用别名
+&gt; import TabBar from "components/tabbar/TabBar";
+&gt; import TabBarItem from "components/tabbar/TabBarItem";
+&gt; 
+&gt; //src引用，则需要在别名前面加“~”
+&gt; <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"item-icon"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"~assets/img/tabbar/category.svg"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">""</span>&gt;</span>
+&gt;</code></pre>
+</blockquote>
+<p align="right"><br>2020年08月4日 下午<br>Guzhz</p>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/学习类/">学习类</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/教程/">教程</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/08/01/VUE学习（六）：Promise的使用/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">VUE学习（六）：Promise的使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/07/28/VUE学习（四）：脚手架和箭头函数的使用/">
+                        <span class="hidden-mobile">VUE学习（四）：脚手架和箭头函数的使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备1234556号-1</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="/js/debouncer.js"></script>
+<script src="/js/main.js"></script>
+
+<!-- Plugins -->
+
+
+  
+    <script src="/js/lazyload.js"></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script>
+  <script src="/js/clipboard-use.js"></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "VUE学习（五）：vue-router的使用&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js"></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,383 +1,687 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
+
+
+
+
+
 <head><meta name="generator" content="Hexo 3.8.0">
-    
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content>
+  <meta name="author" content="Guzhz">
+  <meta name="keywords" content>
+  <title>VUE学习（八）：axios使用 - Guzhz&#39;s House</title>
 
-    
-
-    
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 
 
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
 
-    <meta charset="utf-8">
-    
-    
-    
-    
-    <title>VUE学习（八）：axios使用 | Guzhz&#39;s House | Simply to do something.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    <meta name="theme-color" content="EEE2F5">
-    
-    
-    <meta name="keywords" content="教程">
-    <meta name="description" content="axios：网络请求1、安装：npm install axios –save2、基本使用12345678910111213141516171819import axios from &apos;axios&apos;axios(&amp;#123;		//没有参数  //httpbin.org  url: &apos;http://152.136.185.210:8000/api/z8/home/multidata&apos;,  method">
-<meta name="keywords" content="教程">
-<meta property="og:type" content="article">
-<meta property="og:title" content="VUE学习（八）：axios使用">
-<meta property="og:url" content="http://yoursite.com/2020/08/04/VUE学习（八）：axios使用/index.html">
-<meta property="og:site_name" content="Guzhz&#39;s House">
-<meta property="og:description" content="axios：网络请求1、安装：npm install axios –save2、基本使用12345678910111213141516171819import axios from &apos;axios&apos;axios(&amp;#123;		//没有参数  //httpbin.org  url: &apos;http://152.136.185.210:8000/api/z8/home/multidata&apos;,  method">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-08-04T07:09:16.221Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="VUE学习（八）：axios使用">
-<meta name="twitter:description" content="axios：网络请求1、安装：npm install axios –save2、基本使用12345678910111213141516171819import axios from &apos;axios&apos;axios(&amp;#123;		//没有参数  //httpbin.org  url: &apos;http://152.136.185.210:8000/api/z8/home/multidata&apos;,  method">
-    
-        <link rel="alternate" type="application/atom+xml" title="Guzhz&#39;s House" href="/atom.xml">
-    
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
-    <script>window.lazyScripts=[]</script>
+  
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
 
-    <!-- custom head -->
-    
+  
 
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
 </head>
 
-<body>
-    <div id="loading" class="active"></div>
 
-    <aside id="menu" class="hide">
-  <div class="inner flex-row-vertical">
-    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
-        <i class="icon icon-lg icon-close"></i>
-    </a>
-    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
-      <div class="brand">
-        <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/img/avatar.jpg">
-        </a>
-        <hgroup class="introduce">
-          <h5 class="nickname">Guzhz</h5>
-          <a href="mailto:936681921@qq.com" title="936681921@qq.com" class="mail">936681921@qq.com</a>
-        </hgroup>
-      </div>
-    </div>
-    <div class="scroll-wrap flex-col">
-      <ul class="nav">
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Guzhz's House</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-            <li class="waves-block waves-effect">
-              <a href="/">
-                <i class="icon icon-lg icon-home"></i>
-                Home
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="/archives">
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="/tags">
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="/categories">
-                <i class="icon icon-lg icon-th-list"></i>
-                Categories
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="https://github.com/Guzhz" target="_blank">
-                <i class="icon icon-lg icon-github"></i>
-                Github
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
               </a>
             </li>
+          
         
-            <li class="waves-block waves-effect">
-              <a href="/about">
-                <i class="icon icon-lg icon-address-card"></i>
-                About
-              </a>
-            </li>
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
         
       </ul>
     </div>
   </div>
-</aside>
-
-    <main id="main">
-        <header class="top-header" id="header">
-    <div class="flex-row">
-        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
-          <i class="icon icon-lg icon-navicon"></i>
-        </a>
-        <div class="flex-col header-title ellipsis">VUE学习（八）：axios使用</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
-        
-        
-    </div>
-</header>
-<header class="content-header post-header">
-
-    <div class="container fade-scale">
-        <h1 class="title">VUE学习（八）：axios使用</h1>
-        <h5 class="subtitle">
-            
-                <time datetime="2020-08-04T07:04:33.260Z" itemprop="datePublished" class="page-time">
-  2020-08-04
-</time>
-
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/学习类/">学习类</a></li></ul>
-
-            
-        </h5>
-    </div>
-
-    
-
-
-</header>
-
-
-<div class="container body-wrap">
-    
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#axios：网络请求"><span class="post-toc-number">1.</span> <span class="post-toc-text">axios：网络请求</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、安装：npm-install-axios-–save"><span class="post-toc-number">1.0.0.1.</span> <span class="post-toc-text">1、安装：npm install axios –save</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、基本使用"><span class="post-toc-number">1.0.0.2.</span> <span class="post-toc-text">2、基本使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3、并发请求（改使用全局配置）"><span class="post-toc-number">1.0.0.3.</span> <span class="post-toc-text">3、并发请求（改使用全局配置）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4、创建独立实例（解决多个全局配置问题）"><span class="post-toc-number">1.0.0.4.</span> <span class="post-toc-text">4、创建独立实例（解决多个全局配置问题）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5、封装模块"><span class="post-toc-number">1.0.0.5.</span> <span class="post-toc-text">5、封装模块</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#方法一：回调函数方式（config-success-failure）"><span class="post-toc-number">1.0.0.5.1.</span> <span class="post-toc-text">方法一：回调函数方式（config, success, failure）</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#方法二：回调函数方式（config）-gt-baseConfig-function-function"><span class="post-toc-number">1.0.0.5.2.</span> <span class="post-toc-text">方法二：回调函数方式（config） -&gt; (baseConfig, function(),function)</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#方法三：使用Promise方式"><span class="post-toc-number">1.0.0.5.3.</span> <span class="post-toc-text">方法三：使用Promise方式</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#方法四：优化Promise方式"><span class="post-toc-number">1.0.0.5.4.</span> <span class="post-toc-text">方法四：优化Promise方式</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6、拦截器的使用"><span class="post-toc-number">1.0.0.6.</span> <span class="post-toc-text">6、拦截器的使用</span></a></li></ol></li></ol>
-        </nav>
-    </aside>
-
-
-<article id="post-VUE学习（八）：axios使用" class="post-article article-type-post fade" itemprop="blogPost">
-
-    <div class="post-card">
-        <h1 class="post-card-title">VUE学习（八）：axios使用</h1>
-        <div class="post-meta">
-            <time class="post-time" title="2020-08-04 15:04:33" datetime="2020-08-04T07:04:33.260Z" itemprop="datePublished">2020-08-04</time>
-
-            
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/学习类/">学习类</a></li></ul>
-
-
-
-            
-<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
-    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
-</span>
-
-
-        </div>
-        <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="axios：网络请求"><a href="#axios：网络请求" class="headerlink" title="axios：网络请求"></a>axios：网络请求</h1><h4 id="1、安装：npm-install-axios-–save"><a href="#1、安装：npm-install-axios-–save" class="headerlink" title="1、安装：npm install axios –save"></a>1、安装：npm install axios –save</h4><h4 id="2、基本使用"><a href="#2、基本使用" class="headerlink" title="2、基本使用"></a>2、基本使用</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line"></span><br><span class="line">axios(&#123;		<span class="comment">//没有参数</span></span><br><span class="line">  <span class="comment">//httpbin.org</span></span><br><span class="line">  url: <span class="string">'http://152.136.185.210:8000/api/z8/home/multidata'</span>,</span><br><span class="line">  method: <span class="string">'get'</span> <span class="comment">//默认是post</span></span><br><span class="line">&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">axios(&#123;</span><br><span class="line">  url: <span class="string">'http://152.136.185.210:8000/api/z8/home/data'</span>,</span><br><span class="line">  params: &#123;		<span class="comment">//有参数</span></span><br><span class="line">    type: <span class="string">'pop'</span>,</span><br><span class="line">    page: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h4 id="3、并发请求（改使用全局配置）"><a href="#3、并发请求（改使用全局配置）" class="headerlink" title="3、并发请求（改使用全局配置）"></a>3、并发请求（改使用全局配置）</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">axios.defaults.baseURL = <span class="string">'http://152.136.185.210:8000/api/z8'</span></span><br><span class="line">axios.defaults.timeout = <span class="number">5000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.axios并发请求</span></span><br><span class="line">axios.all([axios(&#123;		<span class="comment">//axios.all()</span></span><br><span class="line">  url: <span class="string">'/home/multidata'</span></span><br><span class="line">&#125;), axios(&#123;</span><br><span class="line">  url: <span class="string">'/home/data'</span>,</span><br><span class="line">  params: &#123;</span><br><span class="line">    type: <span class="string">'pop'</span>,</span><br><span class="line">    page: <span class="number">4</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)])</span><br><span class="line">  <span class="comment">// .then(results =&gt; &#123;</span></span><br><span class="line">  <span class="comment">//   console.log(results[0]);</span></span><br><span class="line">  <span class="comment">//   console.log(results[1]);</span></span><br><span class="line">  <span class="comment">// &#125;)</span></span><br><span class="line">  <span class="comment">// 另一种写法</span></span><br><span class="line">  .then(axios.spread(<span class="function">(<span class="params">res1, res2</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res1);</span><br><span class="line">    <span class="built_in">console</span>.log(res2);</span><br><span class="line">  &#125;))</span><br></pre></td></tr></table></figure>
-<h4 id="4、创建独立实例（解决多个全局配置问题）"><a href="#4、创建独立实例（解决多个全局配置问题）" class="headerlink" title="4、创建独立实例（解决多个全局配置问题）"></a>4、创建独立实例（解决多个全局配置问题）</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建实例并配置全局</span></span><br><span class="line"><span class="keyword">const</span> instance1 = axios.create(&#123;</span><br><span class="line">  baseURL: <span class="string">'http://152.136.185.210:8000/api/z8'</span>,</span><br><span class="line">  timeout: <span class="number">5000</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用实例</span></span><br><span class="line">instance1(&#123;</span><br><span class="line">  url: <span class="string">'/home/multidata'</span></span><br><span class="line">&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用实例</span></span><br><span class="line">instance1(&#123;</span><br><span class="line">  url: <span class="string">'/home/data'</span>,</span><br><span class="line">  params: &#123;</span><br><span class="line">    type: <span class="string">'pop'</span>,</span><br><span class="line">    page: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h4 id="5、封装模块"><a href="#5、封装模块" class="headerlink" title="5、封装模块"></a>5、封装模块</h4><p>network -&gt; request.js</p>
-<h5 id="方法一：回调函数方式（config-success-failure）"><a href="#方法一：回调函数方式（config-success-failure）" class="headerlink" title="方法一：回调函数方式（config, success, failure）"></a>方法一：回调函数方式（config, success, failure）</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//request.js</span></span><br><span class="line"><span class="comment">//导出实例，为了保证拓展性，就不使用default</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">config, success, failure</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//1、创建实例</span></span><br><span class="line">  <span class="keyword">const</span> instance = axios.create(&#123;</span><br><span class="line">    baseURL: <span class="string">'http://152.136.185.210:8000/api/z8'</span>,</span><br><span class="line">    timeout: <span class="number">5000</span></span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//2、真正发送网络请求，config为请求的数据</span></span><br><span class="line">  instance(config)     </span><br><span class="line">   .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">     success(res)</span><br><span class="line">   &#125;)</span><br><span class="line">   .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">     failure(err)</span><br><span class="line">   &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line"><span class="keyword">import</span> &#123;request&#125; <span class="keyword">from</span> <span class="string">"./network/request"</span>;</span><br><span class="line"> </span><br><span class="line">request(&#123;</span><br><span class="line">  url: <span class="string">'/home/multidata'</span></span><br><span class="line">&#125;, res =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;, err =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h5 id="方法二：回调函数方式（config）-gt-baseConfig-function-function"><a href="#方法二：回调函数方式（config）-gt-baseConfig-function-function" class="headerlink" title="方法二：回调函数方式（config） -&gt; (baseConfig, function(),function)"></a>方法二：回调函数方式（config） -&gt; (baseConfig, function(),function)</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//1、创建实例</span></span><br><span class="line">  <span class="keyword">const</span> instance = axios.create(&#123;</span><br><span class="line">    baseURL: <span class="string">'http://152.136.185.210:8000/api/z8'</span>,</span><br><span class="line">    timeout: <span class="number">5000</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">//2、真正发送网络请求，config为请求的数据</span></span><br><span class="line">  instance(config.baseConfig)</span><br><span class="line">    .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">      config.success(res)</span><br><span class="line">    &#125;)</span><br><span class="line">    .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">      config.failure(err)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line"><span class="keyword">import</span> &#123;request&#125; <span class="keyword">from</span> <span class="string">"./network/request"</span>;</span><br><span class="line">request(&#123;</span><br><span class="line">  baseConfig: &#123;</span><br><span class="line">    url: <span class="string">'/home/multidata'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">  &#125;,</span><br><span class="line">  failure: <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h5 id="方法三：使用Promise方式"><a href="#方法三：使用Promise方式" class="headerlink" title="方法三：使用Promise方式"></a>方法三：使用Promise方式</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> instance = axios.create(&#123;</span><br><span class="line">      baseURL: <span class="string">'http://152.136.185.210:8000/api/z8'</span>,</span><br><span class="line">      timeout: <span class="number">5000</span></span><br><span class="line">    &#125;)</span><br><span class="line">    instance(config)</span><br><span class="line">      .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        resolve(res)</span><br><span class="line">      &#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">        reject(err)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line"><span class="keyword">import</span> &#123;request&#125; <span class="keyword">from</span> <span class="string">"./network/request"</span>;</span><br><span class="line">request(&#123;</span><br><span class="line">  url: <span class="string">'/home/multidata'</span></span><br><span class="line">&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h5 id="方法四：优化Promise方式"><a href="#方法四：优化Promise方式" class="headerlink" title="方法四：优化Promise方式"></a>方法四：优化Promise方式</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> instance = axios.create(&#123;</span><br><span class="line">    baseURL: <span class="string">'http://152.136.185.210:8000/api/z8'</span>,</span><br><span class="line">    timeout: <span class="number">5000</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> instance(config)	<span class="comment">//因为本身返回的就是Promise</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line"><span class="keyword">import</span> &#123;request&#125; <span class="keyword">from</span> <span class="string">"./network/request"</span>;</span><br><span class="line">request(&#123;</span><br><span class="line">  url: <span class="string">'/home/multidata'</span></span><br><span class="line">&#125;).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h4 id="6、拦截器的使用"><a href="#6、拦截器的使用" class="headerlink" title="6、拦截器的使用"></a>6、拦截器的使用</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">config</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> instance = axios.create(&#123;</span><br><span class="line">    baseURL: <span class="string">'http://152.136.185.210:8000/api/z8'</span>,</span><br><span class="line">    timeout: <span class="number">5000</span></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">//axios请求拦截</span></span><br><span class="line">  <span class="comment">//一般拦截：不符合服务器的要求的信息需要修改、在界面中显示请求图标结束后取消掉、某些请求需要特殊信息token</span></span><br><span class="line">  instance.interceptors.request.use(<span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(config);   <span class="comment">//成功走这里</span></span><br><span class="line">    <span class="keyword">return</span> config		   <span class="comment">//一定要放行</span></span><br><span class="line">  &#125;, err =&gt; &#123;</span><br><span class="line">    <span class="comment">//失败走这里，一般不会走这里</span></span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">//响应拦截</span></span><br><span class="line">  instance.interceptors.response.use(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">    <span class="keyword">return</span> res.data   <span class="comment">//只需要取出data</span></span><br><span class="line">  &#125;, err =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> instance(config)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p align="right"><br>2020年08月4日 下午<br>Guzhz</p>
-        </div>
-
-        <blockquote class="post-copyright">
-    
-    <div class="content">
-        
-<span class="post-time">
-    Last updated: <time datetime="2020-08-04T07:09:16.221Z" itemprop="dateUpdated">2020-08-04 15:09:16</time>
-</span><br>
-
-
-        
-        你来了，我在呢。
-        
-    </div>
-    
-    <footer>
-        <a href="http://yoursite.com">
-            <img src="/img/avatar.jpg" alt="Guzhz">
-            Guzhz
-        </a>
-    </footer>
-</blockquote>
-
-        
-<div class="page-reward">
-    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
-</div>
-
-
-
-        <div class="post-footer">
-            
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li></ul>
-
-
-            
-
-
-        </div>
-    </div>
-
-    
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
-  
-
-  
-    <div class="waves-block waves-effect next">
-      <a href="/2020/08/04/VUE学习（七）：VueX的使用/" id="post-next" class="post-nav-link">
-        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">VUE学习（七）：VueX的使用</h4>
-      </a>
-    </div>
-  
 </nav>
 
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-08-04 16:49">
+      2020年8月4日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      841 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="axios：网络请求"><a href="#axios：网络请求" class="headerlink" title="axios：网络请求"></a>axios：网络请求</h1><h4 id="1、安装：npm-install-axios-–save"><a href="#1、安装：npm-install-axios-–save" class="headerlink" title="1、安装：npm install axios –save"></a>1、安装：npm install axios –save</h4><h4 id="2、基本使用"><a href="#2、基本使用" class="headerlink" title="2、基本使用"></a>2、基本使用</h4><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">'axios'</span>
+
+axios(&#123;		<span class="hljs-comment">//没有参数</span>
+  <span class="hljs-comment">//httpbin.org</span>
+  url: <span class="hljs-string">'http://152.136.185.210:8000/api/z8/home/multidata'</span>,
+  <span class="hljs-attr">method</span>: <span class="hljs-string">'get'</span> <span class="hljs-comment">//默认是post</span>
+&#125;).then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span>&#123;
+  <span class="hljs-built_in">console</span>.log(res)
+&#125;)
+
+axios(&#123;
+  <span class="hljs-attr">url</span>: <span class="hljs-string">'http://152.136.185.210:8000/api/z8/home/data'</span>,
+  <span class="hljs-attr">params</span>: &#123;		<span class="hljs-comment">//有参数</span>
+    type: <span class="hljs-string">'pop'</span>,
+    <span class="hljs-attr">page</span>: <span class="hljs-number">1</span>
+  &#125;
+&#125;).then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;
+  <span class="hljs-built_in">console</span>.log(res)
+&#125;)</code></pre>
+<h4 id="3、并发请求（改使用全局配置）"><a href="#3、并发请求（改使用全局配置）" class="headerlink" title="3、并发请求（改使用全局配置）"></a>3、并发请求（改使用全局配置）</h4><pre><code class="hljs JavaScript">axios.defaults.baseURL = <span class="hljs-string">'http://152.136.185.210:8000/api/z8'</span>
+axios.defaults.timeout = <span class="hljs-number">5000</span>
+
+<span class="hljs-comment">// 2.axios并发请求</span>
+axios.all([axios(&#123;		<span class="hljs-comment">//axios.all()</span>
+  url: <span class="hljs-string">'/home/multidata'</span>
+&#125;), axios(&#123;
+  <span class="hljs-attr">url</span>: <span class="hljs-string">'/home/data'</span>,
+  <span class="hljs-attr">params</span>: &#123;
+    <span class="hljs-attr">type</span>: <span class="hljs-string">'pop'</span>,
+    <span class="hljs-attr">page</span>: <span class="hljs-number">4</span>
+  &#125;
+&#125;)])
+  <span class="hljs-comment">// .then(results =&gt; &#123;</span>
+  <span class="hljs-comment">//   console.log(results[0]);</span>
+  <span class="hljs-comment">//   console.log(results[1]);</span>
+  <span class="hljs-comment">// &#125;)</span>
+  <span class="hljs-comment">// 另一种写法</span>
+  .then(axios.spread(<span class="hljs-function">(<span class="hljs-params">res1, res2</span>) =&gt;</span> &#123;
+    <span class="hljs-built_in">console</span>.log(res1);
+    <span class="hljs-built_in">console</span>.log(res2);
+  &#125;))</code></pre>
+<h4 id="4、创建独立实例（解决多个全局配置问题）"><a href="#4、创建独立实例（解决多个全局配置问题）" class="headerlink" title="4、创建独立实例（解决多个全局配置问题）"></a>4、创建独立实例（解决多个全局配置问题）</h4><pre><code class="hljs javascript"><span class="hljs-comment">//创建实例并配置全局</span>
+<span class="hljs-keyword">const</span> instance1 = axios.create(&#123;
+  <span class="hljs-attr">baseURL</span>: <span class="hljs-string">'http://152.136.185.210:8000/api/z8'</span>,
+  <span class="hljs-attr">timeout</span>: <span class="hljs-number">5000</span>
+&#125;)
+
+<span class="hljs-comment">//使用实例</span>
+instance1(&#123;
+  <span class="hljs-attr">url</span>: <span class="hljs-string">'/home/multidata'</span>
+&#125;).then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;
+  <span class="hljs-built_in">console</span>.log(res);
+&#125;)
+
+<span class="hljs-comment">//使用实例</span>
+instance1(&#123;
+  <span class="hljs-attr">url</span>: <span class="hljs-string">'/home/data'</span>,
+  <span class="hljs-attr">params</span>: &#123;
+    <span class="hljs-attr">type</span>: <span class="hljs-string">'pop'</span>,
+    <span class="hljs-attr">page</span>: <span class="hljs-number">1</span>
+  &#125;
+&#125;).then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;
+  <span class="hljs-built_in">console</span>.log(res);
+&#125;)</code></pre>
+<h4 id="5、封装模块"><a href="#5、封装模块" class="headerlink" title="5、封装模块"></a>5、封装模块</h4><p>network -&gt; request.js</p>
+<h5 id="方法一：回调函数方式（config-success-failure）"><a href="#方法一：回调函数方式（config-success-failure）" class="headerlink" title="方法一：回调函数方式（config, success, failure）"></a>方法一：回调函数方式（config, success, failure）</h5><pre><code class="hljs JavaScript"><span class="hljs-comment">//request.js</span>
+<span class="hljs-comment">//导出实例，为了保证拓展性，就不使用default</span>
+<span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">'axios'</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">request</span>(<span class="hljs-params">config, success, failure</span>) </span>&#123;
+  <span class="hljs-comment">//1、创建实例</span>
+  <span class="hljs-keyword">const</span> instance = axios.create(&#123;
+    <span class="hljs-attr">baseURL</span>: <span class="hljs-string">'http://152.136.185.210:8000/api/z8'</span>,
+    <span class="hljs-attr">timeout</span>: <span class="hljs-number">5000</span>
+  &#125;)
+  
+  <span class="hljs-comment">//2、真正发送网络请求，config为请求的数据</span>
+  instance(config)     
+   .then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;
+     success(res)
+   &#125;)
+   .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;
+     failure(err)
+   &#125;)
+&#125;
+
+<span class="hljs-comment">//使用</span>
+<span class="hljs-keyword">import</span> &#123;request&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"./network/request"</span>;
+ 
+request(&#123;
+  <span class="hljs-attr">url</span>: <span class="hljs-string">'/home/multidata'</span>
+&#125;, res =&gt; &#123;
+  <span class="hljs-built_in">console</span>.log(res);
+&#125;, err =&gt; &#123;
+  <span class="hljs-built_in">console</span>.log(err);
+&#125;)</code></pre>
+<h5 id="方法二：回调函数方式（config）-gt-baseConfig-function-function"><a href="#方法二：回调函数方式（config）-gt-baseConfig-function-function" class="headerlink" title="方法二：回调函数方式（config） -&gt; (baseConfig, function(),function)"></a>方法二：回调函数方式（config） -&gt; (baseConfig, function(),function)</h5><pre><code class="hljs JavaScript"><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">'axios'</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">request</span>(<span class="hljs-params">config</span>) </span>&#123;
+  <span class="hljs-comment">//1、创建实例</span>
+  <span class="hljs-keyword">const</span> instance = axios.create(&#123;
+    <span class="hljs-attr">baseURL</span>: <span class="hljs-string">'http://152.136.185.210:8000/api/z8'</span>,
+    <span class="hljs-attr">timeout</span>: <span class="hljs-number">5000</span>
+  &#125;)
+  <span class="hljs-comment">//2、真正发送网络请求，config为请求的数据</span>
+  instance(config.baseConfig)
+    .then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;
+      config.success(res)
+    &#125;)
+    .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;
+      config.failure(err)
+    &#125;)
+&#125;
+
+<span class="hljs-comment">//使用</span>
+<span class="hljs-keyword">import</span> &#123;request&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"./network/request"</span>;
+request(&#123;
+  <span class="hljs-attr">baseConfig</span>: &#123;
+    <span class="hljs-attr">url</span>: <span class="hljs-string">'/home/multidata'</span>
+  &#125;,
+  <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">res</span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(res);
+  &#125;,
+  <span class="hljs-attr">failure</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(err);
+  &#125;
+&#125;)</code></pre>
+<h5 id="方法三：使用Promise方式"><a href="#方法三：使用Promise方式" class="headerlink" title="方法三：使用Promise方式"></a>方法三：使用Promise方式</h5><pre><code class="hljs JavaScript"><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">'axios'</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">request</span>(<span class="hljs-params">config</span>) </span>&#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;
+
+    <span class="hljs-keyword">const</span> instance = axios.create(&#123;
+      <span class="hljs-attr">baseURL</span>: <span class="hljs-string">'http://152.136.185.210:8000/api/z8'</span>,
+      <span class="hljs-attr">timeout</span>: <span class="hljs-number">5000</span>
+    &#125;)
+    instance(config)
+      .then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;
+        resolve(res)
+      &#125;).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;
+        reject(err)
+    &#125;)
+  &#125;)
+&#125;
+
+<span class="hljs-comment">//使用</span>
+<span class="hljs-keyword">import</span> &#123;request&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"./network/request"</span>;
+request(&#123;
+  <span class="hljs-attr">url</span>: <span class="hljs-string">'/home/multidata'</span>
+&#125;).then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;
+  <span class="hljs-built_in">console</span>.log(res);
+&#125;).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;
+  <span class="hljs-built_in">console</span>.log(err);
+&#125;)</code></pre>
+<h5 id="方法四：优化Promise方式"><a href="#方法四：优化Promise方式" class="headerlink" title="方法四：优化Promise方式"></a>方法四：优化Promise方式</h5><pre><code class="hljs JavaScript"><span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">'axios'</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">request</span>(<span class="hljs-params">config</span>) </span>&#123;
+  <span class="hljs-keyword">const</span> instance = axios.create(&#123;
+    <span class="hljs-attr">baseURL</span>: <span class="hljs-string">'http://152.136.185.210:8000/api/z8'</span>,
+    <span class="hljs-attr">timeout</span>: <span class="hljs-number">5000</span>
+  &#125;)
+
+  <span class="hljs-keyword">return</span> instance(config)	<span class="hljs-comment">//因为本身返回的就是Promise</span>
+&#125;
+
+<span class="hljs-comment">//使用</span>
+<span class="hljs-keyword">import</span> &#123;request&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"./network/request"</span>;
+request(&#123;
+  <span class="hljs-attr">url</span>: <span class="hljs-string">'/home/multidata'</span>
+&#125;).then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;
+  <span class="hljs-built_in">console</span>.log(res);
+&#125;).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;
+  <span class="hljs-built_in">console</span>.log(err);
+&#125;)</code></pre>
+<h4 id="6、拦截器的使用"><a href="#6、拦截器的使用" class="headerlink" title="6、拦截器的使用"></a>6、拦截器的使用</h4><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">request</span>(<span class="hljs-params">config</span>) </span>&#123;
+  <span class="hljs-keyword">const</span> instance = axios.create(&#123;
+    <span class="hljs-attr">baseURL</span>: <span class="hljs-string">'http://152.136.185.210:8000/api/z8'</span>,
+    <span class="hljs-attr">timeout</span>: <span class="hljs-number">5000</span>
+  &#125;)
+
+  <span class="hljs-comment">//axios请求拦截</span>
+  <span class="hljs-comment">//一般拦截：不符合服务器的要求的信息需要修改、在界面中显示请求图标结束后取消掉、某些请求需要特殊信息token</span>
+  instance.interceptors.request.use(<span class="hljs-function"><span class="hljs-params">config</span> =&gt;</span> &#123;
+    <span class="hljs-built_in">console</span>.log(config);   <span class="hljs-comment">//成功走这里</span>
+    <span class="hljs-keyword">return</span> config		   <span class="hljs-comment">//一定要放行</span>
+  &#125;, err =&gt; &#123;
+    <span class="hljs-comment">//失败走这里，一般不会走这里</span>
+    <span class="hljs-built_in">console</span>.log(err);
+  &#125;)
+
+  <span class="hljs-comment">//响应拦截</span>
+  instance.interceptors.response.use(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;
+    <span class="hljs-built_in">console</span>.log(res);
+    <span class="hljs-keyword">return</span> res.data   <span class="hljs-comment">//只需要取出data</span>
+  &#125;, err =&gt; &#123;
+    <span class="hljs-built_in">console</span>.log(err);
+  &#125;)
+
+  <span class="hljs-keyword">return</span> instance(config)
+&#125;</code></pre>
+<p align="right"><br>2020年08月4日 下午<br>Guzhz</p>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/学习类/">学习类</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/教程/">教程</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/03/VUE学习（七）：VueX的使用/">
+                        <span class="hidden-mobile">VUE学习（七）：VueX的使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
 
 
     
+  </main>
 
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</article>
-
-<div id="reward" class="page-modal reward-lay">
-    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <h3 class="reward-title">
-        <i class="icon icon-quote-left"></i>
-        谢谢大爷~
-        <i class="icon icon-quote-right"></i>
-    </h3>
-    <div class="reward-content">
-        
-        <div class="reward-code">
-            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
-        
-        <label class="reward-toggle">
-            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
-            <div class="reward-toggle-ctrol">
-                <span class="reward-toggle-item wechat">微信</span>
-                <span class="reward-toggle-label"></span>
-                <span class="reward-toggle-item alipay">支付宝</span>
-            </div>
-        </label>
-        
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
 </div>
+  
 
+  
 
+  
 
-</div>
-
-        <footer class="footer">
-    <div class="top">
-        
-<p>
-    <span id="busuanzi_container_site_uv" style="display:none">
-        站点总访客数：<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span id="busuanzi_container_site_pv" style="display:none">
-        站点总访问量：<span id="busuanzi_value_site_pv"></span>
-    </span>
-</p>
-
-
-        <p>
-            
-                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
-            
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
-        </p>
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
     </div>
-    <div class="bottom">
-        <p><span>Guzhz &copy; 2019 - 2020</span>
-            <span>
-                
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
-            </span>
-        </p>
-    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备1234556号-1</a>
+    
+  </div>
+
+
+    
+  </div>
 </footer>
 
-    </main>
-    <div class="mask" id="mask"></div>
-<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="/js/debouncer.js"></script>
+<script src="/js/main.js"></script>
+
+<!-- Plugins -->
 
 
-    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
-<script>
-var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
+  
+    <script src="/js/lazyload.js"></script>
+  
 
 
-</script>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script>
+  <script src="/js/clipboard-use.js"></script>
 
 
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<template id="search-tpl">
-<li class="item">
-    <a href="{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</template>
 
-<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
 
 
+  <script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "VUE学习（八）：axios使用&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js"></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
 
 
