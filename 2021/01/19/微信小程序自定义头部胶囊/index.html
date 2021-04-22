@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content>
+  <meta name="author" content="Guzhz">
+  <meta name="keywords" content>
+  <title>微信小程序自定义头部胶囊 - Guzhz&#39;s House</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Guzhz's House</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-01-19 15:42">
+      2021年1月19日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      988 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <p>需求：有时候需要自定义微信小程序的头部，而不使用默认的样式。</p>
+<h4 id="1、关闭使用头部信息"><a href="#1、关闭使用头部信息" class="headerlink" title="1、关闭使用头部信息"></a>1、关闭使用头部信息</h4><p>对想要自定义的页面进行设置：xx.json，<br>关闭之后页面内容为铺满屏幕<br><pre><code class="hljs javascript"><span class="hljs-string">"navigationStyle"</span>: <span class="hljs-string">"custom"</span>,
+<span class="hljs-string">"enablePullDownRefresh"</span>: <span class="hljs-literal">false</span></code></pre></p>
+<h4 id="2、获得屏幕头部信息存到globalData"><a href="#2、获得屏幕头部信息存到globalData" class="headerlink" title="2、获得屏幕头部信息存到globalData"></a>2、获得屏幕头部信息存到globalData</h4><pre><code class="hljs javascript"><span class="hljs-comment">//app.json</span>
+globalData: &#123;
+  <span class="hljs-attr">systeminfo</span>: &#123;&#125;, <span class="hljs-comment">// 系统信息</span>
+  headerBtnPosi: &#123;&#125; <span class="hljs-comment">// 胶囊按钮位置信息</span>
+&#125;,
+
+setHeaderBtn() &#123;
+  <span class="hljs-comment">// 获取设备信息</span>
+  wx.getSystemInfo(&#123;
+    <span class="hljs-attr">success</span>: <span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;
+      <span class="hljs-keyword">this</span>.globalData.systeminfo = res
+    &#125;,
+  &#125;)
+  <span class="hljs-comment">// 获得胶囊按钮位置信息</span>
+  <span class="hljs-keyword">this</span>.globalData.headerBtnPosi = wxgetMenuButtonBoundingClientRect()
+&#125;,</code></pre>
+<h4 id="3、定义组件"><a href="#3、定义组件" class="headerlink" title="3、定义组件"></a>3、定义组件</h4><p><strong>headerNavBar.js</strong><br><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> app = getApp();
+Component(&#123;
+  <span class="hljs-attr">properties</span>: &#123;
+    <span class="hljs-attr">navbarData</span>: &#123; <span class="hljs-comment">// 由父页面传递的数据</span>
+      type: <span class="hljs-built_in">Object</span>,
+      <span class="hljs-attr">value</span>: &#123;&#125;,
+      <span class="hljs-attr">observer</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">newVal, oldVal</span>) </span>&#123; &#125;
+    &#125;
+  &#125;,
+  <span class="hljs-attr">data</span>: &#123;
+    <span class="hljs-attr">haveBack</span>: <span class="hljs-literal">true</span>, <span class="hljs-comment">// 是否有返回按钮，true 有 false 没有 若从分享页进入则为 false</span>
+    statusBarHeight: <span class="hljs-number">0</span>, <span class="hljs-comment">// 状态栏高度</span>
+    navbarHeight: <span class="hljs-number">0</span>, <span class="hljs-comment">// 顶部导航栏高度</span>
+    navbarBtn: &#123; <span class="hljs-comment">// 胶囊位置信息</span>
+      height: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">width</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">top</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">bottom</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">right</span>: <span class="hljs-number">0</span>
+    &#125;
+  &#125;,
+  <span class="hljs-comment">// 微信7.0.0支持wx.getMenuButtonBoundingClientRect()获得胶囊按钮高度</span>
+  attached: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-keyword">let</span> statusBarHeight = app.globalData.systeminfo.statusBarHeight <span class="hljs-comment">// 状态栏高度</span>
+    <span class="hljs-keyword">let</span> headerPosi = app.globalData.headerBtnPosi <span class="hljs-comment">// 胶囊位置信息</span>
+    <span class="hljs-comment">/**
+     * wx.getMenuButtonBoundingClientRect() 坐标信息以屏幕左上角为原点
+     * 菜单按键宽度： 87
+     * 菜单按键高度： 32
+     * 菜单按键左边界坐标： 278
+     * 菜单按键上边界坐标： 26
+     * 菜单按键右边界坐标： 365
+     * 菜单按键下边界坐标： 58
+     */</span>
+    <span class="hljs-keyword">let</span> btnPosi = &#123; <span class="hljs-comment">// 胶囊实际位置，坐标信息不是左上角原点</span>
+      height: headerPosi.height,
+      <span class="hljs-attr">width</span>: headerPosi.width,
+      <span class="hljs-comment">// 胶囊top - 状态栏高度</span>
+      top: headerPosi.top - statusBarHeight,
+      <span class="hljs-comment">// 胶囊bottom - 胶囊height - 状态栏height （现胶囊bottom 为距离导航栏底部的长度）</span>
+      bottom: headerPosi.bottom - headerPosi.height - statusBarHeight,
+      <span class="hljs-comment">// 屏幕宽度 - 胶囊right</span>
+      right: app.globalData.systeminfo.screenWidth - headerPosi.right
+    &#125;
+    <span class="hljs-keyword">let</span> haveBack;
+    <span class="hljs-keyword">if</span> (getCurrentPages().length === <span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// 当只有一个页面时</span>
+      haveBack = <span class="hljs-literal">false</span>;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+      haveBack = <span class="hljs-literal">true</span>;
+    &#125;
+    <span class="hljs-keyword">this</span>.setData(&#123;
+      <span class="hljs-attr">haveBack</span>: haveBack, <span class="hljs-comment">// 获取是否是通过分享进入的小程序</span>
+      statusBarHeight: statusBarHeight,
+      <span class="hljs-attr">navbarHeight</span>: headerPosi.bottom + btnPosi.bottom, <span class="hljs-comment">// 原胶囊bottom + 现胶囊bottom</span>
+      navbarBtn: btnPosi
+    &#125;)
+  &#125;,
+  <span class="hljs-attr">methods</span>: &#123;
+    <span class="hljs-attr">_goBack</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+      wx.navigateBack(&#123;
+        <span class="hljs-attr">delta</span>: <span class="hljs-number">1</span>
+      &#125;);
+    &#125;,
+    <span class="hljs-attr">_goHome</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+      wx.switchTab(&#123;
+        <span class="hljs-attr">url</span>: <span class="hljs-string">'/pages/home/home'</span>,
+      &#125;);
+    &#125;
+  &#125;
+&#125;)</code></pre></p>
+<p><strong>headerNavBar.wxml</strong><br><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 自定义导航栏 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"navbar-wrap &#123;&#123;navbarData.bgc?'bgc':''&#125;&#125; &#123;&#123;navbarData.float?'float':''&#125;&#125;"</span>
+  <span class="hljs-attr">style</span>=<span class="hljs-string">'height:&#123;&#123;navbarHeight&#125;&#125;px;padding-top:&#123;&#123;statusBarHeight&#125;&#125;px;'</span>&gt;</span>  
+  <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"navbar-text"</span>
+    <span class="hljs-attr">style</span>=<span class="hljs-string">'line-height:&#123;&#123;navbarBtn.height + navbarBtn.top&#125;&#125;px;'</span>&gt;</span>
+    &#123;&#123;navbarData.title ? navbarData.title : ""&#125;&#125;
+  <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"navbar-icon"</span>
+    <span class="hljs-attr">wx:if</span>=<span class="hljs-string">'&#123;&#123;navbarData.showCapsule === 1 ? true : false&#125;&#125;'</span>
+    <span class="hljs-attr">style</span>=<span class="hljs-string">"top:&#123;&#123;navbarBtn.top + statusBarHeight&#125;&#125;px;left:&#123;&#123;navbarBtn.right&#125;&#125;px;height:&#123;&#123;navbarBtn.height&#125;&#125;px;"</span>&gt;</span> 
+      <span class="hljs-tag">&lt;<span class="hljs-name">image</span> <span class="hljs-attr">wx:if</span>=<span class="hljs-string">'&#123;&#123;haveBack&#125;&#125;'</span> <span class="hljs-attr">bindtap</span>=<span class="hljs-string">"_goBack"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"floatL"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"/assets/images/icon/navbar_back.png"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">image</span>&gt;</span>  
+      <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">wx:if</span>=<span class="hljs-string">'&#123;&#123;haveBack&#125;&#125;'</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"line"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">wx:if</span>=<span class="hljs-string">'&#123;&#123;haveBack&#125;&#125;'</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"floatL"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">image</span> <span class="hljs-attr">bindtap</span>=<span class="hljs-string">"_goHome"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"/assets/images/icon/navbar_home.png"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">image</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- 手写loading --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">wx:if</span>=<span class="hljs-string">"&#123;&#123;navbarData.showLoading&#125;&#125;"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"navbar-loading &#123;&#123;navbarData.float?'float':''&#125;&#125;"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">'height:&#123;&#123;navbarHeight&#125;&#125;px;line-height:&#123;&#123;navbarHeight&#125;&#125;px;'</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span>···<span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span></code></pre></p>
+<p><strong>headerNavBar.wxss</strong><br><pre><code class="hljs css"><span class="hljs-selector-class">.navbar-wrap</span> &#123;
+	<span class="hljs-attribute">position</span>: fixed;
+	<span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+	<span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+	<span class="hljs-attribute">z-index</span>: <span class="hljs-number">9999999</span>;
+	<span class="hljs-attribute">box-sizing</span>: border-box;
+&#125;
+
+<span class="hljs-selector-class">.bgc</span> &#123;
+	<span class="hljs-attribute">background-color</span>: <span class="hljs-number">#B0E028</span>;
+&#125;
+<span class="hljs-selector-class">.float</span> &#123;
+	<span class="hljs-attribute">float</span>: left
+&#125;
+
+<span class="hljs-selector-class">.navbar-text</span> &#123;
+	<span class="hljs-attribute">position</span>: relative;
+	<span class="hljs-attribute">top</span>: <span class="hljs-number">6</span>rpx;
+	<span class="hljs-attribute">text-align</span>: center;
+	<span class="hljs-attribute">font-size</span>: <span class="hljs-number">36</span>rpx;
+	<span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+&#125;
+ 
+<span class="hljs-selector-class">.navbar-icon</span> &#123;
+	<span class="hljs-attribute">position</span>: fixed;
+	<span class="hljs-attribute">display</span>: flex;
+	<span class="hljs-attribute">border-radius</span>: <span class="hljs-number">70</span>rpx;
+	<span class="hljs-attribute">border</span>: <span class="hljs-number">0.5px</span> solid <span class="hljs-built_in">rgba</span>(255,255,255, 0.4);
+	<span class="hljs-attribute">box-sizing</span>: border-box;
+	<span class="hljs-attribute">background-color</span>: <span class="hljs-built_in">rgba</span>(0, 0, 0, 0.2);
+&#125;
+ 
+<span class="hljs-selector-class">.navbar-icon</span> <span class="hljs-selector-tag">image</span> &#123;
+	<span class="hljs-attribute">height</span>: <span class="hljs-number">20px</span>;
+	<span class="hljs-attribute">width</span>: <span class="hljs-number">20px</span>;
+	<span class="hljs-attribute">padding</span>: <span class="hljs-number">5px</span> <span class="hljs-number">10px</span> <span class="hljs-number">10px</span>;
+	<span class="hljs-attribute">display</span>: inline-block;
+	<span class="hljs-attribute">overflow</span>: hidden;
+&#125;
+ 
+<span class="hljs-selector-class">.navbar-icon</span> <span class="hljs-selector-tag">view</span> &#123;
+	<span class="hljs-attribute">height</span>: <span class="hljs-number">18px</span>;
+	<span class="hljs-attribute">border-left</span>: <span class="hljs-number">0.5px</span> solid <span class="hljs-built_in">rgba</span>(255,255,255, 0.3);
+	<span class="hljs-attribute">margin-top</span>: <span class="hljs-number">6px</span>;
+&#125;
+ 
+<span class="hljs-selector-class">.navbar-loading</span> &#123;
+	<span class="hljs-attribute">background</span>: <span class="hljs-number">#fff</span>;
+	<span class="hljs-attribute">text-align</span>: center;
+&#125;
+
+<span class="hljs-selector-class">.line</span> &#123;
+	<span class="hljs-attribute">height</span>: <span class="hljs-number">36</span>rpx;
+	<span class="hljs-attribute">width</span>: <span class="hljs-number">1</span>rpx;
+	<span class="hljs-attribute">background</span>: <span class="hljs-built_in">rgba</span>(255,255,255, 0.4);
+&#125;</code></pre></p>
+<h4 id="4、使用"><a href="#4、使用" class="headerlink" title="4、使用"></a>4、使用</h4><p>1、对应页面引入组件</p>
+<blockquote>
+<p>“searchbar”: “/components/searchbar/searchbar”</p>
+</blockquote>
+<p>2、页面js定义变量<br><pre><code class="hljs javascript">navbarData: &#123;
+  <span class="hljs-attr">showCapsule</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-comment">// 是否显示左上角胶囊按钮 1 显示 0 不显示</span>
+  title: <span class="hljs-string">'普菲洛云购'</span>, <span class="hljs-comment">// 导航栏 中间的标题</span>
+  bgc: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">showLoading</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">float</span>: <span class="hljs-literal">false</span>
+&#125;,</code></pre></p>
+<p>3、页面wxml引入<br><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">headerNavbar</span> <span class="hljs-attr">navbar-data</span>=<span class="hljs-string">"&#123;&#123;navbarData&#125;&#125;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">headerNavbar</span>&gt;</span></code></pre></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/浅谈前端/">浅谈前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/javascript/">javascript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/微信小程序/">微信小程序</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/25/uni-app基础/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">uni-app基础</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/12/微信小程序嵌入腾讯地图/">
+                        <span class="hidden-mobile">微信小程序嵌入腾讯地图</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备1234556号-1</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="/js/debouncer.js"></script>
+<script src="/js/main.js"></script>
+
+<!-- Plugins -->
+
+
+  
+    <script src="/js/lazyload.js"></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script>
+  <script src="/js/clipboard-use.js"></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "微信小程序自定义头部胶囊&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js"></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>

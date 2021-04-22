@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content>
+  <meta name="author" content="Guzhz">
+  <meta name="keywords" content>
+  <title>重温JS（三） - Guzhz&#39;s House</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Guzhz's House</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-04-08 14:45">
+      2021年4月8日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      28
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h4 id="一、查找DOM"><a href="#一、查找DOM" class="headerlink" title="一、查找DOM"></a>一、查找DOM</h4><h5 id="1、document对象获得元素（方法）"><a href="#1、document对象获得元素（方法）" class="headerlink" title="1、document对象获得元素（方法）"></a>1、document对象获得元素（方法）</h5><ul>
+<li>通过id属性 document.getElementById 获得元素并修改值</li>
+<li>通过标签名 document.getElementsByTagName 获得标签数组</li>
+<li>通过name属性 document.getElementsByName 获得标签数组</li>
+<li>通过class属性 document.getElementsByClassName 获得标签数组（IE8以下不支持）<pre><code class="hljs js"><span class="hljs-keyword">var</span> btn = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"btn"</span>)
+btn.innerHTML = <span class="hljs-string">"I'm a button"</span>
+<span class="hljs-comment">//获得的标签对象数组，可直接使用元素.属性名获取属性</span>
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; inputs.length; i++) &#123;
+  alert(inputs[i].name)
+  alert(inputs[i].value)
+  <span class="hljs-comment">//但是获得class属性不能直接.class，因为class是js保留字。</span>
+  <span class="hljs-comment">//需要用className来获取</span>
+  alert(inputs[i].className)
+&#125;</code></pre>
+</li>
+</ul>
+<h5 id="2、元素对象获得子元素同样适用（方法）"><a href="#2、元素对象获得子元素同样适用（方法）" class="headerlink" title="2、元素对象获得子元素同样适用（方法）"></a>2、元素对象获得子元素同样适用（方法）</h5><ul>
+<li>getElementById =&gt; 唯一</li>
+<li>getElementsByTagName =&gt; 数组</li>
+<li>getElementsByName =&gt; 数组</li>
+</ul>
+<h5 id="3、元素获得子节点（属性）"><a href="#3、元素获得子节点（属性）" class="headerlink" title="3、元素获得子节点（属性）"></a>3、元素获得子节点（属性）</h5><p>（1）e.childNodes =&gt; 不推荐使用</p>
+<ul>
+<li>获得的是数组</li>
+<li><code>主流浏览器DOM标签左右空白部分也会当成文本结点，IE8不会</code></li>
+</ul>
+<p>（2）e.children =&gt; 推荐使用</p>
+<ul>
+<li>获得的是数组</li>
+<li><code>只获得元素结点，不包括空白</code></li>
+</ul>
+<p>（3）元素获得第一个/最后一个子节点 e.firstChild / e.lastChild</p>
+<ul>
+<li>包括空白</li>
+</ul>
+<p>（4）元素获得第一个/最后一个子节点 e.firstElementChild / e.lastElementChild</p>
+<ul>
+<li>不包括空白</li>
+<li><code>不兼容IE8及以下</code></li>
+</ul>
+<h5 id="4、元素获得父节点-parentNode（属性）"><a href="#4、元素获得父节点-parentNode（属性）" class="headerlink" title="4、元素获得父节点 parentNode（属性）"></a>4、元素获得父节点 parentNode（属性）</h5><h5 id="5、元素获得前一个兄弟节点（属性）"><a href="#5、元素获得前一个兄弟节点（属性）" class="headerlink" title="5、元素获得前一个兄弟节点（属性）"></a>5、元素获得前一个兄弟节点（属性）</h5><ul>
+<li>previousSibling （空格有影响）</li>
+<li>previousElementSibling（直接获得元素）</li>
+</ul>
+<h5 id="6、获得文本节点"><a href="#6、获得文本节点" class="headerlink" title="6、获得文本节点"></a>6、获得文本节点</h5><ul>
+<li>pn.innerHTML：获得内部节点的所有HTML元素</li>
+<li>pn.innerText：获得内部节点的所有Text文本（过滤标签)</li>
+<li>pn.firstChild.nodeValue：第一个文本节点（也就是文本）</li>
+</ul>
+<h5 id="7、获得其他节点"><a href="#7、获得其他节点" class="headerlink" title="7、获得其他节点"></a>7、获得其他节点</h5><ul>
+<li>body节点：document.body</li>
+<li>html节点：document.documentElement  </li>
+<li>获得所有节点-方法一：document.all =&gt; 是undefined，但是有长度，可以遍历</li>
+<li>获得所有节点-方法二：document.getElementsByName(“*”) =&gt; 不是undefined，有长度，可以遍历</li>
+</ul>
+<h5 id="8、样式选择器"><a href="#8、样式选择器" class="headerlink" title="8、样式选择器"></a>8、样式选择器</h5><ul>
+<li>document.querySelector()<ul>
+<li>如果结果是数组，则只取第一个</li>
+<li>支持IE8</li>
+</ul>
+</li>
+<li>document.querySelectorAll()<ul>
+<li>始终是数组</li>
+<li>支持IE8</li>
+</ul>
+</li>
+</ul>
+<h5 id="8、绑定监听事件"><a href="#8、绑定监听事件" class="headerlink" title="8、绑定监听事件"></a>8、绑定监听事件</h5><pre><code class="hljs js">btn.onclick = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+  alert(<span class="hljs-string">"点击了~"</span>)
+&#125;</code></pre>
+<h5 id="9、文档的加载"><a href="#9、文档的加载" class="headerlink" title="9、文档的加载"></a>9、文档的加载</h5><ul>
+<li>逐行加载</li>
+<li>如果js放在html头部，会出现没有dom就操作dom错误</li>
+<li>onload 页面加载完成后再执行<pre><code class="hljs js"><span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+  alert(<span class="hljs-string">"hello"</span>)
+&#125;</code></pre>
+</li>
+</ul>
+<h4 id="二、操作DOM"><a href="#二、操作DOM" class="headerlink" title="二、操作DOM"></a>二、操作DOM</h4><h5 id="1、创建"><a href="#1、创建" class="headerlink" title="1、创建"></a>1、创建</h5><ul>
+<li>元素 document.createElement(“li”)</li>
+<li>创建文本节点 document.createTextNode(“广州”)<h5 id="2、添加"><a href="#2、添加" class="headerlink" title="2、添加"></a>2、添加</h5></li>
+<li>尾部添加：ul.appendChild(li)</li>
+<li>任意插入：在指定子节点前插入新的子节点 city.insertBefore(新节点, 旧节点)</li>
+<li>HTML添加：ul.innerHTML += “<code>&lt;li&gt;广州&lt;/li&gt;</code>“ =&gt; 直接追加HTML也可以<h5 id="3、修改"><a href="#3、修改" class="headerlink" title="3、修改"></a>3、修改</h5></li>
+<li>替换：新节点替换旧节点 city.replaceChild(新节点, 旧节点)</li>
+</ul>
+<h5 id="4、删除"><a href="#4、删除" class="headerlink" title="4、删除"></a>4、删除</h5><ul>
+<li>直接：city.removeChild(bj)</li>
+<li>间接：bj.parentNode.removeChild(bj)<ul>
+<li>方便，不需要提前获取父节点</li>
+<li>缺点，改动太大不建议使用</li>
+</ul>
+</li>
+</ul>
+<h5 id="5、结合使用"><a href="#5、结合使用" class="headerlink" title="5、结合使用"></a>5、结合使用</h5><pre><code class="hljs js"><span class="hljs-keyword">var</span> li = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"li"</span>)
+li.innerHTML = <span class="hljs-string">"广州"</span>
+city.appendChild(li)</code></pre>
+<h5 id="6、样式-gt-内联样式"><a href="#6、样式-gt-内联样式" class="headerlink" title="6、样式 -&gt; 内联样式"></a>6、样式 -&gt; 内联样式</h5><pre><code class="hljs js">box1.style.width = <span class="hljs-string">"300px"</span>
+box2.style.height = <span class="hljs-string">"300px"</span>
+box2.style.backgroudColor = <span class="hljs-string">"yellow"</span> <span class="hljs-comment">//改为驼峰</span>
+
+<span class="hljs-comment">//读取和设置，都是内联样式</span></code></pre>
+<ul>
+<li><p>获得当前样式（IE专属）<br>box1.currentStyle.width</p>
+</li>
+<li><p>获得当前样式（window方法，浏览器通用），如果没有设置值，获得的是真实值，而不是默认值，该方法不支持IE8<br>getComputedStyle(box1, null).width  //参数二为微元素</p>
+</li>
+</ul>
+<p>兼容性方案<br><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getStyle</span>(<span class="hljs-params">obj, name</span>) </span>&#123;
+  <span class="hljs-keyword">if</span>(<span class="hljs-built_in">window</span>.getComputedStyle) &#123;   <span class="hljs-comment">//如果不加window，依然在这里判断的时候，会查找getComputedStyle方法，所以加window.属性的方式，才是返回undefined</span>
+    <span class="hljs-comment">//正常浏览器</span>
+    <span class="hljs-keyword">return</span> getComputedStyle(obj, <span class="hljs-literal">null</span>)[name]
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    <span class="hljs-comment">//IE8方式，没有getComputedStyle()</span>
+    <span class="hljs-keyword">return</span> obj.currentStyle[name]
+  &#125;
+&#125;</code></pre></p>
+<h5 id="7、其他属性"><a href="#7、其他属性" class="headerlink" title="7、其他属性"></a>7、其他属性</h5><ul>
+<li>box.clientWidth =&gt; 内容+内边距</li>
+<li>box.offsetWidth =&gt; 内容+内边距+边框</li>
+<li>box.offsetParent =&gt; 返回最近的开启了定位的祖先元素（找不到则为body）</li>
+<li>box.offsetLeft =&gt; 当前元素相对于其定位父元素的水平偏移量</li>
+<li>box.offsetTop =&gt; 当前元素相对于其定位父元素的垂直偏移量</li>
+<li>box.scrollHeight =&gt; 滚动高度</li>
+<li>box.scrollLeft =&gt; 水平滚动条滚动的距离</li>
+</ul>
+<p>//滚动条到底：scrollHeight - scrollTop == clientHeight<br>//监听滚动 box.onscoll = function() {}… </p>
+<h5 id="8、事件对象"><a href="#8、事件对象" class="headerlink" title="8、事件对象"></a>8、事件对象</h5><ul>
+<li>鼠标滚动事件<pre><code class="hljs js">areaDiv.onmousemove = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>&#123;
+  <span class="hljs-comment">//IE8中event事件不存在，而是存在window中</span>
+  <span class="hljs-comment">//解决兼容性</span>
+  event = event || <span class="hljs-built_in">window</span>.event
+
+  <span class="hljs-keyword">var</span> x = event.clientX
+  <span class="hljs-keyword">var</span> y = event.clientY
+&#125;</code></pre>
+</li>
+</ul>
+<h5 id="9、事件冒泡"><a href="#9、事件冒泡" class="headerlink" title="9、事件冒泡"></a>9、事件冒泡</h5><ul>
+<li>event.cancelBubble = true</li>
+</ul>
+<h5 id="10、事件的委派"><a href="#10、事件的委派" class="headerlink" title="10、事件的委派"></a>10、事件的委派</h5><ul>
+<li>指的是将事件统一绑定给元素的共同祖先元素，这样当后代元素上的事件触发时，使用的是祖先的事件（原理是冒泡）</li>
+<li>然后利用 event.target 获得目标事件，从而实现点击父节点作用子节点。</li>
+</ul>
+<h5 id="11、事件监听"><a href="#11、事件监听" class="headerlink" title="11、事件监听"></a>11、事件监听</h5><p>1、addEventListener(“click”, function(){}, false)</p>
+<ul>
+<li>参数一：事件字符串，不需要on</li>
+<li>参数二：回调函数</li>
+<li>参数三：是否在捕获时触发，一般都为false</li>
+<li>使用同事件监听，可以同时为一个元素的相同事件绑定多个响应函数，当事件被触发时，响应函数会顺序执行</li>
+<li>this 指的是绑定事件<pre><code class="hljs js">btn01.addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;alert(<span class="hljs-string">"1"</span>)&#125;, <span class="hljs-literal">false</span>);
+btn01.addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;alert(<span class="hljs-string">"2"</span>)&#125;, <span class="hljs-literal">false</span>);
+btn01.addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;alert(<span class="hljs-string">"3"</span>)&#125;, <span class="hljs-literal">false</span>);</code></pre>
+</li>
+</ul>
+<p>2、IE8及以下使用attachEvent(“onclick”,function() {})</p>
+<ul>
+<li>不同的是，它的执行顺序是倒叙的</li>
+<li>this 指的是window</li>
+</ul>
+<p>3、统一成一个bind函数（兼容性）</p>
+<ul>
+<li>解决不同浏览器兼容性问题</li>
+<li>解决不同的this指向问题</li>
+</ul>
+<pre><code class="hljs js">bind(btn, <span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+  alert(<span class="hljs-keyword">this</span>)
+&#125;)
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bind</span>(<span class="hljs-params">obj, eventStr, callback</span>) </span>&#123;
+  <span class="hljs-keyword">if</span> (obj.addEventListener) &#123;
+    <span class="hljs-comment">//大部分浏览器兼容的方式</span>
+    obj.addEventListener(eventStr, callback, <span class="hljs-literal">false</span>)
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    <span class="hljs-comment">//IE8及以下</span>
+    <span class="hljs-comment">//this是谁，由调用者决定</span>
+    <span class="hljs-comment">//解决方案，使用匿名函数，来调用这个回调函数，就可以把默认的的Window替换掉了</span>
+    obj.attachEvent(<span class="hljs-string">"on"</span>+eventStr, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+      callback.call(obj)
+    &#125;)
+  &#125;
+&#125;</code></pre>
+<p>4、事件的传播</p>
+<ul>
+<li>关于事件的传播，网景公司和微软公司有不同的理解<ul>
+<li>微软公司认为事件应该是由内向外传播，也就是事件的冒泡阶段。</li>
+<li>网景公司认为事件应该由外向内传播。</li>
+</ul>
+</li>
+<li>W3C整合了两种方案，将事件传播分成了三个阶段<ul>
+<li>捕获阶段：在捕获阶段，从最外层的祖先元素，向目标元素进行事件的捕获，但是默认此事<code>不会触发</code>事件。</li>
+<li>目标阶段：事件捕获到目标元素，捕获结束开始在目标事件上触发事件。</li>
+<li>冒泡阶段：事件从目标元素向他的祖先元素传递，依次触发祖先元素上的事件。</li>
+</ul>
+</li>
+<li>如果希望在捕获阶段就触发事件，可以将addEventListener()的第三个参数设置为true，不过一般都是false </li>
+<li>IE8及以下不存在事件的捕获。</li>
+</ul>
+<h5 id="12、元素拖拽"><a href="#12、元素拖拽" class="headerlink" title="12、元素拖拽"></a>12、元素拖拽</h5><ul>
+<li>box1按下事件：box1.onmousedown()</li>
+<li>document绑定移动事件：onmousemove()</li>
+<li>修改box1的坐标</li>
+<li>document绑定事件松开事件，onmouseup()<pre><code class="hljs js">box1.onmousedown = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-comment">//document监听，防止覆盖</span>
+  <span class="hljs-built_in">document</span>.onmousemove = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>&#123;
+    event = event || <span class="hljs-built_in">window</span>.event;
+    <span class="hljs-keyword">var</span> left = event.clientX
+    <span class="hljs-keyword">var</span> top = event.clientY
+
+    <span class="hljs-comment">//修改box1的位置</span>
+    box1.style.left = left + <span class="hljs-string">"px"</span>
+    box2.style.top = top + <span class="hljs-string">"px"</span>
+  &#125;;
+  <span class="hljs-comment">//document绑定一个鼠标松开事件</span>
+  <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">document</span>.onmousemove = <span class="hljs-literal">null</span>
+    <span class="hljs-built_in">document</span>.onmouseup = <span class="hljs-literal">null</span> <span class="hljs-comment">//自杀掉</span>
+  &#125;  
+&#125;</code></pre>
+</li>
+</ul>
+<h5 id="13、滚轮事件"><a href="#13、滚轮事件" class="headerlink" title="13、滚轮事件"></a>13、滚轮事件</h5><pre><code class="hljs js"><span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-comment">/* 当鼠标滚轮向下滚动时，box1变长，向上变短 */</span>
+  <span class="hljs-keyword">var</span> box1 = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"box1"</span>)
+  <span class="hljs-comment">/* 火狐浏览器不兼容 */</span>
+  box1.onmousewheel = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+    event = event || <span class="hljs-built_in">window</span>.event
+
+    <span class="hljs-comment">//判断鼠标滚轮的方向，向上滚120，向下滚-120，我们只看正负不看大小。</span>
+    <span class="hljs-keyword">if</span> (event.wheelDelta &gt; <span class="hljs-number">0</span> || event.detail &lt; <span class="hljs-number">0</span>) &#123;
+      box1.style.height = box1.clientHeight - <span class="hljs-number">10</span> + <span class="hljs-string">"px"</span>
+    &#125;<span class="hljs-keyword">else</span> &#123;
+      box1.style.height = box1.clientHeight + <span class="hljs-number">10</span> + <span class="hljs-string">"px"</span>
+    &#125;
+
+    <span class="hljs-comment">/* 
+     * 使用addEventListener()方法绑定响应函数，不能使用return false
+     * 需要event采用取消默认行为 
+     */</span>
+     event.preventDefault();
+
+    <span class="hljs-comment">/* 当滚轮滚动时，如果浏览器有滚动条，滚动条会随之滚动。
+       这是浏览器的默认行为，如果不希望发生，则可以取消默认行为。
+     */</span>
+     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+  &#125;
+
+  <span class="hljs-comment">/* 火狐浏览器需要搭配addEventListener使用 */</span>
+  bind(box1, <span class="hljs-string">"onmousewheel"</span>, box1.onmousewheel)
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bind</span>(<span class="hljs-params">obj, eventStr, callback</span>) </span>&#123;
+  <span class="hljs-keyword">if</span> (obj.addEventListener) &#123;
+    <span class="hljs-comment">//大部分浏览器兼容的方式</span>
+    obj.addEventListener(eventStr, callback, <span class="hljs-literal">false</span>)
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    <span class="hljs-comment">//IE8及以下</span>
+    <span class="hljs-comment">//this是谁，由调用者决定</span>
+    <span class="hljs-comment">//解决方案，使用匿名函数，来调用这个回调函数，就可以把默认的的Window替换掉了</span>
+    obj.attachEvent(<span class="hljs-string">"on"</span>+eventStr, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+      callback.call(obj)
+    &#125;)
+  &#125;
+&#125;</code></pre>
+<h5 id="5、键盘事件"><a href="#5、键盘事件" class="headerlink" title="5、键盘事件"></a>5、键盘事件</h5><pre><code class="hljs js"><span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+
+  <span class="hljs-comment">//如果一直按着，则事件会一直被触发</span>
+  <span class="hljs-comment">//连续触发时，第一次和第二次会有一点点间隔时间，其他时间会非常的快。</span>
+  <span class="hljs-comment">//为了防止误操作</span>
+  <span class="hljs-built_in">document</span>.onkeydown = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>&#123;
+    event = event || <span class="hljs-built_in">window</span>.event
+    <span class="hljs-comment">//可以通过它可以判断哪个按键被按下</span>
+    <span class="hljs-built_in">console</span>.log(event.keyCode)  <span class="hljs-comment">//按键的编码</span>
+    <span class="hljs-keyword">if</span> (event.keyCode === <span class="hljs-number">89</span> &amp;&amp; event.ctrlKey) &#123;<span class="hljs-comment">//altKey ctrlKey shiftKey</span>
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"同时按下了"</span>)
+    &#125;
+  &#125;
+  <span class="hljs-built_in">document</span>.onkeyup = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"按键被松开"</span>)
+  &#125;
+
+
+  <span class="hljs-comment">//特点</span>
+  input.onkeydown = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"按键被按下了，但是没有内容"</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>  <span class="hljs-comment">//这个操作可以阻止文本框输入 -&gt; 过滤</span>
+  &#125;
+&#125;</code></pre>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/学习记录/">学习记录</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/javascript/">javascript</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/09/重温JS（四）/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">重温JS（四）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/27/重温JS（二）/">
+                        <span class="hidden-mobile">重温JS（二）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备1234556号-1</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="/js/debouncer.js"></script>
+<script src="/js/main.js"></script>
+
+<!-- Plugins -->
+
+
+  
+    <script src="/js/lazyload.js"></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script>
+  <script src="/js/clipboard-use.js"></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "重温JS（三）&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js"></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>

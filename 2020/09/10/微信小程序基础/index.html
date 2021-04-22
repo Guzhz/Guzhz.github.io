@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content>
+  <meta name="author" content="Guzhz">
+  <meta name="keywords" content>
+  <title>微信小程序基础 - Guzhz&#39;s House</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Guzhz's House</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-09-10 18:52">
+      2020年9月10日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      74
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="一、配置小程序"><a href="#一、配置小程序" class="headerlink" title="一、配置小程序"></a>一、配置小程序</h1><h2 id="1、全局配置：app-json"><a href="#1、全局配置：app-json" class="headerlink" title="1、全局配置：app.json"></a>1、全局配置：app.json</h2><pre><code class="hljs json">&#123;
+  "pages": [		//注册页面，默认显示第一个为主页面
+    "pages/home/home",
+    "pages/about/about",
+    "pages/profile/profile",
+    "pages/category/category"
+  ],
+  "window": &#123;		//app.json才有的window参数
+    "navigationBarBackgroundColor": "#ff5777",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "我的小程序",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false
+  &#125;,
+  "tabBar": &#123;		//封装好的tabBar
+    "selectedColor": "#ff5777",	//选中颜色
+    "list": [
+      &#123;
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "assets/tabbar/home.png",
+        "selectedIconPath": "assets/tabbar/home_active.png"
+      &#125;,
+      &#123;
+        "pagePath": "pages/category/category",
+        "text": "分类",
+        "iconPath": "assets/tabbar/category.png",
+        "selectedIconPath": "assets/tabbar/category_active.png"
+      &#125;
+    ]
+  &#125;,
+&#125;</code></pre>
+<h2 id="2、页面配置"><a href="#2、页面配置" class="headerlink" title="2、页面配置"></a>2、页面配置</h2><pre><code class="hljs json">&#123;
+  "usingComponents": &#123;&#125;,
+  "enablePullDownRefresh": true
+&#125;
+当前页面的优先级高过app.json</code></pre>
+<h2 id="3、sitemap-配置"><a href="#3、sitemap-配置" class="headerlink" title="3、sitemap 配置"></a>3、sitemap 配置</h2><p>小程序根目录下的 <code>sitemap.json</code> 文件用来配置小程序及其页面是否允许被微信索引。</p>
+<pre><code class="hljs javascript">&#123;
+  <span class="hljs-string">"rules"</span>:[&#123;
+    <span class="hljs-string">"action"</span>: <span class="hljs-string">"allow"</span>,
+    <span class="hljs-string">"page"</span>: <span class="hljs-string">"*"</span>
+  &#125;]
+&#125;
+<span class="hljs-comment">//或者</span>
+&#123;
+  <span class="hljs-string">"rules"</span>:[&#123;
+    <span class="hljs-string">"action"</span>: <span class="hljs-string">"disallow"</span>,
+    <span class="hljs-string">"page"</span>: <span class="hljs-string">"path/to/page"</span>
+  &#125;]
+&#125;</code></pre>
+<h1 id="二、逻辑层"><a href="#二、逻辑层" class="headerlink" title="二、逻辑层"></a>二、逻辑层</h1><h2 id="1、注册小程序app"><a href="#1、注册小程序app" class="headerlink" title="1、注册小程序app"></a>1、注册小程序app</h2><pre><code class="hljs javascript"><span class="hljs-comment">// app.js</span>
+App(&#123;
+  onLaunch (options) &#123;
+    <span class="hljs-comment">// Do something initial when launch.</span>
+  &#125;,
+  onShow (options) &#123;
+    <span class="hljs-comment">// Do something when show.</span>
+  &#125;,
+  onHide () &#123;
+    <span class="hljs-comment">// Do something when hide.</span>
+  &#125;,
+  onError (msg) &#123;
+    <span class="hljs-built_in">console</span>.log(msg)
+  &#125;,
+  <span class="hljs-attr">globalData</span>: &#123;
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'Guzhz'</span>,
+    <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>
+  &#125;
+&#125;)
+整个小程序只有一个 App 实例，是全部页面共享的。开发者可以通过 getApp 方法获取到全局唯一的 App 实例，获取App上的数据或调用开发者注册在 App 上的函数。
+
+<span class="hljs-comment">//其他页面的js</span>
+<span class="hljs-keyword">const</span> app = getApp()  <span class="hljs-comment">//拿到全局app</span>
+<span class="hljs-built_in">console</span>.log(app.globalData.name);</code></pre>
+<h2 id="2、注册页面page"><a href="#2、注册页面page" class="headerlink" title="2、注册页面page"></a>2、注册页面page</h2><pre><code class="hljs javascript">Page(&#123;
+  <span class="hljs-attr">onLoad</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options</span>) </span>&#123;
+    <span class="hljs-comment">// 页面创建时执行</span>
+  &#125;,
+  <span class="hljs-attr">onShow</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-comment">// 页面出现在前台时执行</span>
+  &#125;,
+  <span class="hljs-attr">onReady</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-comment">// 页面首次渲染完毕时执行</span>
+  &#125;,
+  <span class="hljs-attr">onHide</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-comment">// 页面从前台变为后台时执行</span>
+  &#125;,
+  <span class="hljs-attr">onUnload</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-comment">// 页面销毁时执行</span>
+  &#125;,
+  <span class="hljs-attr">onPullDownRefresh</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-comment">// 触发下拉刷新时执行</span>
+  &#125;,
+  <span class="hljs-attr">onReachBottom</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-comment">// 页面触底时执行</span>
+  &#125;
+&#125;)</code></pre>
+<h2 id="3、获取用户信息"><a href="#3、获取用户信息" class="headerlink" title="3、获取用户信息"></a>3、获取用户信息</h2><pre><code class="hljs javascript">//获取：
+&lt;button size="mini" open-type="getUserInfo" bindgetuserinfo="handGetUserInfo"&gt;
+  获取授权
+&lt;/button&gt;
+
+handGetUserInfo(event) &#123;
+    console.log(event)
+&#125;
+
+//展示：
+&lt;open-data type="userNickName" bindtap="nameClick"&gt;&lt;/open-data&gt;</code></pre>
+<h2 id="4、回调函数中的this指向"><a href="#4、回调函数中的this指向" class="headerlink" title="4、回调函数中的this指向"></a>4、回调函数中的this指向</h2><pre><code class="hljs javascript">Page(&#123;
+  <span class="hljs-attr">data</span>: &#123;
+    <span class="hljs-attr">list</span>: []
+  &#125;,
+  onLoad() &#123;
+    wx.request(&#123;
+        <span class="hljs-attr">url</span>: <span class="hljs-string">''</span>,
+        <span class="hljs-attr">success</span>: <span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;
+            <span class="hljs-keyword">const</span> data = res.data.data.list;
+            <span class="hljs-keyword">this</span>.setData(&#123;
+                <span class="hljs-keyword">this</span>.list: data;	<span class="hljs-comment">//箭头函数的this会不断网上找，箭头函数这里找到的是page</span>
+            &#125;)
+        &#125;
+    &#125;)
+  &#125;,
+ onLoad() &#123;
+    <span class="hljs-keyword">const</span> _this = <span class="hljs-keyword">this</span>;		<span class="hljs-comment">//独立定义</span>
+    wx.request(&#123;
+        <span class="hljs-attr">url</span>: <span class="hljs-string">''</span>,
+        <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>&#123;	<span class="hljs-comment">//如果是这种写法则this指向会找不到，则需要独立定义</span>
+            <span class="hljs-keyword">const</span> data = res.data.data.list;
+            <span class="hljs-keyword">this</span>.setData(&#123;
+                _this.list: data;	<span class="hljs-comment">//箭头函数的this会不断网上找，箭头函数这里找到的是page</span>
+            &#125;)
+        &#125;
+    &#125;)
+  &#125;
+&#125;</code></pre>
+<h1 id="二、组件"><a href="#二、组件" class="headerlink" title="二、组件"></a>二、组件</h1><h2 id="1、Text组件的基本使用-span"><a href="#1、Text组件的基本使用-span" class="headerlink" title="1、Text组件的基本使用(span)"></a>1、Text组件的基本使用(span)</h2><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 1.1、selectable: true //现在可以不加&#123;&#123;&#125;&#125; --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">text</span> <span class="hljs-attr">selectable</span>=<span class="hljs-string">"&#123;&#123;true&#125;&#125;"</span>&gt;</span>Hello World\n<span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 1.2、只写属性，默认为true，不写为false --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">text</span> <span class="hljs-attr">selectable</span>&gt;</span>你好小程序\n<span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span>  
+
+<span class="hljs-comment">&lt;!-- 2、space：决定文本空格的大小 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span>哈 哈\n<span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">text</span> <span class="hljs-attr">space</span>=<span class="hljs-string">"nbsp"</span>&gt;</span>哈 哈\n<span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span>  <span class="hljs-comment">&lt;!-- 默认就是nbsp --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">text</span> <span class="hljs-attr">space</span>=<span class="hljs-string">"ensp"</span>&gt;</span>哈 哈\n<span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span>  <span class="hljs-comment">&lt;!-- 半个中文字符大小 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">text</span> <span class="hljs-attr">space</span>=<span class="hljs-string">"emsp"</span>&gt;</span>哈 哈\n<span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span>  <span class="hljs-comment">&lt;!-- 一个中文字符大小 --&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 3、decode属性：是否解码文本 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">text</span> <span class="hljs-attr">decode</span>&gt;</span>5 &amp;gt; 3<span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span></code></pre>
+<h2 id="2、button组件的基本使用"><a href="#2、button组件的基本使用" class="headerlink" title="2、button组件的基本使用"></a>2、button组件的基本使用</h2><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 1、本身是块级元素，加了size变成行内块元素 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">size</span>=<span class="hljs-string">'mini'</span>&gt;</span>按钮<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- 2、type属性：bootstrap样式 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"mini"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"primary"</span>&gt;</span>按钮<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- 3、plain：镂空效果 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"mini"</span> <span class="hljs-attr">plain</span>&gt;</span>按钮<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- 4、disable：不可用 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"mini"</span> <span class="hljs-attr">disabled</span>&gt;</span>按钮<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- 5、loading：加载效果 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"mini"</span> <span class="hljs-attr">loading</span>=<span class="hljs-string">"&#123;&#123;isLoading&#125;&#125;"</span>&gt;</span>按钮<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 6、hover-class --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"mini"</span> <span class="hljs-attr">hover-class</span>=<span class="hljs-string">"pressed"</span>&gt;</span>按钮<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+.pressed &#123;
+  background: red;
+  color: white;
+&#125;</code></pre>
+<h2 id="3、view组件的基本使用（div）"><a href="#3、view组件的基本使用（div）" class="headerlink" title="3、view组件的基本使用（div）"></a>3、view组件的基本使用（div）</h2><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 1、view的基本使用 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">text</span>&gt;</span>文本<span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>按钮<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 2、hover-class：用户按下组件时，显示的样式 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"box1"</span> <span class="hljs-attr">hover-class</span>=<span class="hljs-string">"hover-view"</span> <span class="hljs-attr">hover-stay-time</span>=<span class="hljs-string">"0"</span> <span class="hljs-attr">hover-start-time</span>=<span class="hljs-string">"1000"</span>&gt;</span>点下去<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 3、组织传播：hover-stop-propagation：点里面的容器，外面的容器不反应 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">hover-stop-propagation</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span></code></pre>
+<h2 id="4、image组件的基本使用"><a href="#4、image组件的基本使用" class="headerlink" title="4、image组件的基本使用"></a>4、image组件的基本使用</h2><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 
+  重点：
+    1、可以写成单标签
+    2、默认有大小：320px*240px
+    3、image组件是一个行内块元素（inline-block）
+--&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 相对路径 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">image</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"../../assets/tabbar/cart.png"</span>/&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 绝对路径 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">image</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"/assets/tabbar/cart.png"</span>/&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 远程地址 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">image</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"</span>/&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 补充：相册中的图片 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">bindtap</span>=<span class="hljs-string">"handleChooseAlbum"</span>&gt;</span>选中图片<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">image</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"&#123;&#123;imagePath&#125;&#125;"</span>/&gt;</span>
+     data: &#123;
+        isLoading: true,
+        imagePath: ''
+      &#125;,
+      handleChooseAlbum() &#123;
+        //系统api
+        wx.chooseImage(&#123;
+          success: (res) =&gt; &#123;
+            this.setData(&#123;
+              imagePath: res.tempFilePaths[0]
+            &#125;) 
+          &#125;
+        &#125;)
+      &#125;,
+
+<span class="hljs-comment">&lt;!-- bindload: 监听图片加载完成 --&gt;</span>
+<span class="hljs-comment">&lt;!-- 图片懒加载 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">image</span> <span class="hljs-attr">wx:for</span>=<span class="hljs-string">"&#123;&#123;1&#125;&#125;"</span>
+        <span class="hljs-attr">src</span>=<span class="hljs-string">"https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"</span>
+        <span class="hljs-attr">bindload</span>=<span class="hljs-string">"handleImageLoad"</span>
+        <span class="hljs-attr">lazy-load</span>
+        /&gt;</span>
+
+<span class="hljs-comment">&lt;!-- .show-menu-by-longpress:长按图片出现识别小程序码 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">image</span> <span class="hljs-attr">show-menu-by-longpress</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg"</span>/&gt;</span></code></pre>
+<h2 id="5、input组件的基本使用"><a href="#5、input组件的基本使用" class="headerlink" title="5、input组件的基本使用"></a>5、input组件的基本使用</h2><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 1.input的基本使用 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">input</span> /&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 2.value：input中的默认值 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"哈哈哈"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 3.文本输入键盘 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"number "</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 4.password类型 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">password</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 5.提示内容 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"提示内容"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 6.confire-type --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">confirm-type</span>=<span class="hljs-string">"search"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 7.input绑定事件 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">bindinput</span>=<span class="hljs-string">"handleInput"</span> <span class="hljs-attr">bindfocus</span>=<span class="hljs-string">"handleFocus"</span> <span class="hljs-attr">bindblur</span>=<span class="hljs-string">"handleBlur"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span>
+  handleInput(event) &#123;
+    console.log("用户输入内容：",event);
+  &#125;,
+  handleFocus(event) &#123;
+    console.log("input获取焦点：",event);
+  &#125;,
+  handleBlur(event) &#123;
+    console.log("input失去焦点：",event);
+  &#125;</code></pre>
+<h2 id="6、scroll-view组件的基本使用"><a href="#6、scroll-view组件的基本使用" class="headerlink" title="6、scroll-view组件的基本使用"></a>6、scroll-view组件的基本使用</h2><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 1.水平滚动：scroll-x --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">scroll-view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container1"</span> <span class="hljs-attr">scroll-x</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">wx:for</span>=<span class="hljs-string">"&#123;&#123;10&#125;&#125;"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item1"</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">scroll-view</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 2.垂直滚动：scroll-y --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">scroll-view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container2"</span> <span class="hljs-attr">scroll-y</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">wx:for</span>=<span class="hljs-string">"&#123;&#123;10&#125;&#125;"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item2"</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">scroll-view</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 3.其他补充 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">scroll-view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container2"</span> <span class="hljs-attr">scroll-y</span> <span class="hljs-attr">bindscroll</span>=<span class="hljs-string">"handleScroll"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">wx:for</span>=<span class="hljs-string">"&#123;&#123;10&#125;&#125;"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"item2"</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">scroll-view</span>&gt;</span>
+
+.container1 &#123;
+  background: pink;
+  white-space: nowrap;
+&#125;
+
+.item1 &#123;
+  width: 100px;
+  height: 100px;
+  background: red;
+  margin: 10px;
+  display: inline-block;
+&#125;
+
+.container2 &#123;
+  background: orange;
+  height: 100px;
+&#125;
+
+.item2 &#123;
+  width: 100px;
+  background: blue;
+  margin: 10px;
+&#125;</code></pre>
+<h2 id="7、事件对象"><a href="#7、事件对象" class="headerlink" title="7、事件对象"></a>7、事件对象</h2><h3 id="1）常见事件监听"><a href="#1）常见事件监听" class="headerlink" title="1）常见事件监听"></a>1）常见事件监听</h3><ul>
+<li>bindtouchstart：手指触摸开始</li>
+<li>bindtouchmove：手指触摸移动</li>
+<li>bindtouchend：手指触摸结束</li>
+<li>bindtouchcancel：手指触摸取消</li>
+<li>bindtap：起点手势 {两者只会触发一个}</li>
+<li>bindlongpress：手指长按 {两者只会触发一个}</li>
+</ul>
+<h3 id="2）事件参数传递-data"><a href="#2）事件参数传递-data" class="headerlink" title="2）事件参数传递(data-)"></a>2）事件参数传递(data-)</h3><pre><code class="hljs html">for:
+<span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">data-index</span>=<span class="hljs-string">"&#123;&#123;index&#125;&#125;"</span> <span class="hljs-attr">data-item</span>=<span class="hljs-string">"&#123;&#123;item&#125;&#125;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+
+取：
+const dataset = event.currentTarget.dataset;
+const title = dataset.item;
+const index dataset.index;</code></pre>
+<h3 id="3）事件捕获和冒泡"><a href="#3）事件捕获和冒泡" class="headerlink" title="3）事件捕获和冒泡"></a>3）事件捕获和冒泡</h3><p>捕获：事件从外到内依次进行捕获（capture-bind:tap）</p>
+<p>冒泡：事件从内到外依次进行冒泡（bindtap）</p>
+<p>阻止：事件一旦被当前标签阻止了，则不再进行捕获或者冒泡（catch-bind:tap、catchtap）</p>
+<h1 id="三、样式"><a href="#三、样式" class="headerlink" title="三、样式"></a>三、样式</h1><h2 id="1、基本使用"><a href="#1、基本使用" class="headerlink" title="1、基本使用"></a>1、基本使用</h2><pre><code class="hljs css">&lt;!-- 1.1、内联样式 --&gt;
+&lt;view style="color: red"&gt;哈哈哈&lt;/view&gt;
+
+&lt;!-- 1.2、页内样式 --&gt;
+&lt;view class="box"&gt;呵呵呵&lt;/view&gt;
+
+&lt;!-- 1.3、全局样式 --&gt;
+&lt;view class="container"&gt;嘿嘿嘿&lt;/view&gt;
+
+&lt;!-- 2、权重：!important &gt; 内联 &gt; 页内 &gt; 全局 &gt; 元素 --&gt;
+
+&lt;!-- 3、wxss中的单位：rpx，用于做适配，默认是px的一半，所以要写成2倍--&gt;
+&lt;view class="box1"&gt;嗯嗯嗯&lt;/view&gt;</code></pre>
+<h2 id="2、导入样式"><a href="#2、导入样式" class="headerlink" title="2、导入样式"></a>2、导入样式</h2><p>@import ‘路径’</p>
+<h2 id="3、官方样式库"><a href="#3、官方样式库" class="headerlink" title="3、官方样式库"></a>3、官方样式库</h2><p><a href="https://github.com/Tencent/weui-wxss" target="_blank" rel="noopener">https://github.com/Tencent/weui-wxss</a> 的dist文件夹</p>
+<h1 id="四、wxml基本语法"><a href="#四、wxml基本语法" class="headerlink" title="四、wxml基本语法"></a>四、wxml基本语法</h1><h2 id="1、wx-if"><a href="#1、wx-if" class="headerlink" title="1、wx:if"></a>1、wx:if</h2><h2 id="2、wx-if-wx-elif-wx-else"><a href="#2、wx-if-wx-elif-wx-else" class="headerlink" title="2、wx:if wx:elif wx:else"></a>2、wx:if wx:elif wx:else</h2><h2 id="3、hidden隐藏（wx-if不渲染）"><a href="#3、hidden隐藏（wx-if不渲染）" class="headerlink" title="3、hidden隐藏（wx:if不渲染）"></a>3、hidden隐藏（wx:if不渲染）</h2><h2 id="4、wx-for（item，index）"><a href="#4、wx-for（item，index）" class="headerlink" title="4、wx:for（item，index）"></a>4、wx:for（item，index）</h2><ul>
+<li><p>item起别名：wx:for-item=”movie”</p>
+</li>
+<li><p>index起别名：wx:for-index=”i”，多用于多层遍历。</p>
+</li>
+<li>列表渲染，wx:key作为唯一标识，提高性能（diff算法）<ul>
+<li>如果不加key，例如对数组dom进行插入的时候，则会使插入位置的后面的所有dom都进行改变</li>
+<li>如果加了key，则会在对每个dom添加一个id标识，在插入的时候不会影响后面的dom，提高了性能</li>
+</ul>
+</li>
+</ul>
+<h2 id="5、block标签"><a href="#5、block标签" class="headerlink" title="5、block标签"></a>5、block标签</h2><p><block>这个标签不是组件，主要用于包裹元素，不会被渲染成dom</block>，提高性能。可以替代<view></view></p>
+<h2 id="6、template模板（少用）"><a href="#6、template模板（少用）" class="headerlink" title="6、template模板（少用）"></a>6、template模板（少用）</h2><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"名字"</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>按钮<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span>哈哈哈<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+使用：<span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">is</span>=<span class="hljs-string">"名字"</span>/&gt;</span>
+-------------------------------
+<span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"名字"</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>&#123;&#123;btnText&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span>&#123;&#123;content&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+
+类似插槽：<span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">is</span>=<span class="hljs-string">"名字"</span> <span class="hljs-attr">data</span>=<span class="hljs-string">"&#123;&#123;btnText: '按钮', content: '哈哈哈'&#125;&#125;"</span>/&gt;</span></code></pre>
+<p>ps：wxml导入/引入，把模板抽离到单独的一个wxml文件里</p>
+<ul>
+<li>import可以导入模板，但不能循环导入</li>
+<li>include不能引入模板，但是可以循环引入wxml文件</li>
+</ul>
+<h1 id="五、wxs模块（类似js，但不是js）"><a href="#五、wxs模块（类似js，但不是js）" class="headerlink" title="五、wxs模块（类似js，但不是js）"></a>五、wxs模块（类似js，但不是js）</h1><h2 id="1、当前页面的写法"><a href="#1、当前页面的写法" class="headerlink" title="1、当前页面的写法"></a>1、当前页面的写法</h2><pre><code class="hljs javascript">&lt;wxs module="info"&gt;
+  //es5语法
+  var message = "Hello, world";
+  var name = "hhh";
+  var sum = function(num1, num2) &#123;
+    return num1 + num2;
+  &#125;
+  module.exports = &#123;
+    message: message,
+    name: name,
+    sum: sum
+  &#125;
+&lt;/wxs&gt;
+
+&lt;view&gt;&#123;&#123;info.message&#125;&#125;&lt;/view&gt;
+&lt;view&gt;&#123;&#123;info.name&#125;&#125;&lt;/view&gt;
+&lt;view&gt;&#123;&#123;info.sum(10,20)&#125;&#125;&lt;/view&gt;</code></pre>
+<h2 id="2、分离写法"><a href="#2、分离写法" class="headerlink" title="2、分离写法"></a>2、分离写法</h2><pre><code class="hljs javascript">类似js模块化开发
+//info.wxs文件：
+    var message = "Hello, world";
+    var name = "hhh";
+    var sum = function (num1, num2) &#123;
+      return num1 + num2;
+    &#125;
+    module.exports = &#123;
+      message: message,
+      name: name,
+      sum: sum
+    &#125;
+
+//导入使用
+&lt;wxs src="./mywxs.wxs" module="info"/&gt;  //只能是相对路径
+
+&lt;view&gt;&#123;&#123;info.message&#125;&#125;&lt;/view&gt;
+&lt;view&gt;&#123;&#123;info.name&#125;&#125;&lt;/view&gt;
+&lt;view&gt;&#123;&#123;info.sum(10,20)&#125;&#125;&lt;/view&gt;</code></pre>
+<h1 id="六、组件化开发"><a href="#六、组件化开发" class="headerlink" title="六、组件化开发"></a>六、组件化开发</h1><h2 id="1、基本使用-1"><a href="#1、基本使用-1" class="headerlink" title="1、基本使用"></a>1、基本使用</h2><pre><code class="hljs html">//my-cpn.wxml，定义
+<span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"title"</span>&gt;</span>&#123;&#123;title&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"content"</span>&gt;</span>我是自定义组件的内容<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+
+//home.json注册
+&#123;
+  "usingComponents": &#123;
+    "mycpn": "/components/my-cpn/my-cpn"
+  &#125;
+&#125;
+
+//home.wxml使用
+<span class="hljs-tag">&lt;<span class="hljs-name">mycpn</span>/&gt;</span>
+
+//可以在app.json里面进行全局注册。但是不建议都放在app.json里面</code></pre>
+<h2 id="2、样式问题"><a href="#2、样式问题" class="headerlink" title="2、样式问题"></a>2、样式问题</h2><ul>
+<li><p>组件里面的样式和页面的样式互不影响，默认存在隔离。</p>
+</li>
+<li><p>组件里面不推荐使用id选择器，只用class选择器。</p>
+</li>
+<li><p>特殊需求：需要它们相互影响</p>
+<pre><code class="hljs css">组件的<span class="hljs-selector-class">.js</span>文件
+<span class="hljs-selector-tag">Component</span>(&#123;
+    <span class="hljs-attribute">options</span>: &#123;
+        styleIsolation: <span class="hljs-string">"isolated"</span>      //默认是隔离的
+        styleIsolation: <span class="hljs-string">"apply-shared"</span>  //应用组件被分享，也就是页面影响了组件
+        styleIsolation: <span class="hljs-string">"shared"</span>  		//互相影响
+    &#125;
+&#125;)</code></pre>
+</li>
+</ul>
+<h2 id="3、组件和页面的通信"><a href="#3、组件和页面的通信" class="headerlink" title="3、组件和页面的通信"></a>3、组件和页面的通信</h2><h3 id="1）页面给组件传递参数"><a href="#1）页面给组件传递参数" class="headerlink" title="1）页面给组件传递参数"></a>1）页面给组件传递参数</h3><pre><code class="hljs js">//组件.js文件
+Component(&#123;
+  //定义属性
+  properties: &#123;
+    // title: String
+    title: &#123;
+      type: String,
+      value: "我是默认的标题",
+      observer: function(newValue, oldValue) &#123;  //观察者
+        console.log(newValue, oldValue);
+      &#125;
+    &#125;
+  &#125;
+&#125;)
+
+//组件
+&lt;view class="title"&gt;&#123;&#123;title&#125;&#125;&lt;/view&gt;
+&lt;view class="content"&gt;我是自定义组件的内容&lt;/view&gt;
+
+&lt;!-- 使用自定义组件 --&gt;
+&lt;mycpn title="hhh"/&gt;
+&lt;mycpn title="xxx"/&gt;
+&lt;mycpn /&gt;</code></pre>
+<h3 id="2）页面给组件传递样式"><a href="#2）页面给组件传递样式" class="headerlink" title="2）页面给组件传递样式"></a>2）页面给组件传递样式</h3><pre><code class="hljs js">//1.组件js声明一个样式变量
+Component(&#123;
+  externalClasses: ['titleclass']
+&#125;)
+
+//2.组件wxml使用该变量
+&lt;view class="title titleclass"&gt;&#123;&#123;title&#125;&#125;&lt;/view&gt;
+
+//3.页面给变量赋值（传递），此时dom里面就有class="red"了
+&lt;mycpn title="hhh" titleclass="red"/&gt;
+    
+//4.在页面的wxss里面添加.red的样式，使其dom被作用了即可
+.red &#123;
+  color: red;
+&#125;</code></pre>
+<h3 id="3）组件给页面传递事件-自定义事件"><a href="#3）组件给页面传递事件-自定义事件" class="headerlink" title="3）组件给页面传递事件 - 自定义事件"></a>3）组件给页面传递事件 - 自定义事件</h3><pre><code class="hljs javascript">//1.组件监听事件
+&lt;button size="mini" bind:tap="handleIncrement"&gt;+1&lt;/button&gt;
+
+//2.监听事件发射事件
+methods: &#123;   
+  handleIncrement() &#123;
+    this.triggerEvent("increment",&#123;name: "hhh"&#125;,&#123;&#125;)	//事件名，&#123;key:value 额外参数&#125;
+  &#125;
+&#125;
+
+//3.页面接收，然后绑定自己的方法
+&lt;my-event bind:increment="handleIncrement"/&gt;
+    
+//4.页面实现自己的方法
+handleIncrement(event) &#123;
+  console.log(event); //参数在event.detail里面
+  this.setData(&#123;
+    counter: this.data.counter+1
+  &#125;)
+&#125;,</code></pre>
+<h2 id="4、获得组件对象"><a href="#4、获得组件对象" class="headerlink" title="4、获得组件对象"></a>4、获得组件对象</h2><p>需求：在页面上不通过传参的方式，修改组件的data数据，则需要获取组件对象从而setData()</p>
+<p>方法：<code>this.selectComponent(&quot;#sel_id&quot;) //绑定id或者class</code></p>
+<pre><code class="hljs html">//1.给使用的组件绑定一个id或者class
+<span class="hljs-tag">&lt;<span class="hljs-name">my-select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"sel_id"</span>/&gt;</span>
+//组件定义数据
+data: &#123;
+  counter: 0
+&#125;,
+
+//2.页面监听事件
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">size</span>=<span class="hljs-string">"mini"</span> <span class="hljs-attr">bind:tap</span>=<span class="hljs-string">"handleIncrementCpnData"</span>&gt;</span>修改组件内的数据+1<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></code></pre>
+<pre><code class="hljs javascript">handleIncrementCpnData() &#123;
+    <span class="hljs-comment">//修改my-select的counter</span>
+    <span class="hljs-comment">//想办法获得组件对象</span>
+    <span class="hljs-keyword">const</span> my_select = <span class="hljs-keyword">this</span>.selectComponent(<span class="hljs-string">"#sel_id"</span>) <span class="hljs-comment">//绑定id或者class</span>
+    my_select.setData(&#123;
+      <span class="hljs-attr">counter</span>: my_select.data.counter + <span class="hljs-number">1</span>
+    &#125;)
+&#125;,
+    
+<span class="hljs-comment">//------更优雅的方式------</span>
+让组件暴露出一个方法，页面调用方法来修改，而不是直接修改对象的数据
+
+methods: &#123;
+  incrementCounter(num) &#123;
+    <span class="hljs-keyword">this</span>.setData(&#123;
+      <span class="hljs-attr">counter</span>: <span class="hljs-keyword">this</span>.data.counter + num
+    &#125;)
+  &#125;
+&#125;
+
+handleIncrementCpnData() &#123;
+    <span class="hljs-keyword">const</span> my_select = <span class="hljs-keyword">this</span>.selectComponent(<span class="hljs-string">"#sel_id"</span>) <span class="hljs-comment">//绑定id或者class</span>
+    my_select.incrementCounter(<span class="hljs-number">10</span>)
+&#125;,</code></pre>
+<h2 id="5、插槽的使用"><a href="#5、插槽的使用" class="headerlink" title="5、插槽的使用"></a>5、插槽的使用</h2><h3 id="1）单插槽"><a href="#1）单插槽" class="headerlink" title="1）单插槽"></a>1）单插槽</h3><pre><code class="hljs html">//1.组件预留插槽
+<span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span>我的插槽的头部<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">slot</span>/&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span>我的插槽的尾部<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span> 
+
+//2.注册使用插槽
+<span class="hljs-tag">&lt;<span class="hljs-name">my-slot</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>我是插槽的按钮<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">my-slot</span>&gt;</span></code></pre>
+<h3 id="2）多插槽"><a href="#2）多插槽" class="headerlink" title="2）多插槽"></a>2）多插槽</h3><p>注意点：</p>
+<ul>
+<li>具名：组件插槽起名字：name=”名字”，页面使用slot=”名字”</li>
+<li>Component添加options，开启多插槽：multipleSlots: true</li>
+</ul>
+<pre><code class="hljs html">//1.组件预留插槽
+<span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span>我的插槽的头部<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"center"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">slot</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">slot</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span>我的插槽的尾部<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span> 
+
+//2.开启多插槽
+Component(&#123;
+  options: &#123;
+    multipleSlots: true
+  &#125;
+&#125;)
+
+//3.注册使用插槽
+<span class="hljs-tag">&lt;<span class="hljs-name">my-slot</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">text</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"left"</span>&gt;</span>我是左边<span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">text</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"center"</span>&gt;</span>我是中间<span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">text</span> <span class="hljs-attr">slot</span>=<span class="hljs-string">"right"</span>&gt;</span>我是右边<span class="hljs-tag">&lt;/<span class="hljs-name">text</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">my-slot</span>&gt;</span></code></pre>
+<h2 id="6、component构造器"><a href="#6、component构造器" class="headerlink" title="6、component构造器"></a>6、component构造器</h2><ul>
+<li><p>properties：可以让使用者给组件传入数据</p>
+</li>
+<li><p>data：定义主键内部的初始化数据</p>
+</li>
+<li><p>methods：定义组件内部函数</p>
+</li>
+<li><p>options：定义组件的配置选项</p>
+</li>
+<li><p>externalClasses：[]，外界给组件传入额外的样式</p>
+</li>
+<li><p>observers：可以监听属性properties/data的改变</p>
+<pre><code class="hljs javascript">observers: &#123;
+	<span class="hljs-attr">counter</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">newValue</span>) </span>&#123; &#125;   <span class="hljs-comment">//没有oldvalue</span>
+&#125;</code></pre>
+</li>
+<li><p>组件所在页面的生命周期</p>
+<pre><code class="hljs javascript">pageLifetimes: &#123;
+    show() &#123;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"监听组件所在页面显示出来时"</span>)
+    &#125;,
+    hide() &#123;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"监听组件所在页面隐藏起来时"</span>)
+    &#125;,
+    resize() &#123;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"监听组件所在页面尺寸的改变"</span>)
+    &#125;
+&#125;</code></pre>
+</li>
+<li><p>监听组件本身</p>
+<pre><code class="hljs javascript">lifetimes: &#123;
+    created() &#123;&#125;,  <span class="hljs-comment">//创建出来</span>
+    attached() &#123;&#125;, <span class="hljs-comment">//被添加时</span>
+    ready() &#123;&#125;,    <span class="hljs-comment">//组件被渲染出来时</span>
+    moved() &#123;&#125;,    <span class="hljs-comment">//组件被移动到另外一个节点时</span>
+    detached() &#123;&#125; <span class="hljs-comment">//组件被移除</span>
+&#125;</code></pre>
+</li>
+</ul>
+<h1 id="七、网络请求"><a href="#七、网络请求" class="headerlink" title="七、网络请求"></a>七、网络请求</h1><h2 id="1、基本使用-2"><a href="#1、基本使用-2" class="headerlink" title="1、基本使用"></a>1、基本使用</h2><pre><code class="hljs javascript">onLoad: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">options</span>) </span>&#123;
+    <span class="hljs-comment">//1.最简单的发送请求</span>
+     wx.request(&#123;
+       <span class="hljs-attr">url</span>: <span class="hljs-string">'http://152.136.185.210:8000/api/z8/recommend'</span>,
+       <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>&#123;
+         <span class="hljs-built_in">console</span>.log(res)
+       &#125;
+     &#125;),
+    <span class="hljs-comment">//2.get请求，但是携带参数</span>
+    wx.request(&#123;
+      <span class="hljs-attr">url</span>: <span class="hljs-string">'http://152.136.185.210:8000/api/z8/home/data'</span>,
+      <span class="hljs-attr">data</span>: &#123;
+        <span class="hljs-attr">type</span>: <span class="hljs-string">'sell'</span>,
+        <span class="hljs-attr">page</span>: <span class="hljs-number">1</span>
+      &#125;,
+      <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>&#123;
+        <span class="hljs-built_in">console</span>.log(res)
+      &#125;
+    &#125;)
+    <span class="hljs-comment">//3.post请求，并且携带参数</span>
+    wx.request(&#123;
+      <span class="hljs-attr">url</span>: <span class="hljs-string">'http://httpbin.org/post'</span>,
+      <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+      <span class="hljs-attr">data</span>: &#123;
+        <span class="hljs-attr">name</span>: <span class="hljs-string">'guzhz'</span>,
+        <span class="hljs-attr">age</span>: <span class="hljs-number">18</span>
+      &#125;,
+      <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>&#123;
+        <span class="hljs-built_in">console</span>.log(res)
+      &#125;,
+      <span class="hljs-attr">fail</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>&#123;
+        <span class="hljs-built_in">console</span>.log(err)
+      &#125;
+    &#125;)
+  &#125;</code></pre>
+<h2 id="2、请求封装（promise）"><a href="#2、请求封装（promise）" class="headerlink" title="2、请求封装（promise）"></a>2、请求封装（promise）</h2><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">request</span>(<span class="hljs-params">options</span>) </span>&#123;
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;
+    wx.request(&#123;
+      <span class="hljs-attr">url</span>: options.url,
+      <span class="hljs-attr">method</span>: options.method || <span class="hljs-string">'GET'</span>,	<span class="hljs-comment">//默认是get</span>
+      data: options.data || &#123;&#125;,
+      <span class="hljs-attr">success</span>: resolve,   <span class="hljs-comment">//本身就是回调函数</span>
+      fail: reject
+    &#125;)
+  &#125;)
+&#125;</code></pre>
+<pre><code class="hljs javascript"><span class="hljs-keyword">import</span> request <span class="hljs-keyword">from</span> <span class="hljs-string">'../../service/network.js'</span>
+
+onLoad: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">options</span>) </span>&#123;
+    <span class="hljs-comment">// get_data_origin();</span>
+    request(&#123;
+      <span class="hljs-attr">url</span>: <span class="hljs-string">'http://152.136.185.210:8000/api/z8/recommend'</span>,
+    &#125;).then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;
+      <span class="hljs-built_in">console</span>.log(res)
+    &#125;).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;
+      <span class="hljs-built_in">console</span>.log(err)
+    &#125;)
+  &#125;,</code></pre>
+<h1 id="八、界面交互"><a href="#八、界面交互" class="headerlink" title="八、界面交互"></a>八、界面交互</h1><h2 id="1、弹窗（showToast）"><a href="#1、弹窗（showToast）" class="headerlink" title="1、弹窗（showToast）"></a>1、弹窗（showToast）</h2><pre><code class="hljs javascript">handleShowToast() &#123;
+    wx.showToast(&#123;
+        <span class="hljs-attr">title</span>: <span class="hljs-string">'我是标题'</span>,
+        <span class="hljs-attr">duration</span>: <span class="hljs-number">1000</span>,
+        <span class="hljs-attr">icon</span>: <span class="hljs-string">'loading'</span>,
+        <span class="hljs-attr">mask</span>: <span class="hljs-literal">true</span>,  <span class="hljs-comment">//防止触摸蒙版，</span>
+        success: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"展示弹窗成功！"</span>);
+        &#125;,
+        <span class="hljs-attr">fail</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"展示弹窗失败！"</span>);
+        &#125;,
+        <span class="hljs-attr">complete</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"完成调用！"</span>);
+        &#125;
+    &#125;)
+&#125;,</code></pre>
+<h2 id="2、模态框（showModal）"><a href="#2、模态框（showModal）" class="headerlink" title="2、模态框（showModal）"></a>2、模态框（showModal）</h2><pre><code class="hljs javascript">wx.showModal(&#123;
+    <span class="hljs-attr">title</span>: <span class="hljs-string">'标题'</span>,
+    <span class="hljs-attr">content</span>: <span class="hljs-string">'内容'</span>,
+    <span class="hljs-attr">cancelColor</span>: <span class="hljs-string">'red'</span>,
+    <span class="hljs-attr">showCancel</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">cancelText</span>: <span class="hljs-string">'退出'</span>,
+    <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>&#123;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'展示成功！'</span>)
+        <span class="hljs-keyword">if</span>(res.cancel) &#123;
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"点击了取消"</span>)
+        &#125;
+        <span class="hljs-keyword">if</span>(res.confirm) &#123;
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"点击了确定"</span>)
+        &#125;
+    &#125;
+&#125;)</code></pre>
+<h2 id="3、加载（showLoading）"><a href="#3、加载（showLoading）" class="headerlink" title="3、加载（showLoading）"></a>3、加载（showLoading）</h2><pre><code class="hljs javascript">wx.showLoading(&#123;
+    <span class="hljs-attr">title</span>: <span class="hljs-string">'加载ing'</span>,
+    <span class="hljs-attr">mask</span>: <span class="hljs-literal">true</span>
+&#125;)
+<span class="hljs-comment">//需手动取消加载才会消失</span>
+setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    wx.hideLoading()
+&#125;, <span class="hljs-number">2000</span>)</code></pre>
+<h2 id="4、下方活动表单（showActionSheet）"><a href="#4、下方活动表单（showActionSheet）" class="headerlink" title="4、下方活动表单（showActionSheet）"></a>4、下方活动表单（showActionSheet）</h2><pre><code class="hljs javascript">wx.showActionSheet(&#123;
+    <span class="hljs-attr">itemList</span>: [<span class="hljs-string">'相册'</span>,<span class="hljs-string">'拍照'</span>],
+    <span class="hljs-attr">itemColor</span>: <span class="hljs-string">'red'</span>,
+    <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">res</span>) </span>&#123;
+        <span class="hljs-built_in">console</span>.log(res)  <span class="hljs-comment">//res.tapIndex</span>
+    &#125;
+&#125;)</code></pre>
+<h2 id="5、使用分享"><a href="#5、使用分享" class="headerlink" title="5、使用分享"></a>5、使用分享</h2><pre><code class="hljs javascript"><span class="hljs-comment">/**
+  * 用户点击右上角分享
+  */</span>
+onShareAppMessage: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-keyword">return</span> &#123;
+        <span class="hljs-attr">title</span>: <span class="hljs-string">'转发标题'</span>,
+        <span class="hljs-attr">path</span>: <span class="hljs-string">'/pages/about/about'</span>,
+        <span class="hljs-attr">imageUrl</span>: <span class="hljs-string">'本地图片/网络图片'</span>,  <span class="hljs-comment">//默认是首页的截图</span>
+    &#125;
+&#125;
+
+<span class="hljs-comment">//按钮直接分享</span>
+&lt;button size=<span class="hljs-string">"mini"</span> open-type=<span class="hljs-string">"share"</span>&gt;分享&lt;<span class="hljs-regexp">/button&gt;</span></code></pre>
+<h1 id="九、登录流程"><a href="#九、登录流程" class="headerlink" title="九、登录流程"></a>九、登录流程</h1><ul>
+<li>1.调用wx.login获取code</li>
+<li>2.调用wx.request发送code到我们自己的服务器（返回一个标识token）</li>
+<li>3.将登录态的标识token进行存储，以便下次使用</li>
+<li>4.请求需要登录态接口时，携带token</li>
+</ul>
+<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> TOKEN = <span class="hljs-string">'token'</span>
+
+App(&#123;
+  <span class="hljs-attr">globalData</span>: &#123;
+    <span class="hljs-attr">token</span>: <span class="hljs-string">''</span>
+  &#125;,
+  <span class="hljs-comment">/**
+   * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
+   */</span>
+  onLaunch: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-comment">//1.先判断缓存中取出token</span>
+    <span class="hljs-keyword">const</span> token = wx.getStorageSync(TOKEN)
+    <span class="hljs-comment">//2.判断是否token是否过期</span>
+    <span class="hljs-keyword">if</span> (token &amp;&amp; token.length !== <span class="hljs-number">0</span>) &#123;
+      <span class="hljs-comment">//判断是否过期</span>
+      <span class="hljs-keyword">this</span>.check_token()
+    &#125; <span class="hljs-keyword">else</span> &#123;
+      <span class="hljs-comment">//如果不存在则登录</span>
+      <span class="hljs-keyword">this</span>.login();
+    &#125;
+  &#125;,
+  check_token(token) &#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"执行了验证操作！"</span>)
+    wx.request(&#123;
+      <span class="hljs-attr">url</span>: <span class="hljs-string">'http://152.136.185.210:8000/api/z8/auth'</span>,
+      <span class="hljs-attr">header</span>: &#123;
+        token   <span class="hljs-comment">//接口中用请求头的方式传递token</span>
+      &#125;,
+      <span class="hljs-attr">success</span>: <span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;
+        <span class="hljs-comment">//正在验证</span>
+        <span class="hljs-keyword">if</span> (!res.data.errCode) &#123;
+          <span class="hljs-comment">//当前token有效</span>
+          <span class="hljs-keyword">this</span>.globalData.token = token  <span class="hljs-comment">//再次存储一遍</span>
+        &#125; <span class="hljs-keyword">else</span> &#123;
+          <span class="hljs-comment">//当前token无效：1001：没有传入token，1002：传入错误的token，1003：token过期</span>
+          <span class="hljs-keyword">this</span>.login();
+        &#125;
+      &#125;,
+      <span class="hljs-attr">fail</span>: <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> &#123;
+        <span class="hljs-built_in">console</span>.log(err)
+      &#125;
+    &#125;)
+  &#125;,
+  login() &#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"执行了登录操作！"</span>)
+    wx.login(&#123;
+      <span class="hljs-attr">success</span>: <span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;
+        <span class="hljs-comment">//1.获取code，只有5分钟有效期</span>
+        <span class="hljs-keyword">const</span> code = res.code;
+        <span class="hljs-comment">//2.将code发送给我们的服务器</span>
+        wx.request(&#123;
+          <span class="hljs-attr">url</span>: <span class="hljs-string">'http://152.136.185.210:8000/api/z8/login'</span>,
+          <span class="hljs-attr">method</span>: <span class="hljs-string">'post'</span>,
+          <span class="hljs-attr">data</span>: &#123;
+            code  <span class="hljs-comment">//可能还需要appid和appsecret</span>
+          &#125;,
+          <span class="hljs-attr">success</span>: <span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> &#123;
+            <span class="hljs-comment">//1.取出token</span>
+            <span class="hljs-keyword">const</span> token = res.data.token
+            <span class="hljs-comment">//2.保存到全局方便实用</span>
+            <span class="hljs-keyword">this</span>.globalData.token = token
+            <span class="hljs-comment">//3.存储在缓存里，用于判断登录态</span>
+            wx.setStorageSync(<span class="hljs-string">'TOKEN'</span>, token)   <span class="hljs-comment">//同步</span>
+          &#125;
+        &#125;)
+      &#125;
+    &#125;)
+  &#125;
+&#125;)</code></pre>
+<h1 id="十、页面跳转"><a href="#十、页面跳转" class="headerlink" title="十、页面跳转"></a>十、页面跳转</h1><h2 id="1）普通跳转"><a href="#1）普通跳转" class="headerlink" title="1）普通跳转"></a>1）普通跳转</h2><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 1、页面跳转，不支持跳转到导航页 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">navigator</span> <span class="hljs-attr">url</span>=<span class="hljs-string">'/pages/category/category'</span>&gt;</span>跳转到category<span class="hljs-tag">&lt;/<span class="hljs-name">navigator</span>&gt;</span> 
+//返回：
+<span class="hljs-tag">&lt;<span class="hljs-name">navigator</span> <span class="hljs-attr">open-type</span>=<span class="hljs-string">"navigateBack"</span> <span class="hljs-attr">dalta</span>=<span class="hljs-string">"2"</span>&gt;</span>返回层级，默认是1也就是上一级<span class="hljs-tag">&lt;/<span class="hljs-name">navigator</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 2、重定向页面跳转，会把前一个页面销毁掉，不支持跳转到导航页 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">navigator</span> <span class="hljs-attr">url</span>=<span class="hljs-string">'/pages/category/category'</span> <span class="hljs-attr">open-type</span>=<span class="hljs-string">"redirect"</span>&gt;</span>重定向<span class="hljs-tag">&lt;/<span class="hljs-name">navigator</span>&gt;</span> 
+
+<span class="hljs-comment">&lt;!-- 3、switchTab，切换到导航的指定页--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">navigator</span> <span class="hljs-attr">url</span>=<span class="hljs-string">'/pages/about/about'</span> <span class="hljs-attr">open-type</span>=<span class="hljs-string">"switchTab"</span>&gt;</span>切换到导航的指定页<span class="hljs-tag">&lt;/<span class="hljs-name">navigator</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 4、reLaunch，不支持跳转到导航页 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">navigator</span> <span class="hljs-attr">url</span>=<span class="hljs-string">'/pages/category/category'</span> <span class="hljs-attr">open-type</span>=<span class="hljs-string">"reLaunch"</span>&gt;</span>关闭所有页面再跳转<span class="hljs-tag">&lt;/<span class="hljs-name">navigator</span>&gt;</span></code></pre>
+<h2 id="2）传参跳转"><a href="#2）传参跳转" class="headerlink" title="2）传参跳转"></a>2）传参跳转</h2><ul>
+<li>往下一层传参</li>
+</ul>
+<pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 页面跳转携带参数 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">navigator</span> <span class="hljs-attr">url</span>=<span class="hljs-string">'/pages/category/category?name=Guzhz&amp;age=15'</span>&gt;</span>跳转到category<span class="hljs-tag">&lt;/<span class="hljs-name">navigator</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- category取出参数，onload的options参数 --&gt;</span>
+onLoad: function (options) &#123;
+	console.log(options);
+&#125;</code></pre>
+<ul>
+<li>往上一层传参，没有直接的方法，但是可以通过获得上一层的页面对象来进行操作</li>
+</ul>
+<pre><code class="hljs javascript"><span class="hljs-comment">//需求：从home跳转到category，通过category修改home的数据</span>
+
+<span class="hljs-comment">//category的js</span>
+onUnload: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-keyword">const</span> pages = getCurrentPages(); 	<span class="hljs-comment">//获得活跃的页面，得到的是一个数组</span>
+    <span class="hljs-keyword">const</span> home = pages[pages.length<span class="hljs-number">-2</span>];  <span class="hljs-comment">//下标-2是获得上一个页面，不建议直接写0，因为不知道多少层</span>
+    home.setData(&#123;
+        <span class="hljs-attr">message</span>: <span class="hljs-string">'改变了'</span>
+   &#125;)
+&#125;,</code></pre>
+<h2 id="3）通过方法跳转，利用同样的api"><a href="#3）通过方法跳转，利用同样的api" class="headerlink" title="3）通过方法跳转，利用同样的api"></a>3）通过方法跳转，利用同样的api</h2><pre><code class="hljs javascript"><span class="hljs-comment">//跳转</span>
+handlePushDetail() &#123;
+    wx.navigateTo(&#123;
+        <span class="hljs-attr">url</span>: <span class="hljs-string">'/pages/detail/detail?title=你好啊'</span>
+    &#125;)
+&#125;
+<span class="hljs-comment">//返回</span>
+handleBackHome() &#123;
+    wx.navigateBack(&#123;
+        <span class="hljs-attr">delta</span>: <span class="hljs-number">1</span> <span class="hljs-comment">//可以不写</span>
+    &#125;)
+&#125;</code></pre>
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/学习记录/">学习记录</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/微信小程序/">微信小程序</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/10/28/浅谈hexo加密问题/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">浅谈hexo加密问题（密码为guzhz）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/08/04/VUE学习（八）：axios使用/">
+                        <span class="hidden-mobile">VUE学习（八）：axios使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备1234556号-1</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="/js/debouncer.js"></script>
+<script src="/js/main.js"></script>
+
+<!-- Plugins -->
+
+
+  
+    <script src="/js/lazyload.js"></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script>
+  <script src="/js/clipboard-use.js"></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "微信小程序基础&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js"></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>

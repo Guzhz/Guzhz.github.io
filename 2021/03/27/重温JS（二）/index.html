@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content>
+  <meta name="author" content="Guzhz">
+  <meta name="keywords" content>
+  <title>重温JS（二） - Guzhz&#39;s House</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css">
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script src="/js/utils.js"></script>
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>Guzhz's House</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-03-27 15:53">
+      2021年3月27日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h4 id="一、数组"><a href="#一、数组" class="headerlink" title="一、数组"></a>一、数组</h4><p>1、arr.length的值</p>
+<blockquote>
+<p>是根据下标最大那个决定的，如果中间没有元素则为空（,,,,)</p>
+</blockquote>
+<p>2、修改length的值产生的影响</p>
+<blockquote>
+<p>变大，没有值的为空（,,,,)<br>  变小，相当于删除尾部元素</p>
+</blockquote>
+<p>3、构造函数创建数组的细节</p>
+<blockquote>
+<p>//多个参数，则创建的是这些参数的数组<br>var arr = new Array(10,20,30)<br>=&gt; “10,20,30”</p>
+</blockquote>
+<blockquote>
+<p>//一个参数时，创建的是开辟这么大空间的数组<br>var arr = new Array(10)<br>=&gt; “,,,,,,,,,,,,,”</p>
+</blockquote>
+<p>4、数组遍历arr.forEach((value,index,arr) =&gt; {})的三个参数分别是当前项的值，当前项的下标和当前遍历的对象<br><code>IE8一下不兼容</code></p>
+<p>5、常用方法</p>
+<ul>
+<li>arr.push(…x) =&gt; 向尾加元素 =&gt; 返回长度</li>
+<li>arr.pop() =&gt; 向尾删元素 =&gt; 返回被删元素</li>
+<li>arr.unshift(…x) =&gt; 向头加元素 =&gt; 返回长度</li>
+<li>arr.shift() =&gt; 向头删元素 =&gt; 返回长度</li>
+<li>arr.slice(start[,end]) =&gt; 切片，取左不取右，end不写默认为全部，可以为负值 =&gt; 不影响原数组，返回新数组</li>
+<li>arr.splice(start_index, count [,…newElement]) =&gt; 两个参数就是删除，三个参数就是删除后添加，count可为0 =&gt; 返回新数组</li>
+<li>arr.concat(newArr) =&gt; 拼接数组 =&gt; 不会对元数组产生影响</li>
+<li>arr.join(“,”) =&gt; 参数是连接符，默认是逗号 =&gt; 不会对元数组产生影响</li>
+<li>arr.reverse =&gt; 反转 =&gt; 会修改原数组 </li>
+<li>arr.sort() =&gt; 默认Unicode的编码排序<pre><code class="hljs javascript"><span class="hljs-comment">//自定排序规则：根据回调函数的返回值设置</span>
+arr.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a, b</span>) </span>&#123;
+  <span class="hljs-comment">//a始终是b的前一个元素，返回值大于1则交换，等于0不交换，小于1不交换</span>
+  <span class="hljs-comment">//这里a-b为升序</span>
+  <span class="hljs-keyword">return</span> a - b  
+&#125;)</code></pre>
+</li>
+</ul>
+<h4 id="二、函数的call和apply方法"><a href="#二、函数的call和apply方法" class="headerlink" title="二、函数的call和apply方法"></a>二、函数的call和apply方法</h4><p>作用：<code>修改函数的this指向</code></p>
+<ul>
+<li>两个都是函数的方法，需要通过函数对象去调用</li>
+<li>当对函数调用call()和apply()都会调用函数执行</li>
+<li>在调用call()和apply()时，可以将一个对象作为参数传递进去，那个这个参数（对象）将成为函数的this</li>
+</ul>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> obj1 = &#123;
+  <span class="hljs-attr">name</span>: <span class="hljs-string">"我是obj1"</span>
+&#125;
+<span class="hljs-keyword">var</span> obj2 = &#123;
+  <span class="hljs-attr">name</span>: <span class="hljs-string">"我是obj2"</span>
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fun</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.name)
+&#125;
+========================
+fun() =&gt; <span class="hljs-comment">//打印undefined，因为没有全局变量name</span>
+fun.call(obj1) =&gt; <span class="hljs-comment">//打印“我是obj1”</span>
+fun.apply(obj2) =&gt; <span class="hljs-comment">//打印“我是obj2”</span></code></pre>
+<p>区别：</p>
+<ul>
+<li>call()方法可以将实参在对象之后依次传递</li>
+<li>apply()方法需要将实参封装到一个数组中统一传递（也就是只有两个参数位置）<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fun</span>(<span class="hljs-params">a, b</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"a = "</span>,a)
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"b = "</span>,b)
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.name)
+&#125;
+<span class="hljs-keyword">var</span> obj = &#123;
+  <span class="hljs-attr">name</span>: <span class="hljs-string">"我是obj"</span>
+&#125;
+fun.call(obj, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+fun.apply(abj, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]) =&gt; 会自动解构</code></pre>
+</li>
+</ul>
+<h4 id="三、函数的另一个隐式参数：arguments"><a href="#三、函数的另一个隐式参数：arguments" class="headerlink" title="三、函数的另一个隐式参数：arguments"></a>三、函数的另一个隐式参数：arguments</h4><p>在调用函数时，浏览器每次都会传递两个隐式参数：<br>1、函数的上下文对象this<br>2、封装实参的对象arguments</p>
+<ul>
+<li>arguments是一个<code>类数组</code><ul>
+<li>arguments.length可获得它的长度</li>
+<li>但它不是数组（argumentsinstanceof array =&gt; false)</li>
+</ul>
+</li>
+<li>即使不定义形参，也可用通过arguments来使用实参<ul>
+<li>用法类似数组arguments[0]，arguments[1]</li>
+</ul>
+</li>
+<li>arguments存在一个属性callee，该属性指向当前正在执行的函数<ul>
+<li>arguments.callee == fun</li>
+</ul>
+</li>
+</ul>
+<h4 id="四、new-Date"><a href="#四、new-Date" class="headerlink" title="四、new Date()"></a>四、new Date()</h4><p>1、创建方式<br><pre><code class="hljs javascript"><span class="hljs-comment">//直接new对象</span>
+<span class="hljs-keyword">var</span> d = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>() =&gt; 当前时间
+
+<span class="hljs-comment">//指定日期格式：月/日/年(需要4位，2位的话ie可能歧义) 时:分:秒</span>
+<span class="hljs-keyword">var</span> d = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-string">"12/02/2021 11:20:22"</span>) =&gt; 指定时间</code></pre></p>
+<p>2、相关方法<br><pre><code class="hljs js">d.getFullYear() =&gt; 取代getYear，这里返回正常<span class="hljs-number">4</span>位的年份
+d.getMonth() =&gt; 获得月份（<span class="hljs-number">0</span><span class="hljs-number">-11</span>），需要+<span class="hljs-number">1</span>
+d.getDate() =&gt; 获得日期是几日
+d.getDay() =&gt; 获得周几（<span class="hljs-number">0</span><span class="hljs-number">-6</span>）
+d.getHours() =&gt; <span class="hljs-number">0</span><span class="hljs-number">-23</span>
+d.getMinutes() =&gt; <span class="hljs-number">0</span><span class="hljs-number">-59</span>
+d.getSeconds() =&gt; <span class="hljs-number">0</span><span class="hljs-number">-59</span>
+d.getMiliseconds() =&gt; 获得毫秒 <span class="hljs-number">0</span><span class="hljs-number">-999</span>
+
+<span class="hljs-comment">//时间戳，计算机底层保存时间就是用时间戳</span>
+d.getTime() =&gt; 获得从格林威治标准时间的<span class="hljs-number">1970</span><span class="hljs-number">-1</span><span class="hljs-number">-1</span>至今的毫秒数
+<span class="hljs-comment">//另一种方式直接获取时间戳</span>
+<span class="hljs-built_in">Date</span>.now()</code></pre></p>
+<p>3、关于时间戳的细节<br><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> d = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-string">"1/1/1970 0:0:0"</span>)
+<span class="hljs-keyword">var</span> timestamp = d.getTime()
+<span class="hljs-built_in">console</span>.log(timestamp) =&gt; <span class="hljs-string">"-28800000"</span>
+
+解释：当前系统时间为中国北京时间，位于时区的东八区，刚好比格林威治时间早<span class="hljs-number">8</span>小时</code></pre></p>
+<h4 id="五、基本数据类型的包装类"><a href="#五、基本数据类型的包装类" class="headerlink" title="五、基本数据类型的包装类"></a>五、基本数据类型的包装类</h4><ul>
+<li>基本数据类型变量是无法使用属性和方法的</li>
+<li>但是用它定义属性的时候不会报错，是因为浏览器临时把变量封装成对象然后进行调用对象的方法，但是调用完之后又自动销毁了</li>
+<li>然后使用刚刚定义的属性又会自动装箱封装成一个新的对象来进行读取操作，因为是新对象，所以刚刚定义的属性不存在，所以打印是undefined</li>
+</ul>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-number">123</span>
+
+<span class="hljs-comment">//不报错，自动装箱，封装对象并定义该属性，定义完了又销毁了</span>
+a.name = <span class="hljs-string">"hello"</span>
+
+<span class="hljs-comment">//不报错，只是在读取的时候，也会自动装箱进行封装对象</span>
+<span class="hljs-comment">//然后读取完了（undefined）了，又销毁了</span>
+<span class="hljs-built_in">console</span>.log(a.name) =&gt; <span class="hljs-literal">undefined</span></code></pre>
+<h4 id="六、字符串详讲"><a href="#六、字符串详讲" class="headerlink" title="六、字符串详讲"></a>六、字符串详讲</h4><p><code>字符串在在底层是以数组的形式保存的</code></p>
+<ul>
+<li>str.charAt(index) =&gt; 指定位置的字符</li>
+<li>str.charCodeAt(index) =&gt; 指定位置的字符的编码（Unicode）</li>
+<li>String.fromCharCode(72) =&gt; “H”</li>
+<li>str.concat(“拼接字符”) =&gt; 同+号</li>
+<li>str.indexOf(“h”[,startIndex]) =&gt; 第一个h的index，没有找到则返回-1</li>
+<li>str.lastIndexOf(“h”[,startIndex]) =&gt; 从后往前找</li>
+<li>str.slice   =&gt; 切片，取左不取右</li>
+<li>str.substring =&gt; 类似切片，也是取左不取右（参数位置会自动交换为正序）</li>
+<li>str.split(“x”)  =&gt; 根据参数拆分数组，支持传入正则对象</li>
+<li>str.toUpperCase() =&gt; 大写</li>
+<li>str.toLowerCase() =&gt; 小写</li>
+</ul>
+<h4 id="七、正则表达式详讲"><a href="#七、正则表达式详讲" class="headerlink" title="七、正则表达式详讲"></a>七、正则表达式详讲</h4><p>1、创建方式：构造函数、字面量<br><pre><code class="hljs js"><span class="hljs-comment">//最简单的正则表达式，构造函数创建正则对象</span>
+<span class="hljs-keyword">var</span> reg = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">"ab"</span>, <span class="hljs-string">"i/g"</span>)  <span class="hljs-comment">//第二个参数为匹配模式，i为忽略大小写，g为全局匹配</span>
+
+reg.test(<span class="hljs-string">"Abcd"</span>) =&gt; <span class="hljs-literal">true</span></code></pre></p>
+<p>开发中常用的方式为，字面量的方式直接创建</p>
+<pre><code class="hljs js"><span class="hljs-keyword">var</span> reg = <span class="hljs-regexp">/ab/i</span>
+reg.test(<span class="hljs-string">"abc"</span>) =&gt; <span class="hljs-literal">true</span></code></pre>
+<p>2、基本语法</p>
+<ul>
+<li>“|”、[ ] 表示或关系<ul>
+<li>[abcd] == a|b|c|d</li>
+<li>[A-Z] =&gt; 大写字母</li>
+<li>[a-z] =&gt; 小写字母</li>
+<li>[A-z] =&gt; 忽略大小写的字母</li>
+<li>[0-9] =&gt; 数字<ul>
+<li>/a[bde]c/ =&gt; 检查字母中含有abc或者adc或者aec</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>^ 表示非关系<ul>
+<li><code>[^abc]</code> =&gt; 查找任何不在中括号以内的字符</li>
+</ul>
+</li>
+<li>{} 量词<ul>
+<li>/a{n}/ =&gt; 出现n次a</li>
+<li>/ab{n}/ =&gt; 出现n次b</li>
+<li>/(ab){n}/ =&gt; 出现n次ab</li>
+<li>/ab{m,n}/ =&gt; b出现m到n次即可</li>
+<li>/a{m,}/  =&gt; a出现m次以上</li>
+<li>/ab<em>c/   =&gt; </em>表示0次或多次    =&gt; {0,}</li>
+<li>/ab?c/   =&gt; ?表示0次或1次     =&gt; {0,1}</li>
+<li>/ab+c/   =&gt; +表示至少出现一次 =&gt; {1,}</li>
+</ul>
+</li>
+<li>匹配头尾<ul>
+<li><code>/^abc/</code> =&gt; 只能以a开头</li>
+<li>/abc$/ =&gt; 只能以c结尾</li>
+<li>/^a$/  =&gt;  这个a既是匹配头又是匹配尾 =&gt; ‘a’才是true</li>
+</ul>
+</li>
+<li>通配符 . 点<ul>
+<li>任意字符，除了换行符和结束符</li>
+<li>纯粹匹配.这个字符，需要转义，加反斜杠“\.” ==&gt; 引申“\\”</li>
+<li>在构造函数中，字符串需要两个反斜杠才等同于一个反斜杠 =&gt; new RegExp(“\\.”)才等同于/\./</li>
+</ul>
+</li>
+<li>\w 任意字母、数字、下划线_ &lt;==&gt; [A-z0-9]</li>
+<li>\W w的取反 =&gt; [^A-z0-9]</li>
+<li>\d 任意数字 &lt;==&gt; [0-9]</li>
+<li>\D 非数字  =&gt; [^0-9]</li>
+<li>\s 空格</li>
+<li>\S 除了空格</li>
+<li>\b 单词边界 =&gt; 识别是不是一个单词<ul>
+<li>/\bchild\b/ =&gt; “hello child “</li>
+</ul>
+</li>
+</ul>
+<p>3、搭配字符串的方法使用</p>
+<ul>
+<li>str.split(正则)</li>
+<li>str.search(reg/str) =&gt; 返回第一次出现的下标，没有则返回-1<ul>
+<li>如果传字符串则同理与str.indexOf() </li>
+<li>如果传正则对象，则比较灵活</li>
+<li>只能搜索一个，不能设置全局</li>
+</ul>
+</li>
+<li>str.match(正则) =&gt; 返回数组<ul>
+<li>提取内容</li>
+<li>默认只会匹配第一次，匹配到就结束。可以全局匹配/g，同时可以忽略大小写/ig</li>
+</ul>
+</li>
+<li>str.replace(reg,”替换的内容”)  =&gt; 可以全局替换 /g</li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/学习记录/">学习记录</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/javascript/">javascript</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/08/重温JS（三）/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">重温JS（三）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/27/重温JS（一）/">
+                        <span class="hidden-mobile">重温JS（一）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">京ICP备1234556号-1</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="/js/debouncer.js"></script>
+<script src="/js/main.js"></script>
+
+<!-- Plugins -->
+
+
+  
+    <script src="/js/lazyload.js"></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script>
+  <script src="/js/clipboard-use.js"></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "重温JS（二）&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js"></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>
